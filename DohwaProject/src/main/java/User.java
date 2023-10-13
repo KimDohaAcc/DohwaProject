@@ -12,4 +12,6 @@ public class User {
     String password;
     
     // 화석 하이
+
+    // 화석아 안녕
 }
