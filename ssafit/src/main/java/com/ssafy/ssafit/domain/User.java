@@ -15,14 +15,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class User {
     @Id
-    private String id;
-    @Column(nullable = false, length =20)
-    private String pw;
-    @Column(nullable = false, length =20)
-    private String name;
-    private String address;
-    private int phone;
-    private String nickname;
-
-
+    @Column(length=40)
+    private String account_email;
+    @Column(nullable = false, length =40)
+    private String profile_nickname;
+    @Column(nullable = false, length =40)
+    private String user_nickname;
 }
