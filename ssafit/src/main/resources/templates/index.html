@@ -4,11 +4,16 @@
     <title>Title</title>
 </head>
 <body>
+<script th:src="@{https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js}"
+        integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
+<script th:inline="javascript" th:src="@{/js/index.js}"></script>
 <li th:text="|인가코드 = ${code}|">code</li>
 <li th:text="|유효토큰 = ${access_token}|">code</li>
 <li th:text="|사용자정보 = ${userInfo}|">code</li>
 <li th:text="|동의정보 = ${agreementInfo}|">code</li>
 <a href="/do">로그인하기</a>
 <a href="https://kauth.kakao.com/oauth/logout?client_id=492c50fd0e56f48e1008e9f9078acfdc&logout_redirect_uri=http://localhost:8080/member/do">로그아웃</a>
+
+<div id="add-channel-button"></div>
 </body>
 </html>
