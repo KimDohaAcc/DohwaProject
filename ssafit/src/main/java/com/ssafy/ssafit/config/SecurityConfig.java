@@ -7,7 +7,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 public class SecurityConfig {
 //    @Value() 나중에 jwt 토큰 사용하기
-
     @Bean
     // Spring security 6.0 이상에서 많이 바뀜!
     // 그래서 최신 코드 찾아보고 써야 한다~
