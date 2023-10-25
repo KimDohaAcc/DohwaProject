@@ -31,7 +31,7 @@ public class KaKaoServiceImpl implements KaKaoService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=2aad40910868e3c5fa9594f8de34a07b");
+            sb.append("&client_id=492c50fd0e56f48e1008e9f9078acfdc");
             sb.append("&redirect_uri=http://localhost:8080/member/kakao");
             sb.append("&code=" + code);
 
@@ -100,17 +100,18 @@ public class KaKaoServiceImpl implements KaKaoService {
 
             JSONParser parser = new JSONParser();
             JSONObject obj = (JSONObject) parser.parse(res);
-
-            JSONObject kakao_account = (JSONObject) obj.get("kakao_account");
             JSONObject properties = (JSONObject) obj.get("properties");
+            JSONObject kakaoAccount = (JSONObject) obj.get("kakao_account");
 
 
-            String id = obj.get("id").toString();
+            Long id = (Long) obj.get("id");
             String nickname = properties.get("nickname").toString();
+            String email = kakaoAccount.get("email").toString();
 
 
             result.put("id", id);
             result.put("nickname", nickname);
+            result.put("email", email);
 
 
             br.close();
@@ -155,7 +156,5 @@ public class KaKaoServiceImpl implements KaKaoService {
         }
         return result;
     }
-
-
 }
 
