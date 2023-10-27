@@ -1,4 +1,3 @@
-package com.ssafy.ssafit.controller;
 
 import com.ssafy.ssafit.domain.Board;
 import com.ssafy.ssafit.service.boardService.BoardService;
