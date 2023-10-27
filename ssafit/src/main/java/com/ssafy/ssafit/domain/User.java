@@ -1,13 +1,11 @@
 package com.ssafy.ssafit.domain;
 
-import com.ssafy.ssafit.dto.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Entity(name = "user")
@@ -21,10 +19,12 @@ public class User {
     private String nickname;
     @Column(nullable = false, length =40, name = "user_account")
     private String account;
-
-    public User(UserDto userDto){
-        this.id = userDto.getId();
-        this.nickname = userDto.getNickname();
-        this.account = userDto.getAccount();
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", account='" + account + '\'' +
+                '}';
     }
 }
