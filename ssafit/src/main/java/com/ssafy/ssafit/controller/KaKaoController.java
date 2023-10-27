@@ -1,19 +1,18 @@
 package com.ssafy.ssafit.controller;
 
 import com.ssafy.ssafit.domain.User;
-import com.ssafy.ssafit.dto.UserDto;
 import com.ssafy.ssafit.service.kakaoService.KaKaoService;
 import com.ssafy.ssafit.service.userService.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,7 +28,7 @@ public class KaKaoController {
     }
 
     @GetMapping("/member/kakao")
-    public String getCI(@RequestParam String code, Model model) throws IOException {
+    public String getCI(@RequestParam String code, Model model, HttpServletRequest request) throws IOException {
         System.out.println("code = " + code);
         String access_token = ks.getToken(code);
         Map<String, Object> userInfo = ks.getUserInfo(access_token);
@@ -42,8 +41,10 @@ public class KaKaoController {
 
         // 카카오service 에서 db 넣어주기
         // id, nickname, email
-        UserDto userDto = new UserDto((Long) userInfo.get("id"), (String) userInfo.get("nickname"), (String) userInfo.get("email"));
-        userService.insertUser(userDto);
+        User user = new User((Long) userInfo.get("id"), (String) userInfo.get("nickname"), (String) userInfo.get("email"));
+        userService.insertUser(user);
+        HttpSession session = request.getSession();
+        session.setAttribute("loginUser", user);
         // kakaoService.createUser(model.id, model.nickname, model.account)
         return "index";
     }
