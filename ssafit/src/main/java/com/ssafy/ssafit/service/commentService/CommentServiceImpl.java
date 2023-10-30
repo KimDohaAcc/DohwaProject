@@ -1,4 +1,54 @@
 package com.ssafy.ssafit.service.commentService;
 
-public class CommentServiceImpl {
+import com.ssafy.ssafit.domain.Comment;
+import com.ssafy.ssafit.repository.CommentRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class CommentServiceImpl implements CommentService {
+
+    private final CommentRepository commentRepository;
+
+    @Override
+    public List<Comment> getCommentsByBoardNum(Long boardNum) {
+        return commentRepository.findAllByBoardNum(boardNum);
+    }
+
+    @Transactional
+    @Override
+    public Comment writeComment(Comment comment) {
+        return commentRepository.save(comment);
+    }
+
+    @Override
+    public Optional<Comment> getComment(Long userId) {
+
+        return commentRepository.findById(userId);
+    }
+
+    @Transactional
+    @Override
+    public void modifyComment(Comment comment) {
+        commentRepository.save(comment);
+
+    }
+
+    @Transactional
+    @Override
+    public boolean removeComment(Long commentId)
+    {
+        if(commentRepository.existsById(commentId)){
+            commentRepository.deleteById(commentId);
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 }
