@@ -2,6 +2,7 @@ package com.ssafy.ssafit.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,7 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Getter
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
