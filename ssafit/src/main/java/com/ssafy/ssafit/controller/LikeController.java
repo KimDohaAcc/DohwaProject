@@ -34,7 +34,7 @@ public class LikeController {
         Optional<List<Like>> likeList = Optional.ofNullable((User) session.getAttribute("loginUser"))
                 .map(likeService::getLikeByUser);
 
-        return likeList.map(list -> new ResponseEntity<List<Like>>(list, HttpStatus.OK))
+        return likeList.map(list -> new ResponseEntity<>(list, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 }
