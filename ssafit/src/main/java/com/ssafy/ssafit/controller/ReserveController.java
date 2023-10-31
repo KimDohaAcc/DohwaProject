@@ -1,6 +1,5 @@
 package com.ssafy.ssafit.controller;
 
-import com.ssafy.ssafit.domain.Like;
 import com.ssafy.ssafit.domain.Reserve;
 import com.ssafy.ssafit.domain.User;
 import com.ssafy.ssafit.service.reserveService.ReserveService;
