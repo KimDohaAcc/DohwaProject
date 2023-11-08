@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ChatGptController {
     private final ChatService chatService;
-    //chat-gpt 와 간단한 채팅 서비스 소스
     @GetMapping ("/gpt")
     public String test(@RequestBody String question) {
         return chatService.getChatResponse(question);
