@@ -11,22 +11,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class MealServiceImpl implements MealService {
     private final MealRepository mealRepository;
-    @Transactional
+
     @Override
     public Meal createMeal(Meal meal) {
         return mealRepository.save(meal);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Meal> getMealByUser(User user) {
         return mealRepository.findAllByUser(user);
     }
 
-    @Transactional
+
     @Override
     public void removeMeal(User user) {
         mealRepository.deleteMealByTime(user);

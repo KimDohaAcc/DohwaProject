@@ -1,11 +1,11 @@
 package com.ssafy.ssafit.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.time.LocalDateTime;
+
+@Data
 @Getter
 @Entity
 @NoArgsConstructor
@@ -19,6 +19,7 @@ public class Reserve {
     @ManyToOne
     @JoinColumn(nullable = false, name = "user_reserve")
     private User user;
+
 
     @Column(nullable = false, name = "reserve_time")
     // 나중에 수정
