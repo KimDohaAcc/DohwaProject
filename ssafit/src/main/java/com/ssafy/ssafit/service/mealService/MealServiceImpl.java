@@ -19,18 +19,23 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal createMeal(Meal meal) {
+        System.out.println("meal = " + meal.toString());
         return mealRepository.save(meal);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Meal> getMealByUser(User user) {
-        return mealRepository.findAllByUser(user);
+        return mealRepository.findAllByUserOrderByNumDesc(user);
     }
 
 
     @Override
     public void removeMeal(User user) {
-        mealRepository.deleteMealByTime(user);
+        List<Meal> meals = mealRepository.findByUserOrderByNumDesc(user);
+        System.out.println("meals = " + meals);
+        if (!meals.isEmpty()) {
+            mealRepository.delete(meals.get(0));
+        }
     }
 }

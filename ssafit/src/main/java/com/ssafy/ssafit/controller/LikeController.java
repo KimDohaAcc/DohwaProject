@@ -2,6 +2,7 @@ package com.ssafy.ssafit.controller;
 
 import com.ssafy.ssafit.domain.Like;
 import com.ssafy.ssafit.domain.User;
+import com.ssafy.ssafit.domain.Video;
 import com.ssafy.ssafit.service.likeService.LikeService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public class LikeController {
     private final LikeService likeService;
 
-    @PostMapping("/like/create")
+    @PostMapping("/like")
     public ResponseEntity<Like> clickLike(@RequestParam Like like) {
         Optional.ofNullable(likeService.getLikeByUserAndVideo(like.getUser(), like.getVideo()))
                 .ifPresentOrElse(likeService::removeLike,
