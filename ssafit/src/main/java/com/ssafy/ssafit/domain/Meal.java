@@ -2,10 +2,12 @@ package com.ssafy.ssafit.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+import java.time.LocalDateTime;
+
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,9 +22,12 @@ public class Meal {
     @JoinColumn(nullable = false, name = "user_meal")
     private User user;
 
+    @Column(nullable = false, name = "meal_food")
+    private String food;
+
     @Column(nullable = false, name = "meal_kcal")
     private String kcal;
 
     @Column(nullable = false, name = "meal_time")
-    private String time;
+    private LocalDateTime time;
 }
