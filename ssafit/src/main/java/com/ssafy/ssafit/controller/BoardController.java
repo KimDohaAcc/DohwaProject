@@ -6,11 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class BoardController {
     private final BoardService boardService;
 
@@ -43,5 +44,11 @@ public class BoardController {
         System.out.println("board = " + board);
         boardService.modifyBoard(board);
         return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @GetMapping("/board")
+    public ResponseEntity<List<Board>> write(@RequestParam String key, @RequestParam String word, @RequestParam String orderBy, @RequestParam String orderByDir) {
+        List<Board> list = boardService.getListByCondition(key, word, orderBy, orderByDir);
+       return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

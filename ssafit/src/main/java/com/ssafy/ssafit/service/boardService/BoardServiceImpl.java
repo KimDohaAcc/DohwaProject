@@ -50,4 +50,9 @@ public class BoardServiceImpl implements BoardService {
             return false;
         }
     }
+
+    @Override
+    public List<Board> getListByCondition(String key, String word, String orderBy, String orderByDir) {
+        return boardRepository.getListByCondition(key, word, orderBy, orderByDir);
+    }
 }

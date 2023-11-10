@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface BoardRepository extends JpaRepository<Board, Long> {
-    @Query("select c from Board c where id=:id")
-    Board asdf(@Param("id")Long id);
+    @Query("SELECT b FROM Board b WHERE :key = :word ORDER BY :orderBy + :orderByDir")
+    List<Board> getListByCondition(@Param("key") String key, @Param("word") String word, @Param("orderBy") String orderBy, @Param("orderByDir") String orderByDir);
 }
