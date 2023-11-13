@@ -1,15 +1,21 @@
 package com.ssafy.ssafit.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.ssafit.domain.Meal;
 import com.ssafy.ssafit.domain.User;
+import com.ssafy.ssafit.service.alarmService.NotificationService;
 import com.ssafy.ssafit.service.mealService.MealService;
 import com.ssafy.ssafit.service.userService.UserService;
 import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
@@ -107,5 +113,34 @@ public class KakaoSkillController {
         Map<String, String> map = new HashMap<>();
         map.put("result", result.toString());
         return map;
+    }
+    @Autowired
+    private NotificationService notificationService;
+
+    @PostMapping("/datetime")
+    public ResponseEntity<?> handleChatbotDateRequest(@RequestBody Map<String, Object> request) {
+        Map<String, Object> action = (Map<String, Object>) request.get("action");
+        if (action == null) {
+            return ResponseEntity.status(400).body("Action is missing or null");
+        }
+
+        Map<String, String> params = (Map<String, String>) action.get("params");
+        String datetime = params.get("datetime");
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            Map<String, String> datetimeInfo = mapper.readValue(datetime, Map.class);
+            String value = datetimeInfo.get("value");
+            String userTimeZone = datetimeInfo.get("userTimeZone");
+
+            // 알림 서비스 호출 (알림 예약)
+            notificationService.scheduleNotification(value, userTimeZone);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
+
+        return new ResponseEntity<Map<String, String>>(params, HttpStatus.OK);
     }
 }
