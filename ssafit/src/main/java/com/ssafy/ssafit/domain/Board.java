@@ -36,14 +36,4 @@ public class Board {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt  = LocalDateTime.now();
-
-    @Override
-    public String toString() {
-        return "Board{" +
-                "num=" + num +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", user=" + user +
-                '}';
-    }
 }

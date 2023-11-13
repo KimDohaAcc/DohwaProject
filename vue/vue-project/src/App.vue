@@ -54,4 +54,7 @@ const loginUser = (loginUser) => {
 
 
 <style scoped>
+* {
+  margin : 5%;
+}
 </style>

@@ -22,41 +22,6 @@ const kakaoLogout = function(){
 
 
 </script>
+<style scoped>
 
-<!--<script>
-// import { computed, defineEmits } from "vue";
-// import {mapStores, mapActions} from 'pinia';
-// import { useUserStore } from "@/stores/user";
-
-
-// export default {
-//     computed:{
-//         ...mapStores(useUserStore)
-//     },
-//     setup() {
-//         const emits = defineEmits(["logout"]);
-//         // const getUser = computed(() => !!userStore.loginUser);
-
-
-//         const logout = () => {
-//             emits("logout");
-//             kakaoLogout();
-//         };
-
-
-
-//     },
-
-//     methods: {
-//         ...mapActions(useUserStore, ['logoutUser']),
-//         kakaoLogout() {
-//             this.logoutUser();
-//             window.Kakao.Auth.logout((res) => {
-//                 console.log(res);
-//             });
-//         },
-//     },
-// };
-// </script> -->
-
-<style scoped></style>
+</style>
