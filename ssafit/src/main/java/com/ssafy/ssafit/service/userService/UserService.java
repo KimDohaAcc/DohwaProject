@@ -8,4 +8,5 @@ public interface UserService {
     User insertUser(User user);
 
     Optional<User> findUserById(Long id);
+    Optional<User> findUserByEmail(String email);
 }
