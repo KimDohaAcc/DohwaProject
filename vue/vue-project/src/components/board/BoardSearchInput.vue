@@ -17,7 +17,6 @@
             <select v-model="searchInfo.orderBy">
                 <option value="user" selected>작성자</option>
                 <option value="title">제목</option>
-                <option value="view_cnt">조회수</option>
             </select>
         </div>
         <div>
