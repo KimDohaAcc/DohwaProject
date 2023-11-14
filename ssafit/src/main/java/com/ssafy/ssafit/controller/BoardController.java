@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class BoardController {
     private final BoardService boardService;
 
@@ -20,6 +21,11 @@ public class BoardController {
         return boardService.getBoard(num)
                 .map(board -> new ResponseEntity<>(board, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/board")
+    public ResponseEntity<List<Board>> getBoardAll() {
+        return new ResponseEntity<>(boardService.getList(), HttpStatus.OK);
     }
 
     @PostMapping("/board")
@@ -46,9 +52,13 @@ public class BoardController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @GetMapping("/board")
+    @GetMapping("/board/search")
     public ResponseEntity<List<Board>> write(@RequestParam String key, @RequestParam String word, @RequestParam String orderBy, @RequestParam String orderByDir) {
         List<Board> list = boardService.getListByCondition(key, word, orderBy, orderByDir);
+        System.out.println("list = " + list);
+        for (Board board : list) {
+            System.out.println("board.toString() = " + board.toString());
+        }
        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

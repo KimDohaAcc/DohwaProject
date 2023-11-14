@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainView from '@/views/MainView.vue'
 import BoardView from '@/views/BoardView.vue'
+import YoutubeView from '@/views/YoutubeView.vue'
 
 
 import BoardList from '@/components/board/BoardList.vue'
@@ -12,6 +13,8 @@ import Login from '@/components/user/Login.vue'
 import MyPage from '@/components/user/MyPage.vue'
 import MyMeal from '@/components/user/MyMeal.vue'
 import Regist from '@/components/user/Regist.vue'
+
+
 
 
 const router = createRouter({
@@ -41,6 +44,11 @@ const router = createRouter({
       path: "/regist",
       name: "regist",
       component: Regist,
+    },
+    {
+      path: "/youtube",
+      name: "youtube",
+      component: YoutubeView,
     },
     {
       path: '/board',

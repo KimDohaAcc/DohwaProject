@@ -8,7 +8,7 @@
                 <input type="text" id="title" v-model="board.title">
             </div>
             <div>
-                <label for="user">글쓴이 : </label>
+                <label for="user">작성자 : </label>
                 <span>{{ nickname }}</span>
             </div>
             <div>

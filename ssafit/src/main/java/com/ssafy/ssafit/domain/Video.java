@@ -10,14 +10,14 @@ import lombok.*;
 public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int videoNum;
+    private int num;
 
     @Column(nullable = false, length =50, name = "video_title")
-    private String videoTitle;
+    private String title;
 
     @Column(nullable = false, length =300, name = "video_url")
-    private String videoUrl;
+    private String url;
 
     @Column(nullable = false, length =20, name = "video_sort")
-    private String videoSort;
+    private String sort;
 }

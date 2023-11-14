@@ -11,5 +11,7 @@ public interface MealService {
 
     List<Meal> getMealByUser(User user);
 
+    List<Meal> getMealAllByUser(User user);
+
     void removeMeal(User user);
 }
