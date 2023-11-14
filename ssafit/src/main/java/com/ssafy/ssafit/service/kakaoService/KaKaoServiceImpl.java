@@ -107,11 +107,16 @@ public class KaKaoServiceImpl implements KaKaoService {
             Long id = (Long) obj.get("id");
             String nickname = properties.get("nickname").toString();
             String email = kakaoAccount.get("email").toString();
+            String password = null;
+            boolean iskakao=true;
 
 
             result.put("id", id);
             result.put("nickname", nickname);
             result.put("email", email);
+            result.put("password", password);
+            result.put("iskakao", iskakao);
+
 
 
             br.close();
