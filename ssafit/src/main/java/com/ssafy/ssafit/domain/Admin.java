@@ -2,10 +2,11 @@ package com.ssafy.ssafit.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

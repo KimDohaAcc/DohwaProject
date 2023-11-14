@@ -10,4 +10,6 @@ public interface MealRepository extends JpaRepository<Meal, Long> {
     List<Meal> findAllByUserOrderByNumDesc(User user);
 
     List<Meal> findByUserOrderByNumDesc(User user);
+
+    List<Meal> findAllByUser(User user);
 }

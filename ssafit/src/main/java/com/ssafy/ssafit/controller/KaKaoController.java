@@ -27,12 +27,9 @@ public class KaKaoController {
     private final UserService userService;
 
     @GetMapping("/kakao/login")
-    public ResponseEntity<User> getCI(@RequestParam String code, Model model) throws IOException {
+    public ResponseEntity<User> getCI(@RequestParam String code) throws IOException {
         String access_token = ks.getToken(code);
         Map<String, Object> userInfo = ks.getUserInfo(access_token);
-        model.addAttribute("code", code);
-        model.addAttribute("access_token", access_token);
-        model.addAttribute("userInfo", userInfo);
         //ci는 비즈니스 전환후 검수신청 -> 허락받아야 수집 가능
 
         // 카카오에서 로그인 완료
@@ -43,11 +40,5 @@ public class KaKaoController {
         userService.insertUser(user);
         // kakaoService.createUser(model.id, model.nickname, model.account)
         return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
-    @GetMapping("/kakao/logout")
-    public ResponseEntity<Void> logout(HttpSession session) {
-        System.out.println("로그아웃 성공");
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

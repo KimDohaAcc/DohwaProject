@@ -6,7 +6,6 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Data
-@Getter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,8 +21,7 @@ public class Reserve {
 
 
     @Column(nullable = false, name = "reserve_time")
-    // 나중에 수정
-    private String time;
+    private LocalDateTime time;
 
     @Column(nullable = false, name = "reserve_phone")
     private int phone;

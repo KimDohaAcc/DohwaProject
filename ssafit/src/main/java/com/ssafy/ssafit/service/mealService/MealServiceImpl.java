@@ -29,6 +29,12 @@ public class MealServiceImpl implements MealService {
         return mealRepository.findAllByUserOrderByNumDesc(user);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<Meal> getMealAllByUser(User user) {
+        return mealRepository.findAllByUser(user);
+    }
+
 
     @Override
     public void removeMeal(User user) {
