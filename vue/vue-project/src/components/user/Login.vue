@@ -14,7 +14,6 @@ import { useUserStore } from '@/stores/user.js';
 const store = useUserStore();
 const router = useRouter();
 const kakaoLogin = function () {
-  console.log(window.Kakao)
   window.Kakao.Auth.login({
     scope: "profile_nickname, account_email",
     success: () => {
