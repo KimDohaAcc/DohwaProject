@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainView from '@/views/MainView.vue'
 import BoardView from '@/views/BoardView.vue'
-import UserView from '@/views/UserView.vue'
 
 
 import BoardList from '@/components/board/BoardList.vue'
@@ -10,6 +9,10 @@ import BoardDetail from '@/components/board/BoardDetail.vue'
 import BoardUpdate from '@/components/board/BoardUpdate.vue'
 
 import Login from '@/components/user/Login.vue'
+import MyPage from '@/components/user/MyPage.vue'
+import MyMeal from '@/components/user/MyMeal.vue'
+import Regist from '@/components/user/Regist.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,25 +28,19 @@ const router = createRouter({
       component: Login,
     },
     {
-      path: "/user",
-      component: UserView,
-      // children: [
-      //   {
-      //     path: "regist",
-      //     name: "Regist",
-      //     component: UserRegist,
-      //   },
-      //   {
-      //     path: "",
-      //     name: "List",
-      //     component: UserList,
-      //   },
-      //   {
-      //     path: ":id",
-      //     name: "Detail",
-      //     component: UserDetail,
-      //   },
-      // ],
+      path: "/myPage",
+      name: "myPage",
+      component: MyPage,
+    },
+    {
+      path: "/myMeal",
+      name: "myMeal",
+      component: MyMeal,
+    },
+    {
+      path: "/regist",
+      name: "regist",
+      component: Regist,
     },
     {
       path: '/board',
