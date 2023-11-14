@@ -3,7 +3,7 @@
         <div>
             <b-navbar toggleable="lg" type="light" variant="faded">
                 <b-navbar-brand href="#">
-                    <img src="logo.jpg" class="d-inline-block align-top" alt="logo" width="50">
+                    <img src="@/assets/logo.jpg" class="d-inline-block align-top" alt="logo" width="50">
                     <RouterLink to="/">
                         healthPanda
                     </RouterLink>
@@ -12,6 +12,9 @@
                     <b-navbar-nav>
                         <b-nav-item href="#">
                             <RouterLink to="/board">이용 후기</RouterLink>
+                        </b-nav-item>
+                        <b-nav-item href="#">
+                            <RouterLink to="/youtube">운동 추천 영상</RouterLink>
                         </b-nav-item>
                     </b-navbar-nav>
                     <b-navbar-nav v-if="!isLogin">

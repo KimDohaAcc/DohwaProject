@@ -1,31 +1,39 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import axios from "axios"
 
 export const useUserStore = defineStore('user', () => {
-  const userEmail = ref("");
-  const loginUser = ref(localStorage.getItem("loginUser"));
+  const loginUser = ref(null);
+  let user = {};
+  let mealList = ref(null);
+
+  onMounted(() => {
+    loginUser.value = JSON.parse(localStorage.getItem("loginUser"));
+  });
 
   const getKakaoAccount = function () {
     window.Kakao.API.request({
       url: "/v2/user/me",
       success: (res) => {
+        const id = res.id;
         const kakao_account = res.kakao_account;
         const nickname = kakao_account.profile.nickname;
         const email = kakao_account.email;
+        console.log(id);
         console.log("kakao_account", kakao_account);
         console.log("nickname", nickname);
         console.log("email", email);
 
-
-        const matchedUser = {
+        user = {
+          id: id,
           nickname: nickname,
-          email: email,
+          account: email,
+          iskakao: true,
         }
 
-        localStorage.setItem("loginUser", matchedUser);
-        loginUser.value = matchedUser;
-        userEmail.value = email
+        localStorage.setItem("loginUser", JSON.stringify(user));
+        loginUser.value = user;
+        login();
       },
       fail: (error) => {
         console.log(error);
@@ -33,42 +41,41 @@ export const useUserStore = defineStore('user', () => {
     });
   }
 
+  const login = function () {
+    const API_URL = `http://localhost:8080/login`
+    console.log(user)
+    // axios 요청
+    axios.
+      post(API_URL, user)
+      .then((res) => {
+        alert(".로그인 성공");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("로그인 실패");
+      });
+  }
+
   const logoutUser = function () {
     localStorage.removeItem("loginUser");
     loginUser.value = null;
-
-    const API_URL = `http://localhost:8080/kakao/logout`;
-
-    // axios 요청
-    axios
-      .get(API_URL)
-      .then((res) => {
-        alert("로그아웃 성공");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("로그아웃 실패: 서버 에러\n긴 한데 나중에 서버 통일하면 ㄱㅊ");
-      });
   }
 
   const getUserMeal = function () {
-    console.log("들어옴")
     const API_URL = `http://localhost:8080/meal`;
-    console.log(API_URL)
-
+    const user = JSON.parse(localStorage.getItem("loginUser")); // user 변수를 const로 선언
+    
+    console.log(user);
+    
     axios
-    axios.get(API_URL, {
-      params: userEmail
+    .get(API_URL, { params: user }) // 올바른 방식으로 파라미터 전달
+    .then((res) => {
+      mealList.value = res.data;
     })
-      .then((res) => {
-        console.log(res);
-        return res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-        return false;
-      });
-  }
-
-  return { loginUser, getKakaoAccount, userEmail, logoutUser, getUserMeal }
+    .catch((err) => {
+      console.log(err);
+    });
+  };
+  
+  return { loginUser, getKakaoAccount, logoutUser, mealList, getUserMeal }
 })

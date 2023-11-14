@@ -19,6 +19,9 @@ const kakaoLogin = function () {
     success: () => {
       store.getKakaoAccount();
     },
+    fail: function(err) {
+      console.log(err);
+    }
   });
 
   router.push('/');

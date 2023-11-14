@@ -10,7 +10,16 @@ export const useBoardStore = defineStore('board', () => {
   const getBoardList = function () {
     axios.get(REST_BOARD_API)
       .then((response) => {
-      boardList.value = response.data
+        const list = [];
+
+        for(let i = 0; i < response.data.length ; i ++){
+          const board = response.data[i];
+          let date = new Date(response.data[i].createdAt);
+          board.createdAt = date.toISOString().split('T')[0];
+          list.push(board);
+       };
+
+       boardList.value = list;
       })
   }
 
@@ -19,23 +28,15 @@ export const useBoardStore = defineStore('board', () => {
   const getBoard = function (id) {
     axios.get(`${REST_BOARD_API}/${id}`)
       .then((response) => {
-      board.value = response.data
+        console.log(board.value)
+         board.value = response.data
     })
   }
 
   //게시글 등록
   const createBoard = function (board) {
-    axios({
-      url: REST_BOARD_API,
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: board
-    })
+    axios.post(REST_BOARD_API, board)
       .then(() => {
-        //response 응답으로 들어온 게시글의 id를 이용해서
-        //상세보기로 바로 점프도 가넝이야~~
         router.push({ name: 'boardList'})
       })
       .catch((err) => {
@@ -50,21 +51,25 @@ export const useBoardStore = defineStore('board', () => {
     })
   }
 
-  const searchBoardList = function (searchCondition) {
-    axios.get(REST_BOARD_API, {
-      params: searchCondition
-    })
-      .then((res) => {
-        boardList.value = res.data
-    })
-  }
+  // const searchBoardList = function (searchCondition) {
+  //   const API = `http://localhost:8080/board/search`;
+  //   axios.get(API, {
+  //     params: searchCondition
+  //   })
+  //     .then((response) => {
+  //       const list = [];
+        
+  //       for(let i = 0; i < response.data.length ; i ++){
+  //         const board = response.data[i];
+  //         let date = new Date(response.data[i].createdAt);
+  //         board.createdAt = date.toISOString().split('T')[0];
+  //         list.push(board);
+  //      };
+
+  //      boardList.value = list;
+  //   })
+  // }
 
 
-
-
-
-
-
-
-  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard,searchBoardList }
+  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard }
 })

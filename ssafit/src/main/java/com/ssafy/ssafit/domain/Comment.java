@@ -38,16 +38,4 @@ public class Comment {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt  = LocalDateTime.now();
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "num=" + num +
-                ", content='" + content + '\'' +
-                ", user=" + user +
-                ", board=" + board +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
 }

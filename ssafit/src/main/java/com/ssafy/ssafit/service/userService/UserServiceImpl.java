@@ -18,23 +18,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User insertUser(User user) {
         if (userRepository.findById(user.getId()).isEmpty()) {
-            if(user.isIskakao()==false && user.getPassword()==null){
+            if(!user.isIskakao() && user.getPassword()==null){
                 throw new IllegalArgumentException("Password cannot be null");
             }
             else
               return userRepository.save(user);
         }
         return null;
-
     }
 
     @Override
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
-    }
-
-    @Override
-    public Optional<User> findUserByEmail(String email) {
-        return userRepository.findByAccount(email);
     }
 }

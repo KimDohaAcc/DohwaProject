@@ -21,6 +21,8 @@ public class VideoController {
                 .map(video -> new ResponseEntity<>(video, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    
+    // 내일 할 일 : 비디오 리스트 만들기
 
     @PostMapping("/video")
     public ResponseEntity<Video> write(@RequestBody Video video){
