@@ -37,7 +37,7 @@ public class KaKaoController {
 
         // 카카오service 에서 db 넣어주기
         // id, nickname, email
-        User user = new User((Long) userInfo.get("id"), (String) userInfo.get("nickname"), (String) userInfo.get("email"));
+        User user = new User((Long) userInfo.get("id"), (String) userInfo.get("nickname"), (String) userInfo.get("email"), (String) userInfo.get("password"), (boolean) userInfo.get("iskakao"));
         userService.insertUser(user);
         HttpSession session = request.getSession();
         session.setAttribute("loginUser", user);

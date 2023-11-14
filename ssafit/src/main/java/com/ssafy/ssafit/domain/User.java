@@ -17,12 +17,9 @@ public class User {
     private String nickname;
     @Column(nullable = false, length =40, name = "user_account")
     private String account;
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", nickname='" + nickname + '\'' +
-                ", account='" + account + '\'' +
-                '}';
-    }
+    @Column(nullable = true, length =40, name = "user_password")
+    private String password;
+    @Column(nullable = false, length =40, name = "user_iskakao")
+    private boolean iskakao;
+
 }
