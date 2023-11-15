@@ -17,5 +17,5 @@ public interface AlarmService {
 
     Alarm UpdateAlarm(Alarm alarm);
 
-    void removeAlarm(List<Alarm>Alarm userAlarms);
+    void removeAlarm(List<Alarm>Alarm);
 }
