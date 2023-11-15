@@ -208,8 +208,4 @@ public class KakaoSkillController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    @PostMapping("/updateSettingTime")
-
-
 }
