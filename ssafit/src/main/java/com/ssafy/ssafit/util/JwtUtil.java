@@ -1,5 +1,7 @@
 package com.ssafy.ssafit.util;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
@@ -23,8 +25,17 @@ public class JwtUtil {
                 .compact();
     }
 
-    public void validate(String token) {
-        Jwts.parser().setSigningKey(SALT.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token);
+    public boolean isValid(String token) {
+        try {
+            Jwts.parser()
+                    .setSigningKey(SALT.getBytes(StandardCharsets.UTF_8))
+                    .parseClaimsJws(token);
+            return true;
+
+        } catch (JwtException e) {
+            System.out.println("에러발생!");
+            return false;
+        }
     }
 
     private static String generateRandomSalt() {

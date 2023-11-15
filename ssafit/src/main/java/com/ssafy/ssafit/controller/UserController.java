@@ -39,11 +39,20 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
+        System.out.println("user.toString() = " + user.toString());
         Map<String, Object> res = new HashMap<>();
         userService.insertUser(user);
         res.put("user", user);
         res.put("access-token", jwtUtil.createToken("id", user.getId()));
         res.put("message", SUCCESS);
         return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/token-check")
+    public ResponseEntity<Void> checkTokenValidity(@RequestParam("token") String token) {
+        if (jwtUtil.isValid(token))
+            return ResponseEntity.ok().build();
+        else
+            return ResponseEntity.notFound().build();
     }
 }

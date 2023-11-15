@@ -10,8 +10,5 @@ public interface FollowService {
 
     List<Follow> getFollowByFollower(User user);
     List<Follow> getFollowByFollowee(User user);
-
     void removeFollow(Follow follow);
-
-    Follow getFollowByFollowerAndFollowee(Follow follow);
 }

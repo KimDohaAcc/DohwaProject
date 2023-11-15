@@ -15,8 +15,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class VideoServiceImpl implements VideoService{
     private final VideoRepository videoRepository;
-
-
     @Override
     public List<Video> getVideoList() {
         return videoRepository.findAll();

@@ -1,11 +1,9 @@
 package com.ssafy.ssafit.controller;
 
 import com.ssafy.ssafit.domain.Follow;
-import com.ssafy.ssafit.domain.Like;
 import com.ssafy.ssafit.domain.User;
 import com.ssafy.ssafit.service.followService.FollowService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class FollowController {
 
     private final FollowService followService;
@@ -25,17 +24,19 @@ public class FollowController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @GetMapping("/follow")
-    public ResponseEntity<List<Follow>> getFollowByFollower(@RequestBody User user, String type) {
-        if (type.equals("follower"))
+    @PostMapping("/follower")
+    public ResponseEntity<List<Follow>> getFollowByFollower(@RequestBody User user) {
             return Optional.ofNullable(followService.getFollowByFollower(user))
                     .map(ResponseEntity::ok)
                     .orElseGet(() -> ResponseEntity.badRequest().build());
-        else
+    }
+
+
+    @PostMapping("/followee")
+    public ResponseEntity<List<Follow>> getFollowByFollowee(@RequestBody User user) {
             return Optional.ofNullable(followService.getFollowByFollowee(user))
                     .map(ResponseEntity::ok)
                     .orElseGet(() -> ResponseEntity.badRequest().build());
-
     }
 
     @DeleteMapping("/follow")
