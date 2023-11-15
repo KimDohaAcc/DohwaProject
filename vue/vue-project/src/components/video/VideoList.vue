@@ -1,37 +1,25 @@
 <template>
     <div>
-        <h5>이용 후기 목록</h5>
-        <hr>
-        <table>
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>등록일</th>
-                <th>수정일</th>
-            </tr>
-            <tr v-for="(board, index) in store.boardList" :key="board.num">
-                <td>{{ index + 1 }}</td>
-                <td>
-                    <RouterLink :to="`/board/${board.num}`">{{ board.title }}</RouterLink>
-                </td>
-                <td>{{ board.user.nickname }}</td>
-                <td>{{ board.createdAt }}</td>
-            </tr>
-        </table>
-
-        <!-- <BoardSearchInput /> -->
+        <h5>추천 영상 목록</h5>
+        <ul>
+      <li v-for="video in videoList" :key="video.num">
+        <p>{{ video.title }}</p>
+        <iframe width="640" height="360" :src="video.url" frameborder="0" allowfullscreen></iframe>
+      </li>
+    </ul>
     </div>
 </template>
 
 <script setup>
-import { useBoardStore } from "@/stores/board";
+import { useVideoStore } from "@/stores/video";
 import { onMounted, computed } from "vue";
-import BoardSearchInput from "./BoardSearchInput.vue";
-const store = useBoardStore()
+
+
+const store = useVideoStore()
+const videoList = computed(() => store.videoList );
 
 onMounted(() => {
-    store.getBoardList();
+    store.getVideoList();
 })
 
 </script>

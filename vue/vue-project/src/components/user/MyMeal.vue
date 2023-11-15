@@ -15,14 +15,13 @@
 
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 const userStore = useUserStore();
-const userMeal = ref(null);
+const userMeal = computed(() => userStore.mealList);
 
 onMounted(() => {
     userStore.getUserMeal();
-    userMeal.value = userStore.mealList;
 });
 
 </script>
