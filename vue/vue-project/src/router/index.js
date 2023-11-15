@@ -1,9 +1,7 @@
-import { useUserStore } from "@/stores/user";
-
 import { createRouter, createWebHistory } from 'vue-router'
 import MainView from '@/views/MainView.vue'
 import BoardView from '@/views/BoardView.vue'
-import YoutubeView from '@/views/YoutubeView.vue'
+import VideoView from '@/views/VideoView.vue'
 
 
 import BoardList from '@/components/board/BoardList.vue'
@@ -14,6 +12,7 @@ import BoardUpdate from '@/components/board/BoardUpdate.vue'
 import Login from '@/components/user/Login.vue'
 import MyPage from '@/components/user/MyPage.vue'
 import MyMeal from '@/components/user/MyMeal.vue'
+import MyFollow from '@/components/user/MyFollow.vue'
 import Regist from '@/components/user/Regist.vue'
 
 
@@ -43,19 +42,19 @@ const router = createRouter({
       component: MyMeal,
     },
     {
+      path: "/myFollow",
+      name: "myFollow",
+      component: MyFollow,
+    },
+    {
       path: "/regist",
       name: "regist",
       component: Regist,
     },
     {
-      path: "/youtube",
-      name: "youtube",
-      component: YoutubeView,
-    },
-    {
       path: "/video",
       name: "video",
-      component: YoutubeView,
+      component: VideoView,
     },
     {
       path: '/board',
@@ -86,16 +85,5 @@ const router = createRouter({
     },
   ]
 })
-
-const userStore = useUserStore();
-
-router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !userStore.isTokenValid()) {
-      // 토큰이 유효하지 않으면 로그인 페이지로 리다이렉트
-      next('/login');
-  } else {
-      next();
-  }
-});
 
 export default router
