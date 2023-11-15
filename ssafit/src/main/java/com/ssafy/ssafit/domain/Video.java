@@ -10,7 +10,8 @@ import lombok.*;
 public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int num;
+    @Column(nullable = false,name = "video_num")
+    private Long num;
 
     @Column(nullable = false, length =50, name = "video_title")
     private String title;

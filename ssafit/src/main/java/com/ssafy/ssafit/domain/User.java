@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.util.UUID;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -22,4 +24,7 @@ public class User {
     @Column(nullable = false, length =40, name = "user_iskakao")
     private boolean iskakao;
 
+//    private Long generateRandomUserId() {
+//        return UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+//    }
 }

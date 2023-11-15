@@ -1,4 +1,11 @@
 -- 데이터 삽입
+CREATE TABLE video (
+                       video_num INT AUTO_INCREMENT PRIMARY KEY,
+                       video_title VARCHAR(50) NOT NULL,
+                       video_url VARCHAR(300) NOT NULL,
+                       video_sort VARCHAR(20) NOT NULL
+);
+
 INSERT INTO video (video_num, video_title, video_sort, video_url) VALUES
                                                                       (1, "전신 다이어트 최고의 운동 [칼소폭 찐 핵핵매운맛]", "전신", "https://www.youtube.com/embed/gMaB-fG4u4g"),
                                                                       (2, "하루 15분! 전신 칼로리 불태우는 다이어트 운동", "전신", "https://www.youtube.com/embed/swRNeYw1JkY"),

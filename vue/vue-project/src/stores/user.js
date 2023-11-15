@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, computed, onMounted } from "vue";
 import axios from "axios"
+// import jwt_decode from 'jwt-decode';
 
 export const useUserStore = defineStore('user', () => {
   const loginUser = ref(null);
@@ -8,7 +9,7 @@ export const useUserStore = defineStore('user', () => {
   let mealList = ref(null);
 
   onMounted(() => {
-    loginUser.value = JSON.parse(localStorage.getItem("loginUser"));
+    tokenCheck();
   });
 
   const getKakaoAccount = function () {
@@ -48,7 +49,8 @@ export const useUserStore = defineStore('user', () => {
     axios.
       post(API_URL, user)
       .then((res) => {
-        alert(".로그인 성공");
+        localStorage.setItem('jwtToken', res.data['access-token']);
+        
       })
       .catch((err) => {
         console.log(err);
@@ -56,14 +58,44 @@ export const useUserStore = defineStore('user', () => {
       });
   }
 
+  const tokenCheck = function isTokenValid() {
+    const token = localStorage.getItem('jwtToken');
+
+    if (token) {
+      try {
+          const decodedToken = jwt_decode(token);
+
+          // 대부분의 토큰 시스템에서는 만료 시간을 초 단위로 표시하므로, 현재 시간을 초 단위로 변환하기 위해 / 1000을 사용
+          const currentTimestamp = Date.now() / 1000;
+          if (decodedToken.exp && decodedToken.exp < currentTimestamp) {
+              // 토큰이 만료되었음
+              return false;
+          }
+
+          // 다른 유효성 검사 로직 추가
+          // ...
+          loginUser.value = localStorage.getItem('loginUser')
+          return true;
+      } catch (error) {
+          // 토큰 디코딩 오류 발생
+          console.error('Error decoding token:', error);
+          return false;
+      }
+  } else {
+      loginUser.value = null;
+      localStorage.removeItem('loginUser');
+      return false;
+    }
+}
+
   const logoutUser = function () {
-    localStorage.removeItem("loginUser");
+    localStorage.removeItem("jwtToken");
     loginUser.value = null;
   }
 
   const getUserMeal = function () {
     const API_URL = `http://localhost:8080/meal`;
-    const user = JSON.parse(localStorage.getItem("loginUser")); // user 변수를 const로 선언
+    const user = JSON.parse(loginUser.value); // user 변수를 const로 선언
     
     console.log(user);
     
@@ -77,5 +109,5 @@ export const useUserStore = defineStore('user', () => {
     });
   };
   
-  return { loginUser, getKakaoAccount, logoutUser, mealList, getUserMeal }
+  return { loginUser, getKakaoAccount, logoutUser, mealList, getUserMeal, tokenCheck }
 })
