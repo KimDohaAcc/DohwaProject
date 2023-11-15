@@ -1,28 +1,29 @@
 package com.ssafy.ssafit.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.ssafit.domain.Alarm;
+import com.ssafy.ssafit.domain.AlarmSetting;
 import com.ssafy.ssafit.domain.Meal;
 import com.ssafy.ssafit.domain.User;
-import com.ssafy.ssafit.service.alarmService.NotificationService;
+import com.ssafy.ssafit.service.alarmService.AlarmService;
+import com.ssafy.ssafit.service.alarmSettingService.AlarmSettingService;
 import com.ssafy.ssafit.service.mealService.MealService;
 import com.ssafy.ssafit.service.userService.UserService;
 import io.github.flashvayne.chatgpt.service.ChatgptService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,12 +31,15 @@ public class KakaoSkillController {
     private final ChatgptService chatgptService;
     private final MealService mealService;
     private final UserService userService;
+    private final AlarmService alarmService;
+    private final AlarmSettingService alarmSettingService;
 
     @PostMapping("/skill")
     public Map<String, String> checkFoodkcal(@RequestBody Map<String, Object> event) {
         Map<String, String> params = getActionParams(event);
         String food = params.get("food");
         String gram = params.get("gram");
+
         Optional<User> opt = userService.findUserById(Long.parseLong(getUserId(event)));
 
 
@@ -114,10 +118,8 @@ public class KakaoSkillController {
         map.put("result", result.toString());
         return map;
     }
-    @Autowired
-    private NotificationService notificationService;
 
-    @PostMapping("/datetime")
+    @PostMapping("/dateTime")
     public ResponseEntity<?> handleChatbotDateRequest(@RequestBody Map<String, Object> request) {
         Map<String, Object> action = (Map<String, Object>) request.get("action");
         if (action == null) {
@@ -133,8 +135,14 @@ public class KakaoSkillController {
             String value = datetimeInfo.get("value");
             String userTimeZone = datetimeInfo.get("userTimeZone");
 
-            // 알림 서비스 호출 (알림 예약)
-            notificationService.scheduleNotification(value, userTimeZone);
+            LocalTime localTime = LocalTime.parse(value, DateTimeFormatter.ISO_LOCAL_TIME);
+            params.put("localTime", localTime.toString());
+            AlarmSetting alarmSetting = new AlarmSetting();
+            alarmSetting.setDate(localTime);
+            Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
+            if (user.isPresent()) {
+                alarmSetting.setUser(user.get());
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -143,4 +151,65 @@ public class KakaoSkillController {
 
         return new ResponseEntity<Map<String, String>>(params, HttpStatus.OK);
     }
+    @PostMapping("/nowTime")
+    public Map<String, String> nowTime(@RequestBody Map<String, Object> request) {
+        LocalTime now = LocalTime.now();
+        Map<String, String> res = new HashMap<>();
+
+        Alarm alarm = new Alarm();
+        alarm.setDate(now);
+
+        Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
+        if (user.isPresent()) {
+            alarm.setUser(user.get());
+            AlarmSetting alarmSetting = alarmSettingService.findAlarmSettingByUser(user.get());
+            LocalTime alarmSettingTime = alarmSetting.getDate();
+
+            if (now.isBefore(alarmSettingTime)) {
+                alarm.setSafe(true);
+                res.put("msg", "아주 잘했구나~");
+            } else {
+                alarm.setSafe(false);
+                res.put("msg", "다음부터는 늦게오지 말렴~");
+            }
+        }
+
+        return res;
+    }
+    @GetMapping("/listTime")
+    public List<LocalTime>getDateList(@RequestBody Map<String, Object> request){
+        List<Alarm>alarms = new ArrayList<>();
+        List<LocalTime>dateList=new ArrayList<>();
+        Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
+        if (user.isPresent()) {
+            alarms = (List<Alarm>) alarmService.findAlarmsByUser(user.get());
+
+            for (Alarm alarm : alarms) {
+                dateList.add(alarm.getDate());
+            }
+        }
+
+        return dateList;
+    }
+
+    @DeleteMapping("/deleteTime")
+    public ResponseEntity<Void> delete(@RequestBody Map<String, Object> request) {
+        long userId = Long.parseLong(getUserId(request));
+
+        Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
+        if (user.isPresent()) {
+            List<Alarm> userAlarms = alarmService.findAlarmsByUser(user.get());
+            AlarmSetting alarmSetting = alarmSettingService.findAlarmSettingByUser(user.get());
+
+            alarmService.removeAlarm(userAlarms);
+            alarmSettingService.removeAlarmSetting(alarmSetting);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/updateSettingTime")
+
+
 }

@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,10 +20,12 @@ public class AlarmServiceImpl implements AlarmService {
         return alarmRepository.save(alarm);
     }
 
+
+
     @Override
     @Transactional(readOnly = true)
-    public Optional<Alarm> findByUser(User user) {
-        return alarmRepository.findByUser(user);
+    public List<Alarm> findAlarmsByUser(User user) {
+        return alarmRepository.findAlarmsByUser(user);
     }
 
     @Override
@@ -33,7 +35,7 @@ public class AlarmServiceImpl implements AlarmService {
     }
 
     @Override
-    public void removeAlarm(Alarm alarm) {
-        alarmRepository.delete(alarm);
+    public void removeAlarm(List<Alarm>userAlarms) {
+        alarmRepository.delete((Alarm) userAlarms);
     }
 }
