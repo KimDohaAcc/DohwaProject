@@ -16,8 +16,8 @@ import java.util.List;
 public class MealController {
     private final MealService mealService;
 
-    @GetMapping("/meal")
-    ResponseEntity<List<Meal>> getUserMeal(@ModelAttribute User user){
+    @PostMapping("/meal")
+    ResponseEntity<List<Meal>> getUserMeal(@RequestBody User user){
         return new ResponseEntity<>(mealService.getMealAllByUser(user), HttpStatus.OK);
     }
 }

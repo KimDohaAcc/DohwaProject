@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,8 +22,11 @@ public class VideoController {
                 .map(video -> new ResponseEntity<>(video, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    
-    // 내일 할 일 : 비디오 리스트 만들기
+
+    @GetMapping("/video")
+    public ResponseEntity<List<Video>> getVideoAll(){
+        return new ResponseEntity<>(videoService.getVideoList(), HttpStatus.OK);
+    }
 
     @PostMapping("/video")
     public ResponseEntity<Video> write(@RequestBody Video video){
