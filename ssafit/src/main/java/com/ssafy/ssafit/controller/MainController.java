@@ -11,15 +11,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class MainController {
     private final BoardService boardService;
-
-    @RequestMapping("/")
-    public String index(){
-        return "index";
-    }
-
-    @GetMapping("boardPage")
-    public String showBoardAll(Model model) {
-        model.addAttribute("list", boardService.getList());
-        return "/boardPage";
-    }
 }

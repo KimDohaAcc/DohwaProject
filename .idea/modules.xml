@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DohwaProject.iml" filepath="$PROJECT_DIR$/.idea/DohwaProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ssafit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ssafit.main.iml" />
     </modules>
   </component>
 </project>
