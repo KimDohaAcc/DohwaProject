@@ -1,3 +1,5 @@
+import { useUserStore } from "@/stores/user";
+
 import { createRouter, createWebHistory } from 'vue-router'
 import MainView from '@/views/MainView.vue'
 import BoardView from '@/views/BoardView.vue'
@@ -51,6 +53,11 @@ const router = createRouter({
       component: YoutubeView,
     },
     {
+      path: "/video",
+      name: "video",
+      component: YoutubeView,
+    },
+    {
       path: '/board',
       name: 'board',
       component: BoardView,
@@ -79,5 +86,16 @@ const router = createRouter({
     },
   ]
 })
+
+const userStore = useUserStore();
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !userStore.isTokenValid()) {
+      // 토큰이 유효하지 않으면 로그인 페이지로 리다이렉트
+      next('/login');
+  } else {
+      next();
+  }
+});
 
 export default router
