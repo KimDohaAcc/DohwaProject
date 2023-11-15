@@ -1,17 +1,21 @@
 package com.ssafy.ssafit.service.alarmService;
 
-import com.ssafy.ssafit.domain.Admin;
 import com.ssafy.ssafit.domain.Alarm;
 import com.ssafy.ssafit.domain.User;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface AlarmService {
     Alarm insertAlarm(Alarm alarm);
 
-    Optional<Alarm> findByUser(User user);
+
+
+
+    @Transactional(readOnly = true)
+    List<Alarm> findAlarmsByUser(User user);
 
     Alarm UpdateAlarm(Alarm alarm);
 
-    void removeAlarm(Alarm alarm);
+    void removeAlarm(List<Alarm>Alarm userAlarms);
 }

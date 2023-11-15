@@ -5,28 +5,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Alarm {
+public class AlarmSetting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, name = "alram_num")
+    @Column(nullable = false, name = "alramSetting_num")
     private Long num;
 
     @OneToOne
-    @JoinColumn(name = "user_alram_id")
+    @JoinColumn(name = "user_alramSetting_id")
     private User user;
 
-    @Column(name = "alram_date")
+    @Column(name = "alramSetting_date")
     private LocalTime date;
 
 
-    @Column(name="alarm_safe")
-    private Boolean safe;
 
 }
