@@ -15,7 +15,7 @@ public interface AlarmService {
     @Transactional(readOnly = true)
     List<Alarm> findAlarmsByUser(User user);
 
-    Alarm UpdateAlarm(Alarm alarm);
+    Alarm updateAlarm(Alarm alarm);
 
-    void removeAlarm(List<Alarm>Alarm userAlarms);
+    void removeAlarm(List<Alarm>userAlarms);
 }

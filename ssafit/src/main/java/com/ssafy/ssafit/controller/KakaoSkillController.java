@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -135,7 +136,7 @@ public class KakaoSkillController {
             String value = datetimeInfo.get("value");
             String userTimeZone = datetimeInfo.get("userTimeZone");
 
-            LocalTime localTime = LocalTime.parse(value, DateTimeFormatter.ISO_LOCAL_TIME);
+            LocalDateTime localTime = LocalDateTime.parse(value, DateTimeFormatter.ISO_LOCAL_TIME);
             params.put("localTime", localTime.toString());
             AlarmSetting alarmSetting = new AlarmSetting();
             alarmSetting.setDate(localTime);
@@ -152,44 +153,45 @@ public class KakaoSkillController {
         return new ResponseEntity<Map<String, String>>(params, HttpStatus.OK);
     }
     @PostMapping("/nowTime")
-    public Map<String, String> nowTime(@RequestBody Map<String, Object> request) {
-        LocalTime now = LocalTime.now();
-        Map<String, String> res = new HashMap<>();
-
-        Alarm alarm = new Alarm();
-        alarm.setDate(now);
+    public Map<String, Object> nowTime(@RequestBody Map<String, Object> request) {
+        LocalDateTime now = LocalDateTime.now();
+        Map<String, Object> res = new HashMap<>();
 
         Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
         if (user.isPresent()) {
-            alarm.setUser(user.get());
             AlarmSetting alarmSetting = alarmSettingService.findAlarmSettingByUser(user.get());
-            LocalTime alarmSettingTime = alarmSetting.getDate();
+            LocalDateTime alarmSettingTime = alarmSetting.getDate();
 
-            if (now.isBefore(alarmSettingTime)) {
-                alarm.setSafe(true);
+            boolean isBefore = now.toLocalTime().isBefore(alarmSettingTime.toLocalTime());
+            res.put("isBefore", isBefore);
+
+
+            if (isBefore) {
                 res.put("msg", "아주 잘했구나~");
             } else {
-                alarm.setSafe(false);
-                res.put("msg", "다음부터는 늦게오지 말렴~");
+                res.put("msg", "다음부터는 늦게 오지 말라구~");
             }
         }
 
         return res;
     }
     @GetMapping("/listTime")
-    public List<LocalTime>getDateList(@RequestBody Map<String, Object> request){
-        List<Alarm>alarms = new ArrayList<>();
-        List<LocalTime>dateList=new ArrayList<>();
+    public List<String> getDateList(@RequestBody Map<String, Object> request) {
+        List<Alarm> alarms = new ArrayList<>();
+        List<String> formattedDates = new ArrayList<>();
+
         Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
         if (user.isPresent()) {
             alarms = (List<Alarm>) alarmService.findAlarmsByUser(user.get());
 
             for (Alarm alarm : alarms) {
-                dateList.add(alarm.getDate());
+                LocalDateTime date = alarm.getDate();
+                String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
+                formattedDates.add(formattedDate);
             }
         }
 
-        return dateList;
+        return formattedDates;
     }
 
     @DeleteMapping("/deleteTime")
@@ -210,6 +212,48 @@ public class KakaoSkillController {
     }
 
     @PostMapping("/updateSettingTime")
+    public ResponseEntity<?> handleChatbotUpdateDateRequest(@RequestBody Map<String, Object> request) {
+        Map<String, Object> action = (Map<String, Object>) request.get("action");
+        if (action == null) {
+            return ResponseEntity.status(400).body("Action is missing or null");
+        }
+
+        Map<String, String> params = (Map<String, String>) action.get("params");
+        String datetime = params.get("datetime");
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            Map<String, String> datetimeInfo = mapper.readValue(datetime, Map.class);
+            String value = datetimeInfo.get("value");
+            String userTimeZone = datetimeInfo.get("userTimeZone");
+
+            LocalDateTime localTime = LocalDateTime.parse(value, DateTimeFormatter.ISO_LOCAL_TIME);
+            params.put("localTime", localTime.toString());
+
+            Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
+            if (user.isPresent()) {
+
+                AlarmSetting existingSetting = alarmSettingService.findAlarmSettingByUser(user.get());
+                if (existingSetting != null) {
+                    alarmSettingService.removeAlarmSetting(existingSetting);
+                }
+
+
+                AlarmSetting alarmSetting = new AlarmSetting();
+                alarmSetting.setDate(localTime);
+                alarmSetting.setUser(user.get());
+                alarmSettingService.updateAlarmSetting(alarmSetting);
+            } else {
+                return ResponseEntity.status(404).body("User not found");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
+
+        return new ResponseEntity<Map<String, String>>(params, HttpStatus.OK);
+    }
+
 
 
 }

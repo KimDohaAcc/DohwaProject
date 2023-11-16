@@ -14,7 +14,7 @@ public interface AlarmSettingService {
     @Transactional(readOnly = true)
     AlarmSetting findAlarmSettingByUser(User user);
 
-    AlarmSetting UpdateAlarmSetting(AlarmSetting alarmSetting);
+    AlarmSetting updateAlarmSetting(AlarmSetting alarmSetting);
 
     void removeAlarmSetting(AlarmSetting alarmSetting);
 
