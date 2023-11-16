@@ -15,9 +15,9 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class MealController {
     private final MealService mealService;
-
-    @PostMapping("/meal")
-    ResponseEntity<List<Meal>> getUserMeal(@RequestBody User user){
-        return new ResponseEntity<>(mealService.getMealAllByUser(user), HttpStatus.OK);
-    }
+//
+//    @PostMapping("/meal")
+//    ResponseEntity<List<Meal>> getUserMeal(@RequestBody User user){
+//        return new ResponseEntity<>(mealService.getMealAllByUser(user), HttpStatus.OK);
+//    }
 }

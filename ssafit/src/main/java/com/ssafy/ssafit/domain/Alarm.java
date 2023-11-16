@@ -18,9 +18,8 @@ public class Alarm {
     @Column(nullable = false, name = "alram_num")
     private Long num;
 
-    @OneToOne
-    @JoinColumn(name = "user_alram_id")
-    private User user;
+    @Column(nullable = false, name = "alram_user")
+    private String user;
 
     @Column(name = "alram_date")
     private LocalDateTime date;

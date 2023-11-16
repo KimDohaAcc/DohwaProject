@@ -15,17 +15,9 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class AlarmSetting {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, name = "alramSetting_num")
-    private Long num;
+    @Column(nullable = false, name = "alramsetting_user")
+    private String user;
 
-    @OneToOne
-    @JoinColumn(name = "user_alramSetting_id")
-    private User user;
-
-    @Column(name = "alramSetting_date")
-    private LocalDateTime date;
-
-
-
+    @Column(name = "alramsetting_date")
+    private String date;
 }
