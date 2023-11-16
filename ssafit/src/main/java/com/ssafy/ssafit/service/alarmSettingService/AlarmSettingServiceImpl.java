@@ -12,17 +12,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
+@RequiredArgsConstructor
 public class AlarmSettingServiceImpl implements AlarmSettingService{
-    private AlarmSettingRepository alarmSettingRepository;
+    private final AlarmSettingRepository alarmSettingRepository;
     @Override
     public AlarmSetting insertAlarmSetting(AlarmSetting alarmSetting) {
         return alarmSettingRepository.save(alarmSetting);
     }
 
     @Override
-    public AlarmSetting findAlarmSettingByUser(User user) {
+    public AlarmSetting findAlarmSettingByUser(String user) {
         return alarmSettingRepository.findAlarmSettingByUser(user);
     }
 
@@ -33,6 +33,7 @@ public class AlarmSettingServiceImpl implements AlarmSettingService{
 
     @Override
     public void removeAlarmSetting(AlarmSetting alarmSetting) {
+        System.out.println("alarmSetting = " + alarmSetting.toString());
         alarmSettingRepository.delete(alarmSetting);
     }
 

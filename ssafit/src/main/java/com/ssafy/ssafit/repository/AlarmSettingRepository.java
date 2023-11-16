@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AlarmSettingRepository extends JpaRepository<AlarmSetting, Long> {
-    Optional<AlarmSetting> findByUser(User user);
+    Optional<AlarmSetting> findByUser(String user);
 
-    AlarmSetting findAlarmSettingByUser(User user);
+    AlarmSetting findAlarmSettingByUser(String user);
 
 
 
