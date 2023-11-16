@@ -29,7 +29,7 @@ public class AlarmServiceImpl implements AlarmService {
     }
 
     @Override
-    public Alarm UpdateAlarm(Alarm alarm) {
+    public Alarm updateAlarm(Alarm alarm) {
         return alarmRepository.save(alarm);
 
     }

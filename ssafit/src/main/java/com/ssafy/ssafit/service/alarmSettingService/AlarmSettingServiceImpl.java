@@ -27,7 +27,7 @@ public class AlarmSettingServiceImpl implements AlarmSettingService{
     }
 
     @Override
-    public AlarmSetting UpdateAlarmSetting(AlarmSetting alarmSetting) {
+    public AlarmSetting updateAlarmSetting(AlarmSetting alarmSetting) {
         return alarmSettingRepository.save(alarmSetting);
     }
 

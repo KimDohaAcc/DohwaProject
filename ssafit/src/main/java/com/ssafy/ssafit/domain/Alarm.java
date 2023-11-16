@@ -23,7 +23,7 @@ public class Alarm {
     private User user;
 
     @Column(name = "alram_date")
-    private LocalTime date;
+    private LocalDateTime date;
 
 
     @Column(name="alarm_safe")
