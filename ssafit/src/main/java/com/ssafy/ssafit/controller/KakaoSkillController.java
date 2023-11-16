@@ -1,18 +1,18 @@
 package com.ssafy.ssafit.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.ssafit.domain.Alarm;
 import com.ssafy.ssafit.domain.AlarmSetting;
 import com.ssafy.ssafit.domain.Meal;
-import com.ssafy.ssafit.domain.User;
 import com.ssafy.ssafit.service.alarmService.AlarmService;
 import com.ssafy.ssafit.service.alarmSettingService.AlarmSettingService;
 import com.ssafy.ssafit.service.mealService.MealService;
 import com.ssafy.ssafit.service.userService.UserService;
 import io.github.flashvayne.chatgpt.service.ChatgptService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.joda.time.field.StrictDateTimeField;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
@@ -30,7 +31,6 @@ import java.util.*;
 public class KakaoSkillController {
     private final ChatgptService chatgptService;
     private final MealService mealService;
-    private final UserService userService;
     private final AlarmService alarmService;
     private final AlarmSettingService alarmSettingService;
 
@@ -39,25 +39,22 @@ public class KakaoSkillController {
         Map<String, String> params = getActionParams(event);
         String food = params.get("food");
         String gram = params.get("gram");
+        String user = getUserId(event);
 
-        Optional<User> opt = userService.findUserById(Long.parseLong(getUserId(event)));
-
-
-        String reply = chatgptService.sendMessage(food + " " + gram + "의 칼로리를 '[kcal: ]' 형식으로 알려줘");
+        String reply = chatgptService.sendMessage(String.format("%s %s의 칼로리를 '[kcal: ]' 형식으로 알려줘", food, gram));
         String kcal = extractKcal(reply);
 
-        if (params.get("delete") != null && opt.isPresent()) {
-            mealService.removeMeal(opt.get());
+        if (params.containsKey("delete")) {
+            mealService.removeMeal(user);
         }
 
-        opt.map(user -> mealService.createMeal(new Meal(null, user, food, kcal, LocalDateTime.now())));
+        Meal newMeal = new Meal(null, user, food, kcal, LocalDateTime.now());
+        mealService.createMeal(newMeal);
         return createResponseMap(kcal);
     }
 
     private String getUserId(Map<String, Object> event) {
-        Map<String, Object> json = (Map<String, Object>) event.get("body-json");
-        System.out.println("json = " + json);
-        Map<String, Object> userRequest = (Map<String, Object>) json.get("userRequest");
+        Map<String, Object> userRequest = (Map<String, Object>) event.get("userRequest");
         System.out.println("userRequest = " + userRequest);
         Map<String, Object> user = (Map<String, Object>) userRequest.get("user");
         System.out.println("user = " + user);
@@ -65,8 +62,7 @@ public class KakaoSkillController {
     }
 
     private Map<String, String> getActionParams(Map<String, Object> event) {
-        Map<String, Object> json = (Map<String, Object>) event.get("body-json");
-        Map<String, Object> action = (Map<String, Object>) json.get("action");
+        Map<String, Object> action = (Map<String, Object>) event.get("action");
         return (Map<String, String>) action.get("params");
     }
 
@@ -88,171 +84,157 @@ public class KakaoSkillController {
     public Map<String, String> searchMeal(@RequestBody Map<String, Object> event) {
         Map<String, String> params = getActionParams(event);
         String period = params.get("period");
-        Optional<User> opt = userService.findUserById(Long.parseLong(getUserId(event)));
+        String user = getUserId(event);
 
-        Optional<List<Meal>> list = opt.map(mealService::getMealByUser);
+        Optional<List<Meal>> list = Optional.ofNullable(mealService.getMealAllByUser(user));
         LocalDateTime now = LocalDateTime.now();
         StringBuilder result = new StringBuilder();
+        System.out.println("period = " + period);
 
-        if (list.isPresent()) {
+        list.ifPresent(mealList -> {
             LocalDateTime before = switch (period) {
                 case "이번 주" -> now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
                 case "이번 달" -> now.with(TemporalAdjusters.firstDayOfMonth());
-                case "최근 세 달" -> now.minusMonths(2).with(TemporalAdjusters.firstDayOfMonth());
-                case "최근 여섯 달" -> now.minusMonths(5).with(TemporalAdjusters.firstDayOfMonth());
-                case "최근 일 년" -> now.minusYears(1);
-                default -> now.minusYears(3);
+                case "최근 일 년" -> now.minusYears(1).with(TemporalAdjusters.firstDayOfYear());
+                default -> now.minusYears(3).with(TemporalAdjusters.firstDayOfYear());
             };
 
-            for (Meal meal : list.get()) {
+            for (Meal meal : mealList) {
                 if (meal.getTime().isAfter(before)) {
-                    result.append("------");
-                    result.append(meal.getTime().getYear()).append("/").append(meal.getTime().getMonth()).append("/").append(meal.getTime().getDayOfMonth()).append(" ").append(meal.getTime().getHour() >= 17 ? "저녁" : meal.getTime().getHour() >= 12 ? "점심" : "아침" + "\n");
-                    result.append(meal.getFood()).append("(").append(meal.getKcal().trim()).append("kcal)\n");
-                    result.append("------");
+                    result
+                            .append(meal.getTime().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")))
+                            .append(" ")
+                            .append(meal.getTime().getHour() >= 17 ? "저녁" : meal.getTime().getHour() >= 12 ? "점심" : "아침")
+                            .append("\n")
+                            .append(meal.getFood())
+                            .append("(")
+                            .append(meal.getKcal().trim())
+                            .append("kcal)\n");
                 }
             }
-        }
+        });
 
         Map<String, String> map = new HashMap<>();
         map.put("result", result.toString());
+        System.out.println("map.get(\"result\") = " + map.get("result"));
         return map;
     }
 
     @PostMapping("/dateTime")
-    public ResponseEntity<?> handleChatbotDateRequest(@RequestBody Map<String, Object> request) {
-        Map<String, Object> action = (Map<String, Object>) request.get("action");
-        if (action == null) {
-            return ResponseEntity.status(400).body("Action is missing or null");
-        }
+    public Map<String, String> handleChatbotDateRequest(@RequestBody Map<String, Object> event) throws JsonProcessingException {
+        Map<String, Object> action = (Map<String, Object>) event.get("action");
+        Map<String, Object> params = (Map<String, Object>) action.get("params");
+        String healthtimeMap = (String) params.get("healthtime");
 
-        Map<String, String> params = (Map<String, String>) action.get("params");
-        String datetime = params.get("datetime");
-        ObjectMapper mapper = new ObjectMapper();
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, String> result = new HashMap<>();
         try {
-            Map<String, String> datetimeInfo = mapper.readValue(datetime, Map.class);
-            String value = datetimeInfo.get("value");
-            String userTimeZone = datetimeInfo.get("userTimeZone");
+            JsonNode jsonNode = objectMapper.readTree(healthtimeMap);
+            String value = jsonNode.get("value").asText();
 
-            LocalDateTime localTime = LocalDateTime.parse(value, DateTimeFormatter.ISO_LOCAL_TIME);
-            params.put("localTime", localTime.toString());
             AlarmSetting alarmSetting = new AlarmSetting();
-            alarmSetting.setDate(localTime);
-            Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
-            if (user.isPresent()) {
-                alarmSetting.setUser(user.get());
-            }
+            alarmSetting.setDate(value);
+            alarmSetting.setUser(getUserId(event));
+            alarmSettingService.insertAlarmSetting(alarmSetting);
 
-        } catch (IOException e) {
+            result.put("settingTime", value);
+        } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).build();
         }
 
-        return new ResponseEntity<Map<String, String>>(params, HttpStatus.OK);
+        return result;
     }
+
     @PostMapping("/nowTime")
-    public Map<String, Object> nowTime(@RequestBody Map<String, Object> request) {
-        LocalDateTime now = LocalDateTime.now();
-        Map<String, Object> res = new HashMap<>();
+    public Map<String, Object> nowTime(@RequestBody Map<String, Object> event) {
+        System.out.println("event = " + event);
+        String user = getUserId(event);
 
-        Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
-        if (user.isPresent()) {
-            AlarmSetting alarmSetting = alarmSettingService.findAlarmSettingByUser(user.get());
-            LocalDateTime alarmSettingTime = alarmSetting.getDate();
+        AlarmSetting alarmSetting = alarmSettingService.findAlarmSettingByUser(user);
+        String alarmSettingTime = alarmSetting.getDate();
 
-            boolean isBefore = now.toLocalTime().isBefore(alarmSettingTime.toLocalTime());
-            res.put("isBefore", isBefore);
+        LocalTime currentTime = LocalTime.now(ZoneId.of("Asia/Seoul"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime inputTime = LocalTime.parse(alarmSettingTime, formatter);
 
+        boolean isBefore = currentTime.isBefore(inputTime);
 
-            if (isBefore) {
-                res.put("msg", "아주 잘했구나~");
-            } else {
-                res.put("msg", "다음부터는 늦게 오지 말라구~");
-            }
-        }
+        Alarm alarm = new Alarm(null, user, LocalDateTime.now(ZoneId.of("Asia/Seoul")), isBefore);
+        alarmService.insertAlarm(alarm);
+        String msg = "";
 
-        return res;
-    }
-    @GetMapping("/listTime")
-    public List<String> getDateList(@RequestBody Map<String, Object> request) {
-        List<Alarm> alarms = new ArrayList<>();
-        List<String> formattedDates = new ArrayList<>();
-
-        Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
-        if (user.isPresent()) {
-            alarms = (List<Alarm>) alarmService.findAlarmsByUser(user.get());
-
-            for (Alarm alarm : alarms) {
-                LocalDateTime date = alarm.getDate();
-                String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
-                formattedDates.add(formattedDate);
-            }
-        }
-
-        return formattedDates;
-    }
-
-    @DeleteMapping("/deleteTime")
-    public ResponseEntity<Void> delete(@RequestBody Map<String, Object> request) {
-        long userId = Long.parseLong(getUserId(request));
-
-        Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
-        if (user.isPresent()) {
-            List<Alarm> userAlarms = alarmService.findAlarmsByUser(user.get());
-            AlarmSetting alarmSetting = alarmSettingService.findAlarmSettingByUser(user.get());
-
-            alarmService.removeAlarm(userAlarms);
-            alarmSettingService.removeAlarmSetting(alarmSetting);
-            return new ResponseEntity<>(HttpStatus.OK);
+        if (isBefore) {
+            msg = "아주 잘했구나~";
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            msg = "다음부터는 늦게 오지 말라구~";
         }
+
+        return getStringObjectMap(msg);
     }
 
-    @PostMapping("/updateSettingTime")
-    public ResponseEntity<?> handleChatbotUpdateDateRequest(@RequestBody Map<String, Object> request) {
-        Map<String, Object> action = (Map<String, Object>) request.get("action");
-        if (action == null) {
-            return ResponseEntity.status(400).body("Action is missing or null");
-        }
-
-        Map<String, String> params = (Map<String, String>) action.get("params");
-        String datetime = params.get("datetime");
-        ObjectMapper mapper = new ObjectMapper();
+    private Map<String, Object> getStringObjectMap(String msg) {
+        String jsonString = "{\n" +
+                "  \"version\": \"2.0\",\n" +
+                "  \"template\": {\n" +
+                "    \"outputs\": [\n" +
+                "      {\n" +
+                "        \"simpleText\": {\n" +
+                "          \"text\": \"" + msg + "\"\n" + // Added double quotes around msg
+                "        }\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  }\n" +
+                "}";
 
         try {
-            Map<String, String> datetimeInfo = mapper.readValue(datetime, Map.class);
-            String value = datetimeInfo.get("value");
-            String userTimeZone = datetimeInfo.get("userTimeZone");
-
-            LocalDateTime localTime = LocalDateTime.parse(value, DateTimeFormatter.ISO_LOCAL_TIME);
-            params.put("localTime", localTime.toString());
-
-            Optional<User> user = userService.findUserById(Long.parseLong(getUserId(request)));
-            if (user.isPresent()) {
-
-                AlarmSetting existingSetting = alarmSettingService.findAlarmSettingByUser(user.get());
-                if (existingSetting != null) {
-                    alarmSettingService.removeAlarmSetting(existingSetting);
-                }
-
-
-                AlarmSetting alarmSetting = new AlarmSetting();
-                alarmSetting.setDate(localTime);
-                alarmSetting.setUser(user.get());
-                alarmSettingService.updateAlarmSetting(alarmSetting);
-            } else {
-                return ResponseEntity.status(404).body("User not found");
-            }
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, Object> jsonMap = objectMapper.readValue(jsonString, Map.class);
+            System.out.println(jsonMap);
+            return jsonMap;
         } catch (IOException e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).build();
+            return null;
         }
-
-        return new ResponseEntity<Map<String, String>>(params, HttpStatus.OK);
     }
 
+    @PostMapping("/listTime")
+    public Map<String, Object> getDateList(@RequestBody Map<String, Object> event) {
+        List<Alarm> alarms = alarmService.findAlarmsByUser(getUserId(event));
+        StringBuilder sb = new StringBuilder();
+        for (Alarm alarm : alarms) {
+            LocalDateTime date = alarm.getDate();
+            String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
+            sb.append(formattedDate).append("\n");
+        }
 
+        String list = sb.toString().replace("\n", "\\n");
+        return getStringObjectMap(list);
+    }
 
+    @PostMapping("/deleteTime")
+    public ResponseEntity<Void> delete(@RequestBody Map<String, Object> event) {
+        String user = getUserId(event);
+        AlarmSetting alarmSetting = alarmSettingService.findAlarmSettingByUser(user);
+        alarmService.removeAlarm(user);
+        alarmSettingService.removeAlarmSetting(alarmSetting);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+//    @PostMapping("/updateSettingTime")
+//    public Map<String, String> handleChatbotUpdateDateRequest(@RequestBody Map<String, Object> event) {
+//        String healthtime = getActionParams(event).get("healthtime");
+//        String user = getUserId(event);
+//
+//        alarmSettingService.removeAlarmSetting(alarmSettingService.findAlarmSettingByUser(user));
+//
+//        Map<String, String> result = new HashMap<>();
+//        AlarmSetting alarmSetting = new AlarmSetting();
+//        alarmSetting.setDate(healthtime);
+//        alarmSetting.setUser(getUserId(event));
+//        alarmSettingService.updateAlarmSetting(alarmSetting);
+//
+//        result.put("settingTime", healthtime);
+//
+//        return result;
+//    }
 }

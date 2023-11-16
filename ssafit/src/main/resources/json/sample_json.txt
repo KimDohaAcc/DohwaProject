@@ -27,3 +27,15 @@
     }
   }
 }
+
+
+event = {
+    "action": {
+      "params": {
+        "healthtime": {
+          "userTimeZone": "UTC+9",
+          "value": "07:00:00"
+        }
+      }
+    }
+}
