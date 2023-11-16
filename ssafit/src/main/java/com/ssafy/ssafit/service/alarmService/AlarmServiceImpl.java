@@ -21,21 +21,14 @@ public class AlarmServiceImpl implements AlarmService {
     }
 
 
-
     @Override
     @Transactional(readOnly = true)
-    public List<Alarm> findAlarmsByUser(User user) {
+    public List<Alarm> findAlarmsByUser(String user) {
         return alarmRepository.findAlarmsByUser(user);
     }
 
     @Override
-    public Alarm updateAlarm(Alarm alarm) {
-        return alarmRepository.save(alarm);
-
-    }
-
-    @Override
-    public void removeAlarm(List<Alarm>userAlarms) {
-        alarmRepository.delete((Alarm) userAlarms);
+    public void removeAlarm(String user) {
+        alarmRepository.deleteAllByUser(user);
     }
 }

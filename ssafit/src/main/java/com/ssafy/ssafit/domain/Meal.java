@@ -18,9 +18,8 @@ public class Meal {
     @Column(nullable = false, name = "meal_num")
     private Long num;
 
-    @ManyToOne
-    @JoinColumn(nullable = false, name = "user_meal")
-    private User user;
+    @Column(nullable = false, name = "meal_user")
+    private String user;
 
     @Column(nullable = false, name = "meal_food")
     private String food;
