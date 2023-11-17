@@ -20,13 +20,13 @@ export const useCommentStore = defineStore('comment', () => {
       console.log(commentValue);
       if (commentValue) {
         axios.post(REST_COMMENT_API, commentValue)
-          .then((response) => {
-            comments.value.push(response.data);
-            resolve();
-          })
-          .catch((error) => {
-            reject(error);
-          });
+            .then((response) => {
+              comments.value.push(response.data);
+              resolve();
+            })
+            .catch((error) => {
+              reject(error);
+            });
       } else {
         reject(new Error('댓글 내용을 입력하세요'));
       }
@@ -45,6 +45,4 @@ export const useCommentStore = defineStore('comment', () => {
     deleteComment,
     filteredComments, // computed로 생성한 속성을 반환합니다.
   };
-  
-}
-);
+});
