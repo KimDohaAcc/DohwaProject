@@ -45,7 +45,7 @@ public class BoardController {
         }
     }
 
-    @PutMapping("/board")
+    @PutMapping("/board/")
     public ResponseEntity<Void> update(@RequestBody Board board) {
         System.out.println("board = " + board);
         boardService.modifyBoard(board);
