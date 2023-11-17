@@ -14,7 +14,7 @@
                             <RouterLink to="/board">이용 후기</RouterLink>
                         </b-nav-item>
                         <b-nav-item href="#">
-                            <RouterLink to="/youtube">운동 추천 영상</RouterLink>
+                            <RouterLink to="/video">운동 추천 영상</RouterLink>
                         </b-nav-item>
                     </b-navbar-nav>
                     <b-navbar-nav v-if="!isLogin">
