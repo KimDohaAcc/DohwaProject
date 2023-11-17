@@ -8,7 +8,7 @@ export const useUserStore = defineStore('user', () => {
   let mealList = ref(null);
   let followerList = ref(null);
   let followeeList = ref(null);
-  
+
   const REST_API_URL = `http://localhost:8080`;
 
 
@@ -69,6 +69,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   const getUserMeal = function () {
+    const API_URL = `http://healthpanda.site/meal`;
     const user = loginUser.value;
 
     console.log(user);
