@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class BoardController {
     private final BoardService boardService;
 
