@@ -34,27 +34,15 @@ export const useBoardStore = defineStore('board', () => {
   }
 
   //게시글 등록
-  // const createBoard = function (board) {
-  //   axios.post(REST_BOARD_API, board)
-  //     .then(() => {
-  //       router.push({ name: 'boardList'})
-  //     })
-  //     .catch((err) => {
-  //     console.log(err)
-  //   })
-  // }
   const createBoard = function (board) {
     axios.post(REST_BOARD_API, board)
-      .then((response) => {
-       
-        boardList.value.push(response.data);
-        router.push({ name: 'boardList' });
+      .then(() => {
+        router.push({ name: 'boardList'})
       })
       .catch((err) => {
-        console.log(err);
-      });
-  };
-  
+      console.log(err)
+    })
+  }
 
   const updateBoard = function () {
     axios.put(REST_BOARD_API, board.value)

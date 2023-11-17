@@ -18,7 +18,6 @@
             <div>
                 <button @click="createBoard">등록</button>
             </div>
-            
         </fieldset>
     </div>
 </template>
@@ -33,7 +32,6 @@ const store = useBoardStore();
 const nickname = ref(userStore.loginUser.nickname);
 const board = ref({
     title: '',
-    
     user: userStore.loginUser,
     content: ''
 })
