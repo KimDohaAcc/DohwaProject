@@ -8,6 +8,7 @@ import BoardList from '@/components/board/BoardList.vue'
 import BoardCreate from '@/components/board/BoardCreate.vue'
 import BoardDetail from '@/components/board/BoardDetail.vue'
 import BoardUpdate from '@/components/board/BoardUpdate.vue'
+import BoardCommentCreate from '@/components/board/BoardCommentCreate.vue'
 
 import Login from '@/components/user/Login.vue'
 import MyPage from '@/components/user/MyPage.vue'
@@ -80,6 +81,11 @@ const router = createRouter({
           path: "update",
           name: "boardUpdate",
           component: BoardUpdate
+        },
+        {
+          path: "comment",
+          name: "boardCommentCreate",
+          component: BoardCommentCreate
         },
       ]
     },
