@@ -18,7 +18,7 @@ app.use(router);
 app.use(BootstrapVue3);
 
 const checkTokenValidity = () => {
-  const token = localStorage.getItem('jwtToken');
+  const token = sessionStorage.getItem('jwtToken');
   console.log(token);
 
   if (token) {
@@ -31,8 +31,8 @@ const checkTokenValidity = () => {
         console.log("토큰이 있음")
       })
       .catch(error => {
-        localStorage.removeItem('jwtToken');
-        localStorage.removeItem('loginUser');
+        sessionStorage.removeItem('jwtToken');
+        sessionStorage.removeItem('loginUser');
         console.log("토큰이 없음")
 
       });

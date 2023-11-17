@@ -14,7 +14,7 @@
                             <RouterLink to="/board">이용 후기</RouterLink>
                         </b-nav-item>
                         <b-nav-item href="#">
-                            <RouterLink to="/video">운동 추천 영상</RouterLink>
+                            <RouterLink to="/youtube">운동 추천 영상</RouterLink>
                         </b-nav-item>
                     </b-navbar-nav>
                     <b-navbar-nav v-if="!isLogin">
@@ -38,11 +38,6 @@
                                 </RouterLink>
                             </b-nav-item>
                             <b-nav-item href="#">
-                                <RouterLink to="/myFollow">
-                                    friends
-                                </RouterLink>
-                            </b-nav-item>
-                            <b-nav-item href="#">
                                 <b-dropdown-item href="#" @click="kakaoLogout">
                                     로그아웃
                                 </b-dropdown-item>
@@ -58,7 +53,6 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
 import { computed } from 'vue'
-import { RouterLink } from 'vue-router';
 
 const userStore = useUserStore();
 const isLogin = computed(() => !!userStore.loginUser);
