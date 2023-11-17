@@ -87,7 +87,8 @@ public class KakaoSkillController {
         String user = getUserId(event);
 
         Optional<List<Meal>> list = Optional.ofNullable(mealService.getMealAllByUser(user));
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+
         StringBuilder result = new StringBuilder();
         System.out.println("period = " + period);
 
@@ -164,9 +165,9 @@ public class KakaoSkillController {
         String msg = "";
 
         if (isBefore) {
-            msg = "아주 잘했구나~";
+            msg = "시간을 엄수해 주셔서 정말 고마워요! 꾸준히 운동에 최선을 다하는 모습이 멋져요";
         } else {
-            msg = "다음부터는 늦게 오지 말라구~";
+            msg = "늦어서 안타깝네요. 앞으로는 엄수해 주실거죠?";
         }
 
         return getStringObjectMap(msg);

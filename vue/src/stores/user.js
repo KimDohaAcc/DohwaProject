@@ -45,7 +45,8 @@ export const useUserStore = defineStore('user', () => {
   }
 
   const login = function () {
-    const API_URL = `http://healthpanda.site/login`
+    // const API_URL = `http://healthpanda.site/login`
+    const API_URL = `http://localhost:8080/login`
     console.log(user)
     // axios 요청
     axios
@@ -67,7 +68,8 @@ export const useUserStore = defineStore('user', () => {
   }
 
   const getUserMeal = function () {
-    const API_URL = `http://healthpanda.site/meal`;
+    // const API_URL = `http://healthpanda.site/meal`;
+    const API_URL = `http://localhost:8080/meal`;
     const user = loginUser.value;
 
     console.log(user);
@@ -87,7 +89,8 @@ export const useUserStore = defineStore('user', () => {
 };
 
   const getUserFollow = function (type) {
-    let API_URL = `http://healthpanda.site`;
+    // let API_URL = `http://healthpanda.site`;
+    let API_URL = `http://localhost:8080/`;
     if(type == "follower"){
       API_URL += "/follower";
     } else {API_URL += "/followee"}
