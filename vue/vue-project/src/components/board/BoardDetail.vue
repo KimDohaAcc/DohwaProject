@@ -10,7 +10,6 @@
 
         <button @click="deleteBoard">삭제</button>
         <button @click="updateBoard">수정</button>
-        <BoardCommentCreate></BoardCommentCreate>
     </div>
 </template>
 
@@ -19,7 +18,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useBoardStore } from "@/stores/board";
 import { onMounted } from "vue";
 import axios from 'axios'
-import BoardCommentCreate from './BoardCommentCreate.vue';
+
 const store = useBoardStore()
 
 const route = useRoute();

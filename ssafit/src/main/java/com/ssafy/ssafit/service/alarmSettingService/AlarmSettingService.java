@@ -12,9 +12,9 @@ public interface AlarmSettingService {
     AlarmSetting insertAlarmSetting(AlarmSetting alarmSetting);
 
     @Transactional(readOnly = true)
-    AlarmSetting findAlarmSettingByUser(String user);
+    AlarmSetting findAlarmSettingByUser(User user);
 
-    AlarmSetting updateAlarmSetting(AlarmSetting alarmSetting);
+    AlarmSetting UpdateAlarmSetting(AlarmSetting alarmSetting);
 
     void removeAlarmSetting(AlarmSetting alarmSetting);
 
