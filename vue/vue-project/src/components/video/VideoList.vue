@@ -6,8 +6,8 @@
       <p>
         {{ video.title }}
         <a @click="clickLike(video)">
-          <!-- <span v-if="hasLike(video)">❤</span>
-          <span v-else>[좋아요 하기]</span> -->
+          <span v-if="hasLike(video)">❤</span>
+          <span v-else>[좋아요 하기]</span>
         </a>
       </p>
       <iframe width="640" height="360" :src="video.url" frameborder="0" allowfullscreen></iframe>
@@ -33,12 +33,12 @@ const clickLike = function(video) {
 store.clickLike(video);
 }
 
-// const likeList = computed(()=> store.likeList);
-// console.log(likeList)
+const likeList = computed(()=> store.likeList);
+console.log(likeList)
 
-// const hasLike = function (video) {
-//   return likeList.some((like) => like.video === video);
-// };
+const hasLike = function (video) {
+  return true;
+};
 
 </script>
 
