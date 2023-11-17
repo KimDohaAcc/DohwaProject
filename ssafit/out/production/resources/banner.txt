@@ -1,0 +1,9 @@
+${AnsiColor.RED}  _   _  U _____ u    _       _       _____    _   _     ____       _      _   _    ____       _      
+${AnsiColor.BRIGHT_YELLOW} |'| |'| \| ___"|/U  /"\  u  |"|     |_ " _|  |'| |'|  U|  _"\ uU  /"\  u | \ |"|  |  _"\  U  /"\  u  
+${AnsiColor.BRIGHT_GREEN}/| |_| |\ |  _|"   \/ _ \/ U | | u     | |   /| |_| |\ \| |_) |/ \/ _ \/ <|  \| |>/| | | |  \/ _ \/   
+${AnsiColor.GREEN}U|  _  |u | |___   / ___ \  \| |/__   /| |\  U|  _  |u  |  __/   / ___ \ U| |\  |uU| |_| |\ / ___ \   
+${AnsiColor.BRIGHT_CYAN} |_| |_|  |_____| /_/   \_\  |_____| u |_|U   |_| |_|   |_|     /_/   \_\ |_| \_|  |____/ u/_/   \_\  
+${AnsiColor.BLUE} //   \\  <<   >>  \\    >>  //  \\  _// \\_  //   \\   ||>>_    \\    >> ||   \\,-.|||_    \\    >>  
+${AnsiColor.MAGENTA}(_") ("_)(__) (__)(__)  (__)(_")("_)(__) (__)(_") ("_) (__)__)  (__)  (__)(_")  (_/(__)_)  (__)  (__)
+${application.title} ${application.version}
+Powered by Spring Boot ${spring-boot.version}
