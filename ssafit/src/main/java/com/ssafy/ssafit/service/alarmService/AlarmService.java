@@ -9,13 +9,8 @@ import java.util.List;
 public interface AlarmService {
     Alarm insertAlarm(Alarm alarm);
 
-
-
-
     @Transactional(readOnly = true)
-    List<Alarm> findAlarmsByUser(User user);
+    List<Alarm> findAlarmsByUser(String user);
 
-    Alarm UpdateAlarm(Alarm alarm);
-
-    void removeAlarm(List<Alarm>Alarm userAlarms);
+    void removeAlarm(String user);
 }
