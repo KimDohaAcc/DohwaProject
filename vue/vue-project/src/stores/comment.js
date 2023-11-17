@@ -45,4 +45,6 @@ export const useCommentStore = defineStore('comment', () => {
     deleteComment,
     filteredComments, // computed로 생성한 속성을 반환합니다.
   };
-});
+  
+}
+);
