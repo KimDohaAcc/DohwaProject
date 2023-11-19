@@ -54,8 +54,12 @@ const loginUser = (loginUser) => {
 
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600&display=swap');
+
 * {
   margin : 5%;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 200;
   
 }
 </style>
