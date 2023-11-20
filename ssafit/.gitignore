@@ -37,3 +37,23 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+*.class
+
+*.jar
+*.war
+*.ear
+
+.idea/*.xml
+out
+gen
+rebel.xml
+
+
+/target/
+**/target
+/example/
+
+/build
+/.gradletasknamecache

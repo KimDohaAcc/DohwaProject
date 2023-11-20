@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <h2>이곳은 메인입니다</h2>
-        <h2>이미지~~</h2>
-    </div>
-    <footer class>
+  <div>
+    <h2>이곳은 메인입니다</h2>
+    <h2>이미지~~</h2>
+  </div>
+  <footer class>
     <div class="container py-5">
       <div class="row g-5">
         <div class="col-lg-3 col-md-6">
@@ -34,7 +34,7 @@
           <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
         </div>
       </div>
-    </div> 
+    </div>
   </footer>
 </template>
 
@@ -52,15 +52,15 @@ footer .btn.btn-link {
 }
 
 #nav-collapse {
-    list-style: none;
+  list-style: none;
 }
 footer {
-  
+
   bottom: 0;
   left: 0;
   width: 100%;
   background-color: #264653;
-  color: white; 
+  color: white;
   z-index: 9999;
 }
 </style>
