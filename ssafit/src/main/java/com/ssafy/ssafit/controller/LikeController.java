@@ -7,7 +7,6 @@ import com.ssafy.ssafit.service.likeService.LikeService;
 import com.ssafy.ssafit.service.userService.UserService;
 import com.ssafy.ssafit.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,26 +17,27 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
 public class LikeController {
     private final LikeService likeService;
     private final JwtUtil jwtUtil;
     private final UserService userService;
 
-    @PostMapping("/like")
-    public ResponseEntity<Like> clickLike(@RequestBody Like like) {
-        System.out.println("like = " + like.toString());
-        Optional.ofNullable(likeService.getLikeByUserAndVideo(like.getUser(), like.getVideo()))
-                .ifPresentOrElse(likeService::removeLike,
-                        () -> likeService.createLike(like));
-
+    @PostMapping("/auth/like")
+    public ResponseEntity<Like> clickLike(@RequestBody Video video, HttpServletRequest request) {
+        System.out.println("video = " + video);
+        userService.extractUserFromToken(request.getHeader("Authorization"))
+                .ifPresent(user -> {
+                    likeService.getLikeByUserAndVideo(user, video)
+                            .ifPresentOrElse(likeService::removeLike,
+                                    () -> likeService.createLike(new Like(null, video, user))
+                            );
+                });
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/like/get")
+    @GetMapping("/auth/like/get")
     public ResponseEntity<List<Like>> getLikeByUser(HttpServletRequest request) {
         String sessionToken = request.getHeader("Authorization");
-
         try {
             Optional<User> user = userService.findUserById(jwtUtil.extractUserIdFromToken(sessionToken));
 
@@ -54,5 +54,11 @@ public class LikeController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @GetMapping("/like/{videoNum}")
+    public ResponseEntity<Integer> getLikeCountByVideo(@PathVariable Long videoNum) {
+        int likeCount = likeService.getLikeCountByVideo(videoNum);
+        return new ResponseEntity<>(likeCount, HttpStatus.OK);
     }
 }
