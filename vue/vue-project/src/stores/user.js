@@ -11,7 +11,6 @@ export const useUserStore = defineStore('user', () => {
 
   const REST_API_URL = `http://localhost:8080`;
 
-
   loginUser.value = JSON.parse(sessionStorage.getItem('loginUser'));
 
   const getKakaoAccount = function () {
