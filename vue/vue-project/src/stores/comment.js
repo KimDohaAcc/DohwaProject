@@ -10,6 +10,7 @@ const REST_COMMENT_API = 'http://localhost:8080/comment';
 export const useCommentStore = defineStore('comment', () => {
   const comment = ref('');
   const comments = ref([]);
+  const nowBoard = ref({});
 
   const userStore = useUserStore();
   const boardStore = useBoardStore();
@@ -18,9 +19,11 @@ export const useCommentStore = defineStore('comment', () => {
 
   }
 
-  const getComments = (board) => {
-    axiosInstanceWithToken.get(`http://localhost:8080/comment/${board.num}`)
+  function getComments() {
+    console.log(nowBoard.value)
+    axiosInstanceWithToken.get(`http://localhost:8080/comment/${nowBoard.num}`)
       .then((res) => {
+        console.log(res.data)
         comments.value = res.data;
       })
       .catch((err) => {
@@ -99,10 +102,5 @@ export const useCommentStore = defineStore('comment', () => {
     deleteComment,
     filteredComments,
     getComments,
-  },
-  {
-    persist: {
-      storage: sessionStorage,
-    }
   }
 });
