@@ -5,22 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a570605a-a07f-4715-b9ee-be5e64845f01" name="Changes" comment="[fix] 복구">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/LikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/LikeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/LikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/LikeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/VideoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/VideoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/db/videoInsert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/db/videoInsert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyMeal.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/video/VideoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/video/VideoList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/stores/video.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/stores/video.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/VideoView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/VideoView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/controller/LikeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/controller/LikeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/repository/LikeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/repository/LikeRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/db/videoInsert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/db/videoInsert.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +60,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="hwaseok" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -84,35 +78,35 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "android.gradle.sync.needed": "true",
-    "git-widget-placeholder": "hwaseok",
-    "last_opened_file_path": "C:/Users/hwasu/OneDrive/바탕 화면/project/DohwaProject",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "spring.configuration.checksum": "c1f5f5a72e6ffa2fb14b29f1c8a76ec3",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;android.gradle.sync.needed&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;doha&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/hwasu/OneDrive/바탕 화면/project/DohwaProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;c1f5f5a72e6ffa2fb14b29f1c8a76ec3&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb",
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;,
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Spring Boot.SsafitApplication">
     <configuration name="ssafit [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -133,7 +127,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <configuration name="SsafitApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
