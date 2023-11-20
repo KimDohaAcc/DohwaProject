@@ -18,10 +18,7 @@ import Login from '@/components/user/Login.vue'
 import MyPage from '@/components/user/MyPage.vue'
 import MyFollow from '@/components/user/MyFollow.vue'
 import Regist from '@/components/user/Regist.vue'
-import MyMeal from '@/components/user/MyMeal.vue'
-
 import ReserveRegist from '@/components/reserve/ReserveRegist.vue'
-
 import StoreIntroduce from '@/components/store/StoreIntroduce.vue'
 
 const checkLogin = (to, from, next) => {
@@ -68,12 +65,6 @@ const router = createRouter({
       path: "/myFollow",
       name: "myFollow",
       component: MyFollow,
-      beforeEnter: checkLogin,
-    },
-    {
-      path: "/myMeal",
-      name: "myMeal",
-      component: MyMeal,
       beforeEnter: checkLogin,
     },
     {
@@ -125,24 +116,24 @@ const router = createRouter({
       path: '/reserve',
       name: 'reserve',
       component: ReserveView,
-      children: 
-        {
-          path: "reseveRegist",
-          name: "reserveRegist",
-          component: ReserveRegist,
-        },
-      },
+      children:
+          {
+            path: "reseveRegist",
+            name: "reserveRegist",
+            component: ReserveRegist,
+          },
+    },
     {
       path: '/store',
       name: 'store',
       component: StoreView,
-      children: 
-        {
-          path: "storeIntroduce",
-          name: "storeIntroduce",
-          component: StoreIntroduce,
-        },
-      }
+      children:
+          {
+            path: "storeIntroduce",
+            name: "storeIntroduce",
+            component: StoreIntroduce,
+          },
+    }
   ]
 })
 
