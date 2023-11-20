@@ -5,7 +5,7 @@
     <button @click="submitComment1">댓글 작성</button>
 
     <!-- 댓글 목록 -->
-    <div v-if="commentList.length">
+    <div v-if="commentList">
       <h3>댓글 목록</h3>
       <ul>
         <template v-for="(comment, index) in commentList" :key="index">
@@ -41,24 +41,19 @@ const commentStore = useCommentStore();
 const router = useRouter();
 const content = ref('');
 const updateCheck = ref(false);
-const board = defineProps(['board']);
+const commentList = computed(() => commentStore.comments);
 
-onBeforeMount(() => {
-  commentStore.getComments(board);
-})
-
-
-
-const commentList = computed(() => {
-  return commentStore.comments.map(comment => {
-    return {
-      ...comment,
-      isEditing: false,
-      updatedContent: comment.content,
-    };
-  });
+const props = defineProps({
+  board: {
+    type: Object,
+    required: true,
+  },
 });
 
+onBeforeMount(() => {
+  commentStore.nowBoard = props.board;
+  commentStore.getComments;
+});
 
 
 const submitComment1 = () => {
@@ -79,22 +74,18 @@ const submitComment1 = () => {
 };
 
 const startEditing = (comment) => {
-  // comment.content = comment.updatedContent;
+  comment.updatedContent = comment.content;
   updateCheck.value = true;
 };
 
 const saveEditedComment = function (comment) {
   comment.content = comment.updatedContent;
-  const index = commentStore.comments.findIndex(c => c.num === comment.num);
-  if (index !== -1) {
-    commentStore.comments.splice(index, 1, comment);
-  }
-  // commentStore.editComment(comment);
+  commentStore.editComment(comment);
   updateCheck.value = false;
-}
+};
 
 const cancelEditing = (comment) => {
-  comment.updatedContent = comment.content;
+  updateCheck.value = false;
 };
 
 const deleteComment = async (commentId) => {
@@ -102,7 +93,6 @@ const deleteComment = async (commentId) => {
     await axios.delete(`http://localhost:8080/comment/${commentId}`);
     await commentStore.deleteComment(commentId);
     alert("삭제되었습니다.");
-    console.log(commentList);
   } catch (error) {
     console.error(error.message);
   }
