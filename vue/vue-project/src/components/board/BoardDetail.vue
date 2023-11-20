@@ -10,20 +10,25 @@
 
         <button @click="deleteBoard">삭제</button>
         <button @click="updateBoard">수정</button>
-        <BoardCommentCreate></BoardCommentCreate>
+        <BoardCommentCreate :board="store.board"></BoardCommentCreate>
     </div>
 </template>
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { useBoardStore } from "@/stores/board";
-import { onMounted } from "vue";
+import { onMounted, defineProps } from "vue";
 import axios from 'axios'
 import BoardCommentCreate from './BoardCommentCreate.vue';
 const store = useBoardStore()
 
 const route = useRoute();
 const router = useRouter();
+const props = defineProps({
+  board: {
+    type: Object,
+  },
+});
 
 onMounted(() => {
     store.getBoard(route.params.id)

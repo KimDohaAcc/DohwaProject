@@ -7,24 +7,30 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class CommentController {
     private final CommentService commentService;
 
-    @GetMapping("/comment/{num}")
-    public ResponseEntity<Comment> detail(@PathVariable Long num){
-        return commentService.getComment(num)
+    @GetMapping("/comment/{userId}")
+    public ResponseEntity<Comment> detail(@PathVariable Long userId){
+        return commentService.getComment(userId)
+                .map(comment -> new ResponseEntity<>(comment, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/comment/{boardNum}")
+    public ResponseEntity<List<Comment>> getCommentAllByBoard(@PathVariable Long boardNum){
+        return commentService.getCommentAllByBoard(boardNum)
                 .map(comment -> new ResponseEntity<>(comment, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/comment")
     public ResponseEntity<Comment>write(@RequestBody Comment comment){
-        System.out.println("comment= " + comment.toString());
         return Optional.ofNullable(commentService.writeComment(comment))
                 .map(createComment -> new ResponseEntity<>(createComment, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -40,6 +46,7 @@ public class CommentController {
     }
     @PutMapping("/comment")
     public ResponseEntity<Void>update(@RequestBody Comment comment){
+        System.out.println("comment= " + comment.toString());
         commentService.modifyComment(comment);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }

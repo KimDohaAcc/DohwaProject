@@ -10,12 +10,12 @@
       <ul>
         <template v-for="(comment, index) in commentList" :key="index">
           <li>
-            <div v-show="!updateCheck(comment)">
+            <div v-show="!updateCheck">
               {{ comment.content }}
               <button @click="startEditing(comment)">수정</button>
               <button @click="deleteComment(comment.num)">삭제</button>
             </div>
-            <div v-show="updateCheck(comment)">
+            <div v-show="updateCheck">
               <textarea v-model="comment.updatedContent"></textarea>
               <button @click="saveEditedComment(comment)">저장</button>
               <button @click="cancelEditing(comment)">취소</button>
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onBeforeMount, defineProps } from "vue";
 import { useBoardStore } from "@/stores/board";
 import { useUserStore } from "@/stores/user";
 import { useCommentStore } from "@/stores/comment";
@@ -40,6 +40,14 @@ const boardStore = useBoardStore();
 const commentStore = useCommentStore();
 const router = useRouter();
 const content = ref('');
+const updateCheck = ref(false);
+const board = defineProps(['board']);
+
+onBeforeMount(() => {
+  commentStore.getComments(board);
+})
+
+
 
 const commentList = computed(() => {
   return commentStore.comments.map(comment => {
@@ -52,12 +60,6 @@ const commentList = computed(() => {
 });
 
 
-const updateCheck = function(comment){
-  const res = computed(() => comment.isEditing);
-  return res.value;
-}
-
-
 
 const submitComment1 = () => {
   const comment = {
@@ -67,26 +69,31 @@ const submitComment1 = () => {
   };
 
   commentStore.submitComment(comment)
-      .then(() => {
-        alert("등록");
-        content.value = ''; // 댓글 입력 필드 초기화
-      })
-      .catch((error) => {
-        console.error(error.message); // 오류 메시지 출력
-      });
+    .then(() => {
+      alert("등록");
+      content.value = ''; // 댓글 입력 필드 초기화
+    })
+    .catch((error) => {
+      console.error(error.message); // 오류 메시지 출력
+    });
 };
 
 const startEditing = (comment) => {
-  comment.isEditing = true;
-
+  // comment.content = comment.updatedContent;
+  updateCheck.value = true;
 };
 
-const saveEditedComment = function(comment, board) {
-  boardStore.editComment(comment, board);
+const saveEditedComment = function (comment) {
+  comment.content = comment.updatedContent;
+  const index = commentStore.comments.findIndex(c => c.num === comment.num);
+  if (index !== -1) {
+    commentStore.comments.splice(index, 1, comment);
+  }
+  // commentStore.editComment(comment);
+  updateCheck.value = false;
 }
 
 const cancelEditing = (comment) => {
-  comment.isEditing = false;
   comment.updatedContent = comment.content;
 };
 
