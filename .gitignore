@@ -7,3 +7,26 @@
 /dataSources/
 /dataSources.local.xml
 
+*.class
+
+*.jar
+*.war
+*.ear
+
+.idea
+.idea/*.xml
+*.iml
+out
+gen
+build
+rebel.xml
+
+
+/target/
+**/target
+/example/
+
+.gradle
+/build
+/.gradletasknamecache
+
