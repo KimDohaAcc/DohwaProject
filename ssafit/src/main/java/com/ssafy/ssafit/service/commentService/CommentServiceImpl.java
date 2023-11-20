@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +19,6 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final UserService userService;
     private final BoardService boardService;
-
-    @Override
-    public List<Comment> getCommentsByBoardNum(Long boardNum) {
-        return commentRepository.findAllByBoardNum(boardNum);
-    }
 
     @Transactional
     @Override
@@ -35,7 +31,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Optional<Comment> getComment(Long userId) {
-
         return commentRepository.findById(userId);
     }
 
@@ -43,22 +38,22 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void modifyComment(Comment comment) {
         commentRepository.save(comment);
-
     }
 
     @Transactional
     @Override
-    public boolean removeComment(Long commentId)
-    {
-        if(commentRepository.existsById(commentId)){
+    public boolean removeComment(Long commentId) {
+        if (commentRepository.existsById(commentId)) {
             commentRepository.deleteById(commentId);
             return true;
-        }else{
+        } else {
             return false;
         }
-
     }
 
-
-
+    @Override
+    public Optional<List<Comment>> getCommentAllByBoard(Long boardNum) {
+        return boardService.getBoard(boardNum)
+                .map(commentRepository::findAllByBoard);
+    }
 }
