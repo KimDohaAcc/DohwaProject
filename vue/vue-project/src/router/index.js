@@ -4,17 +4,25 @@ import { computed } from 'vue'
 import MainView from '@/views/MainView.vue'
 import BoardView from '@/views/BoardView.vue'
 import VideoView from '@/views/VideoView.vue'
+import ReserveView from '@/views/ReserveView.vue'
+import StoreView from '@/views/StoreView.vue'
 
 
 import BoardList from '@/components/board/BoardList.vue'
 import BoardCreate from '@/components/board/BoardCreate.vue'
 import BoardDetail from '@/components/board/BoardDetail.vue'
 import BoardUpdate from '@/components/board/BoardUpdate.vue'
+import BoardCommentCreate from '@/components/board/BoardCommentCreate.vue'
 
 import Login from '@/components/user/Login.vue'
 import MyPage from '@/components/user/MyPage.vue'
 import MyFollow from '@/components/user/MyFollow.vue'
 import Regist from '@/components/user/Regist.vue'
+import MyMeal from '@/components/user/MyMeal.vue'
+
+import ReserveRegist from '@/components/reserve/ReserveRegist.vue'
+
+import StoreIntroduce from '@/components/store/StoreIntroduce.vue'
 
 const checkLogin = (to, from, next) => {
   const isLoggedIn = computed(() => !!JSON.parse(sessionStorage.getItem('loginUser')));
@@ -63,6 +71,12 @@ const router = createRouter({
       beforeEnter: checkLogin,
     },
     {
+      path: "/myMeal",
+      name: "myMeal",
+      component: MyMeal,
+      beforeEnter: checkLogin,
+    },
+    {
       path: "/regist",
       name: "regist",
       component: Regist,
@@ -100,8 +114,35 @@ const router = createRouter({
           component: BoardUpdate,
           beforeEnter: checkLogin,
         },
+        {
+          path: "commentCreate",
+          name: "boardCommentCreate",
+          component: BoardCommentCreate,
+        },
       ]
     },
+    {
+      path: '/reserve',
+      name: 'reserve',
+      component: ReserveView,
+      children: 
+        {
+          path: "reseveRegist",
+          name: "reserveRegist",
+          component: ReserveRegist,
+        },
+      },
+    {
+      path: '/store',
+      name: 'store',
+      component: StoreView,
+      children: 
+        {
+          path: "storeIntroduce",
+          name: "storeIntroduce",
+          component: StoreIntroduce,
+        },
+      }
   ]
 })
 

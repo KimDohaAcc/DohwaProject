@@ -111,6 +111,8 @@ public class KakaoSkillController {
                             .append("(")
                             .append(meal.getKcal().trim())
                             .append("kcal)\n");
+
+
                 }
             }
         });
@@ -206,6 +208,7 @@ public class KakaoSkillController {
             LocalDateTime date = alarm.getDate();
             String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
             sb.append(formattedDate).append("\n");
+
         }
 
         String list = sb.toString().replace("\n", "\\n");
