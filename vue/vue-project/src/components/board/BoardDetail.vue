@@ -17,18 +17,13 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { useBoardStore } from "@/stores/board";
-import { onMounted, defineProps } from "vue";
+import { onMounted } from "vue";
 import axios from 'axios'
 import BoardCommentCreate from './BoardCommentCreate.vue';
 const store = useBoardStore()
 
 const route = useRoute();
 const router = useRouter();
-const props = defineProps({
-  board: {
-    type: Object,
-  },
-});
 
 onMounted(() => {
     store.getBoard(route.params.id)

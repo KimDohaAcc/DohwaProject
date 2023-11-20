@@ -17,6 +17,7 @@ const props = defineProps({
 });
 
 
+
 const clickVideo = function() {
     store.clickVideo(props.video)
 }
