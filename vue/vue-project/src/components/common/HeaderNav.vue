@@ -11,10 +11,16 @@
                 <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav>
                         <b-nav-item href="#">
+                            <RouterLink to="/store">지점 소개</RouterLink>
+                        </b-nav-item>
+                        <b-nav-item href="#">
                             <RouterLink to="/board">이용 후기</RouterLink>
                         </b-nav-item>
                         <b-nav-item href="#">
                             <RouterLink to="/video">운동 추천 영상</RouterLink>
+                        </b-nav-item>
+                        <b-nav-item href="#">
+                            <RouterLink to="/reserve">전화상담예약</RouterLink>
                         </b-nav-item>
                     </b-navbar-nav>
                     <b-navbar-nav v-if="!isLogin">
@@ -48,6 +54,8 @@
             </b-navbar>
         </div>
     </header>
+    <main></main>
+    
 </template>
 
 <script setup>
@@ -63,7 +71,14 @@ const kakaoLogout = function () {
 
 </script>
 <style scoped>
-#nav-collapse {
-    list-style: none;
-}
+
+
+
+
+
+
+
+
+
+
 </style>

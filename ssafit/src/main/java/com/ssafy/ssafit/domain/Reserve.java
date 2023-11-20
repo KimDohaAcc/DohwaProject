@@ -24,5 +24,8 @@ public class Reserve {
     private LocalDateTime time;
 
     @Column(nullable = false, name = "reserve_phone")
-    private int phone;
+    private String phone;
+
+    @Column(nullable = false, name = "reserve_store")
+    private String store;
 }
