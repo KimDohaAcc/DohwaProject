@@ -1,8 +1,6 @@
 package com.ssafy.ssafit.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
@@ -13,6 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false,name = "user_id")
     private Long id;
     @Column(nullable = false, length =40, name = "user_nickname")

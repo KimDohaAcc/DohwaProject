@@ -81,9 +81,42 @@ const startEditing = (comment) => {
 
 };
 
-const saveEditedComment = function(comment, board) {
-  boardStore.editComment(comment, board);
+function editComment(comment, board) {
+  return new Promise((resolve, reject) => {
+    axios.put(`http://localhost:8080/comment`, comment)
+      .then((response) => {
+        alert("댓글이 성공적으로 수정되었습니다.");
+        // 리스트 안에 있는 댓글을 업데이트
+        const newComment = comments.value.find((findComment) => findComment.num === comment.id);
+        resolve(newComment);
+      })
+      .catch((error) => {
+        console.error("댓글 수정 실패:", error);
+        alert("댓글 수정에 실패했습니다.");
+        reject(error);
+      });
+  });
 }
+
+// saveEditedComment 함수 수정
+const saveEditedComment = function(comment) {
+  return new Promise((resolve, reject) => {
+    commentStore.editComment(comment)
+      .then((newComment) => {
+        if (newComment) {
+          comment.isEditing = false; // 수정 상태 해제
+          resolve(); // 성공적으로 처리됨을 알림
+        } else {
+          console.error("댓글 수정에 실패했습니다.");
+          reject(new Error("댓글 수정에 실패했습니다.")); // 실패 시 에러 처리
+        }
+      })
+      .catch((error) => {
+        console.error("댓글 수정 실패:", error);
+        reject(error); // 에러 발생 시 에러 처리
+      });
+  });
+};
 
 const cancelEditing = (comment) => {
   comment.isEditing = false;

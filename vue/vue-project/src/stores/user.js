@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
+import axios from 'axios'; 
 
 export const useUserStore = defineStore('user', () => {
       const loginUser = ref(null);
@@ -95,10 +96,21 @@ export const useUserStore = defineStore('user', () => {
           next();
         }
       }
+      const submitNewUser = async (newUser) => {
+        try {
+          
+          const response = await axiosInstance.post('http://localhost:8080/user', newUser);
+          console.log('서버 응답:', response.data);
+          alert("회원가입이 완료되었습니다.");
+        } catch (error) {
+          console.error('오류 발생:', error);
+          
+        }
+      };
 
 
 
-      return { loginUser, checkLoginAndRedirect, getKakaoAccount, logoutUser, mealList, getUserFollow, followerList, followeeList }
+      return { submitNewUser, loginUser, checkLoginAndRedirect, getKakaoAccount, logoutUser, mealList, getUserFollow, followerList, followeeList }
     },
     {
       persist: {
