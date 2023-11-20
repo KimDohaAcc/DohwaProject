@@ -5,21 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab2912ae-0573-4ef1-92f2-21c41af6def9" name="Changes" comment="[feat] 예약기능 완성">
+    <list default="true" id="a570605a-a07f-4715-b9ee-be5e64845f01" name="Changes" comment="[fix] 복구">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/controller/LikeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/controller/LikeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/repository/LikeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/repository/LikeRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/db/videoInsert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/db/videoInsert.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/ssafit">
+      <ProjectState />
+    </projectState>
+  </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/ssafit">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ssafit" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ssafit" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ssafit" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -32,7 +65,15 @@
         <entry key="$PROJECT_DIR$" value="hwaseok" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2YIPyWIWBLNy6VPqBRNdrzyKOnu" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -43,9 +84,41 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)"
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;android.gradle.sync.needed&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;doha&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/hwasu/OneDrive/바탕 화면/project/DohwaProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;c1f5f5a72e6ffa2fb14b29f1c8a76ec3&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;,
+      &quot;mysql&quot;
+    ]
   }
 }]]></component>
   <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Spring Boot.SsafitApplication">
     <configuration name="ssafit [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -65,20 +138,77 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
+    </configuration>
+    <configuration name="SsafitApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="ssafit.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ssafy.ssafit.SsafitApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.ssafit [build]" />
+        <item itemvalue="Gradle.ssafit [build]" />
+        <item itemvalue="Gradle.ssafit [build]" />
+        <item itemvalue="Gradle.ssafit [build]" />
+        <item itemvalue="Gradle.ssafit [build]" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a570605a-a07f-4715-b9ee-be5e64845f01" name="Changes" comment="" />
+      <created>1700210375069</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700210375069</updated>
+      <workItem from="1700210376125" duration="30000" />
+      <workItem from="1700390320373" duration="13795000" />
+    </task>
+    <task id="LOCAL-00001" summary="[fix] 복구">
+      <created>1700218742696</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1700218742696</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[fix] 복구">
+      <created>1700220285505</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1700220285505</updated>
+    </task>
+    <task id="LOCAL-00003" summary="[fix] 복구">
+      <created>1700220360361</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1700220360361</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[feat] 예약기능 완성" />
-    <option name="LAST_COMMIT_MESSAGE" value="[feat] 예약기능 완성" />
+    <MESSAGE value="[fix] 복구" />
+    <option name="LAST_COMMIT_MESSAGE" value="[fix] 복구" />
   </component>
 </project>
