@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ReserveRepository  extends JpaRepository<Reserve, Long> {
     List<Reserve> findAllByUser(User user);
+
+
 }
