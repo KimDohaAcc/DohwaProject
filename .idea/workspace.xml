@@ -5,12 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a570605a-a07f-4715-b9ee-be5e64845f01" name="Changes" comment="[fix] 복구">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/LikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/LikeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/LikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/LikeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/VideoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/VideoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/db/videoInsert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/db/videoInsert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyMeal.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/video/VideoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/video/VideoList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/stores/video.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/stores/video.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/VideoView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/VideoView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,31 +84,35 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;android.gradle.sync.needed&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;hwaseok&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/hwasu/OneDrive/바탕 화면/project/DohwaProject&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "android.gradle.sync.needed": "true",
+    "git-widget-placeholder": "hwaseok",
+    "last_opened_file_path": "C:/Users/hwasu/OneDrive/바탕 화면/project/DohwaProject",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "spring.configuration.checksum": "c1f5f5a72e6ffa2fb14b29f1c8a76ec3",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mariadb&quot;,
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb",
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Spring Boot.SsafitApplication">
     <configuration name="ssafit [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -148,6 +162,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700210375069</updated>
       <workItem from="1700210376125" duration="30000" />
+      <workItem from="1700390320373" duration="13795000" />
     </task>
     <task id="LOCAL-00001" summary="[fix] 복구">
       <created>1700218742696</created>
@@ -156,11 +171,36 @@
       <option name="project" value="LOCAL" />
       <updated>1700218742696</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="[fix] 복구">
+      <created>1700220285505</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1700220285505</updated>
+    </task>
+    <task id="LOCAL-00003" summary="[fix] 복구">
+      <created>1700220360361</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1700220360361</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[fix] 복구" />
