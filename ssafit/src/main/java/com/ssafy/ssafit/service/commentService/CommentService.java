@@ -8,15 +8,12 @@ import java.util.Optional;
 public interface CommentService {
 
 
-    //댓글 목록 조회
-    List<Comment> getCommentsByBoardNum(Long boardNum);
-
     //댓글 작성
     Comment writeComment(Comment comment);
 
     //댓글 조회
     Optional<Comment> getComment(Long userId);
-
+    Optional<List<Comment>> getCommentAllByBoard(Long boardNum);
     //댓글 수정
     void modifyComment(Comment comment);
 
