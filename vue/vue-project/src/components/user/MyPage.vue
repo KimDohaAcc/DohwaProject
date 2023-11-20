@@ -27,6 +27,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script setup>
@@ -75,15 +76,7 @@ const deleteReservation = (index) => {
       console.error('예약 삭제 중 에러 발생:', error);
     })
 }
-
-
-
 </script>
-
-<style scoped>
-/* 필요한 스타일 작성 */
-</style>
-
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600&display=swap');
 
