@@ -4,59 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a570605a-a07f-4715-b9ee-be5e64845f01" name="Changes" comment="[fix] 복구">
+    <list default="true" id="ab2912ae-0573-4ef1-92f2-21c41af6def9" name="Changes" comment="[feat] 예약기능 완성">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/LikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/LikeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/LikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/LikeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/VideoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/VideoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/db/videoInsert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/db/videoInsert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyMeal.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/video/VideoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/video/VideoList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/stores/video.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/stores/video.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/VideoView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/VideoView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$/ssafit">
-      <ProjectState />
-    </projectState>
-  </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <task path="$PROJECT_DIR$/ssafit">
-          <activation />
-        </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="ssafit" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="ssafit" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="ssafit" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -69,51 +32,20 @@
         <entry key="$PROJECT_DIR$" value="hwaseok" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 4
-}</component>
-  <component name="ProjectId" id="2YIPyWIWBLNy6VPqBRNdrzyKOnu" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "android.gradle.sync.needed": "true",
-    "git-widget-placeholder": "hwaseok",
-    "last_opened_file_path": "C:/Users/hwasu/OneDrive/바탕 화면/project/DohwaProject",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "spring.configuration.checksum": "c1f5f5a72e6ffa2fb14b29f1c8a76ec3",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb",
-      "mysql"
-    ]
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.SsafitApplication">
+  <component name="RunManager">
     <configuration name="ssafit [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -133,77 +65,20 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
-    </configuration>
-    <configuration name="SsafitApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="ssafit.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ssafy.ssafit.SsafitApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.ssafit [build]" />
-        <item itemvalue="Gradle.ssafit [build]" />
-        <item itemvalue="Gradle.ssafit [build]" />
-        <item itemvalue="Gradle.ssafit [build]" />
-        <item itemvalue="Gradle.ssafit [build]" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="a570605a-a07f-4715-b9ee-be5e64845f01" name="Changes" comment="" />
-      <created>1700210375069</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1700210375069</updated>
-      <workItem from="1700210376125" duration="30000" />
-      <workItem from="1700390320373" duration="13795000" />
-    </task>
-    <task id="LOCAL-00001" summary="[fix] 복구">
-      <created>1700218742696</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1700218742696</updated>
-    </task>
-    <task id="LOCAL-00002" summary="[fix] 복구">
-      <created>1700220285505</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1700220285505</updated>
-    </task>
-    <task id="LOCAL-00003" summary="[fix] 복구">
-      <created>1700220360361</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1700220360361</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[fix] 복구" />
-    <option name="LAST_COMMIT_MESSAGE" value="[fix] 복구" />
+    <MESSAGE value="[feat] 예약기능 완성" />
+    <option name="LAST_COMMIT_MESSAGE" value="[feat] 예약기능 완성" />
   </component>
 </project>
