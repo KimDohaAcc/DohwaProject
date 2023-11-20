@@ -72,6 +72,10 @@ const deleteReservation = (index) => {
 </script>
 
 <style scoped>
+/* 필요한 스타일 작성 */
+</style>
+
+<style scoped>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600&display=swap');
 
 #user-container {

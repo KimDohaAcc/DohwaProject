@@ -4,179 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a570605a-a07f-4715-b9ee-be5e64845f01" name="Changes" comment="[fix] 복구">
+    <list default="true" id="ab2912ae-0573-4ef1-92f2-21c41af6def9" name="Changes" comment="[feat] 예약기능 완성">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DohwaProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DohwaProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/build/resources/main/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/build/resources/main/banner.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/build/resources/main/banner.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/build/resources/main/db/videoInsert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/build/resources/main/db/videoInsert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/build/resources/main/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/build/resources/main/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/build/resources/main/json/sample_json.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/build/resources/main/json/sample_json.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/build/resources/main/static/assets/index-3ed1dd68.css" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/build/resources/main/static/assets/index-3ed1dd68.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/build/resources/main/static/assets/index-783c9ab0.js" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/build/resources/main/static/assets/index-783c9ab0.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/build/resources/main/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/build/resources/main/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/controller/LikeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/controller/LikeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/repository/LikeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/repository/LikeRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/likeService/LikeServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/classes/com/ssafy/ssafit/service/userService/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/banner.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/banner.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/db/videoInsert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/db/videoInsert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/json/sample_json.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/json/sample_json.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/static/assets/index-3ed1dd68.css" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/static/assets/index-3ed1dd68.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/static/assets/index-783c9ab0.js" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/static/assets/index-783c9ab0.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/out/production/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/out/production/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/SsafitApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/SsafitApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/config/WebMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/FollowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/FollowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/KaKaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/KaKaoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/KakaoSkillController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/KakaoSkillController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/LikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/LikeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/MealController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/MealController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/ReserveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/ReserveController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/VideoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/controller/VideoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Alarm.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Alarm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/AlarmSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/AlarmSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Follow.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Follow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Like.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Meal.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Meal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Reserve.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Reserve.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/domain/Video.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/interceptor/JwtInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/interceptor/JwtInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/AdminRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/AlarmRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/AlarmRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/AlarmSettingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/AlarmSettingRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/BoardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/BoardRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/CommentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/FollowRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/FollowRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/LikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/LikeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/MealRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/MealRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/ReserveRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/ReserveRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/VideoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/repository/VideoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/adminService/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/adminService/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/adminService/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/adminService/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/alarmService/AlarmService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/alarmService/AlarmService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/alarmService/AlarmServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/alarmService/AlarmServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/alarmSettingService/AlarmSettingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/alarmSettingService/AlarmSettingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/alarmSettingService/AlarmSettingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/alarmSettingService/AlarmSettingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/boardService/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/boardService/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/boardService/BoardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/boardService/BoardServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/commentService/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/commentService/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/commentService/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/commentService/CommentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/followService/FollowService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/followService/FollowService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/followService/FollowServiceimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/followService/FollowServiceimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/kakaoService/KaKaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/kakaoService/KaKaoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/kakaoService/KaKaoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/kakaoService/KaKaoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/likeService/LikeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/mealService/MealService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/mealService/MealService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/mealService/MealServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/mealService/MealServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/reserveService/ReserveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/reserveService/ReserveService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/reserveService/ReserveServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/reserveService/ReserveServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/userService/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/service/videoService/VideoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/util/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/java/com/ssafy/ssafit/util/JwtUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/banner.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/banner.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/db/videoInsert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/db/videoInsert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/json/sample_json.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/json/sample_json.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/static/assets/index-3ed1dd68.css" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/static/assets/index-3ed1dd68.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/static/assets/index-783c9ab0.js" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/static/assets/index-783c9ab0.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ssafit/src/test/java/com/ssafy/ssafit/SsafitApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/ssafit/src/test/java/com/ssafy/ssafit/SsafitApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/node_modules/@esbuild/win32-x64/esbuild.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/.vscode/extensions.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/.vscode/extensions.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/assets/video.css" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/assets/video.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardCommentCreate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardCommentCreate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardCreate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardCreate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardDetail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardSearchInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardSearchInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardUpdate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/board/BoardUpdate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/common/HeaderNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/common/HeaderNav.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/reserve/ReserveRegist.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/reserve/ReserveRegist.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/store/StoreIntroduce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/store/StoreIntroduce.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/user/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyFollow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyFollow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/user/MyPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/user/Regist.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/user/Regist.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/video/VideoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/video/VideoList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/youtube/YoutubeVideoDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/youtube/YoutubeVideoDetail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/youtube/YoutubeVideoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/youtube/YoutubeVideoList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/youtube/YoutubeVideoListItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/youtube/YoutubeVideoListItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/components/youtube/YoutubeVideoSearch.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/components/youtube/YoutubeVideoSearch.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/stores/board.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/stores/board.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/stores/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/stores/comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/stores/reserve.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/stores/reserve.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/stores/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/stores/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/stores/video.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/stores/video.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/stores/youtube.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/stores/youtube.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/util/http-common.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/util/http-common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/BoardView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/BoardView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/CommentView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/CommentView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/MainView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/MainView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/ReserveView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/ReserveView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/StoreView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/StoreView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/VideoView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/VideoView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/src/views/YoutubeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/src/views/YoutubeView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/vue-project/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue/vue-project/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$/ssafit">
-      <ProjectState />
-    </projectState>
-  </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <task path="$PROJECT_DIR$/ssafit">
-          <activation />
-        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -192,52 +32,20 @@
         <entry key="$PROJECT_DIR$" value="hwaseok" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 4
-}</component>
-  <component name="ProjectId" id="2YIPyWIWBLNy6VPqBRNdrzyKOnu" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "hwaseok",
-    "last_opened_file_path": "C:/Users/SSAFY/Desktop/dohwa-project/DohwaProject",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Problems",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "spring.configuration.checksum": "c1f5f5a72e6ffa2fb14b29f1c8a76ec3",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb",
-      "mysql"
-    ]
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.SsafitApplication">
+  <component name="RunManager">
     <configuration name="ssafit [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -260,76 +68,17 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="SsafitApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="ssafit.main" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ssafy.ssafit.SsafitApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ssafit [build]" />
-        <item itemvalue="Gradle.ssafit [build]" />
-        <item itemvalue="Gradle.ssafit [build]" />
-        <item itemvalue="Gradle.ssafit [build]" />
         <item itemvalue="Gradle.ssafit [build]" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="a570605a-a07f-4715-b9ee-be5e64845f01" name="Changes" comment="" />
-      <created>1700210375069</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1700210375069</updated>
-      <workItem from="1700210376125" duration="30000" />
-      <workItem from="1700390320373" duration="13795000" />
-      <workItem from="1700456791425" duration="1400000" />
-      <workItem from="1700458435020" duration="598000" />
-    </task>
-    <task id="LOCAL-00001" summary="[fix] 복구">
-      <created>1700218742696</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1700218742696</updated>
-    </task>
-    <task id="LOCAL-00002" summary="[fix] 복구">
-      <created>1700220285505</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1700220285505</updated>
-    </task>
-    <task id="LOCAL-00003" summary="[fix] 복구">
-      <created>1700220360361</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1700220360361</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="[fix] 복구" />
-    <option name="LAST_COMMIT_MESSAGE" value="[fix] 복구" />
+    <MESSAGE value="[feat] 예약기능 완성" />
+    <option name="LAST_COMMIT_MESSAGE" value="[feat] 예약기능 완성" />
   </component>
 </project>
