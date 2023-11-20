@@ -37,22 +37,26 @@ export const useCommentStore = defineStore('comment', () => {
 
   }
 
-  function editComment(comment, board) {
+  function editComment(editedComment) {
     //카카오계정 로그인하고싶어->카카오로그인,비밀번호 서버에 보내->nickname, account, id
-      console.log(comment);
-        // 해당 댓글의 내용을 수정합니다.
-        // 서버에 댓글 수정 API 호출
-        axios.put(`http://localhost:8080/comment`, comment)
-          .then((response) => {
-            alert("댓글이 성공적으로 수정되었습니다.");
-            // 리스트 안에 있는 댓글을 업데이트
-            const newComment = comments.value.find((findComment) => findComment.num === comment.id);
-          })
-          .catch((error) => {
-            console.error("댓글 수정 실패:", error);
-            alert("댓글 수정에 실패했습니다.");
-          });
-      } 
+    console.log(editedComment);
+    // 해당 댓글의 내용을 수정합니다.
+    // 서버에 댓글 수정 API 호출
+    axiosInstanceWithToken.put(`http://localhost:8080/comment`, editedComment)
+      .then((response) => {
+        alert("댓글이 성공적으로 수정되었습니다.");
+        // 리스트 안에 있는 댓글을 업데이트
+        const index = comments.value.findIndex((comment) => comment.num === editedComment.num);
+        if (index !== -1) {
+          // Replace the old comment with the updated one
+          comments.value.splice(index, 1, response.data);
+        }
+      })
+      .catch((error) => {
+        console.error("댓글 수정 실패:", error);
+        alert("댓글 수정에 실패했습니다.");
+      });
+  }
 
   function submitComment(commentValue) {
     commentValue.user = userStore.loginUser;
@@ -62,7 +66,6 @@ export const useCommentStore = defineStore('comment', () => {
         axios.post(REST_COMMENT_API, commentValue)
           .then((response) => {
             comments.value.push(response.data);
-            
             resolve();
           })
           .catch((error) => {
