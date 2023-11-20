@@ -21,9 +21,8 @@
               <button @click="cancelEditing(comment)">취소</button>
             </div>
           </li>
-          </template>
-        </ul>
-      </div>
+        </template>
+      </ul>
     </div>
   </div>
 </template>
@@ -56,33 +55,12 @@ onBeforeMount(() => {
   commentStore.getComments;
 });
 
-  const updateCheck = function(comment){
-   const res = computed(() => comment.isEditing);
-   return res.value;
-  }
 
-
-  
-  const submitComment1 = () => {
-    const comment = {
-      board: boardStore.board,
-      user: userStore.loginUser,
-      content: content.value,
-    };
-  
-    commentStore.submitComment(comment)
-      .then(() => {
-        alert("등록");
-        content.value = ''; // 댓글 입력 필드 초기화
-      })
-      .catch((error) => {
-        console.error(error.message); // 오류 메시지 출력
-      });
-  };
-  
-  const startEditing = (comment) => {
-    comment.isEditing = true;
-    
+const submitComment1 = () => {
+  const comment = {
+    board: boardStore.board,
+    user: userStore.loginUser,
+    content: content.value,
   };
 
   commentStore.submitComment(comment)
