@@ -8,5 +8,7 @@ public interface UserService {
     User insertUser(User user);
     Optional<User> findUserById(Long id);
 
+    Optional<User> findUserByAccount(String account);
+
     Optional<User> extractUserFromToken(String sessionToken);
 }

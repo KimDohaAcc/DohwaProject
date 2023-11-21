@@ -9,15 +9,17 @@
         <div><span class="info-name">카카오 연동</span><span>{{ userStore.loginUser.iskakao ? "사용 중" : "사용 안 함" }}</span></div>
         <div class="changable-info" v-if="!userStore.loginUser.iskakao"><span class="info-name">비밀번호</span><span>새 비밀번호 설정</span><i class="bi bi-arrow-right enter"></i></div>
       </div>
-      <h3>예약 내역:</h3>
-      <ul>
-        <li v-for="(reservation, index) in reservations" :key="index">
-          <p>지점: {{ reservation.store }}</p>
-          <p>예약 날짜: {{ formatDate(reservation.time) }}</p>
-          <p>전화번호: {{ reservation.phone}}</p>
+      <h1>예약 내역</h1>
+      <div class="user-info">
+        <div v-for="(reservation, index) in reservations" :key="index">
+          <div><span class="info-name">지점</span><span class="info-value">{{ reservation.store }}</span></div>
+          <div><span class="info-name">예약날짜</span><span class="info-value">{{ formatDate(reservation.time) }}</span></div>
+          <div><span class="info-name">전화 번호</span><span>{{ reservation.phone }}</span></div>
           <button @click="deleteReservation(index)">삭제</button>
-        </li>
-      </ul>
+          
+        </div>
+      </div>
+      
     </div>
   </div>
 </template>
@@ -26,6 +28,7 @@
 import { useUserStore } from "@/stores/user";
 import { onMounted, ref } from 'vue';
 import axios from 'axios';
+import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 const userStore = useUserStore();
 
 const reservations = ref([]);
@@ -44,7 +47,7 @@ onMounted(() => {
   const url = `http://localhost:8080/reserve/get/${user.id}`;
   console.log(url);
   console.log(user);
-  axios.get(`http://localhost:8080/reserve/get/${user.id}`)
+  axiosInstanceWithToken.get(`http://localhost:8080/auth/reserve/get/${user.id}`)
       .then(response => {
         reservations.value = response.data; // 백엔드에서 반환된 예약 목록 저장
         console.log("정보를 가져왔습니다");
@@ -59,7 +62,7 @@ onMounted(() => {
 const deleteReservation = (index) => {
   const reservationToDelete = reservations.value[index];
   console.log(reservationToDelete.num); // 예약의 ID 확인
-  axios.delete(`http://localhost:8080/reserve/delete/${reservationToDelete.num}`)
+  axiosInstanceWithToken.delete(`http://localhost:8080/auth/reserve/delete/${reservationToDelete.num}`)
       .then(response =>{
         reservations.value.splice(index, 1);
         console.log('예약이 삭제되었습니다.');

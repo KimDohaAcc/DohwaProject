@@ -1,6 +1,17 @@
 <template>
   <div>
     <h2>로그인 페이지</h2>
+    <form @submit.prevent="login">
+      <div>
+        <label for="username">아이디</label>
+        <input type="text" id="username" v-model="username" />
+      </div>
+      <div>
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" v-model="password" />
+      </div>
+      <button type="submit">로그인</button>
+    </form>
     <a id="custom-login-btn" @click="kakaoLogin()">
       <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222" alt="카카오 로그인 버튼" />
     </a>
@@ -10,6 +21,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user.js';
+import { ref } from 'vue';
 
 const store = useUserStore();
 const router = useRouter();
@@ -26,6 +38,18 @@ const kakaoLogin = function () {
 
   router.push('/');
 }
+
+const username = ref('');
+const password = ref('');
+
+const login = () => {
+  // 여기에 로그인 처리 로직을 추가하세요 (예: 서버에 아이디와 비밀번호 전송, 인증 등)
+  console.log('아이디:', username.value);
+  console.log('비밀번호:', password.value);
+
+  // 로그인 성공 후의 작업을 진행하세요 (예: 성공 시 페이지 이동)
+  // router.push('/dashboard'); // 대시보드 페이지로 이동하는 예시
+};
 </script>
 
 <!-- <script>
