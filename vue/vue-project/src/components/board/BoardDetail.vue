@@ -6,26 +6,27 @@
         <div class="timestamp">
           {{ store.board.updatedAtFormat }}
           <span>
-            {{ store.board.createdAtFormat !== store.board.updatedAtFormat ? "(수정됨)" : "" }}
+            {{ store.board.createdAt !== store.board.updatedAt ? "(수정됨)" : "" }}
           </span>
         </div>
-        <button @click="deleteBoard" class="action-button delete-button">삭제</button>
-        <button @click="updateBoard" class="action-button update-button">수정</button>
+        <div v-if="userStore.loginUser.id === store.board.user.id">
+          <button @click="updateBoard" class="action-button update-button">수정</button>
+          <button @click="deleteBoard" class="action-button delete-button">삭제</button>
+        </div>
       </div>
     </div>
 
     <div class="user-info">
-        {{ store.board.user.nickname }}
+      {{ store.board.user.nickname }}
       <span>
-          <i class="bi bi-person-add" v-if="isFollowed" @click="followUser(store.board.user)"></i>
-          <i class="bi bi-person-fill-dash" v-else @click="deleteFollow(store.board.user)"></i>
+        <i class="bi bi-person-add" v-if="!followStore.checkFollow" @click="followUser(store.board.user)"></i>
+        <i class="bi bi-person-fill-dash" v-else @click="deleteFollow(store.board.user)"></i>
       </span>
     </div>
 
     <div class="post-content">
       <div class="content">{{ store.board.content }}</div>
     </div>
-
     <BoardCommentCreate></BoardCommentCreate>
   </div>
 </template>
@@ -33,31 +34,24 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { useBoardStore } from "@/stores/board";
+import { useUserStore } from "@/stores/user";
 import { useFollowStore } from "@/stores/follow";
-import { onBeforeMount, ref, computed, watch } from "vue";
-import axios from 'axios'
+import { onBeforeMount, ref } from "vue";
 import BoardCommentCreate from './BoardCommentCreate.vue';
 const store = useBoardStore();
+const userStore = useUserStore();
 const followStore = useFollowStore();
 const route = useRoute();
 const router = useRouter();
-const followList = computed(()=> followStore.followList)
-const isFollowed = computed(()=> checkFollow)
 
 onBeforeMount(() => {
   store.getBoard(route.params.id)
   followStore.getFollowList();
 })
 
-const checkFollow = function () {
-  return followList.value.some(follow => store.board.user.id === follow.follower.id);
-};
-
 const deleteBoard = function () {
-  axios.delete(`http://localhost:8080/board/${route.params.id}`)
-    .then(() => {
-      router.push({ name: 'boardList' })
-    })
+  store.deleteBoard(route.params.id);
+  router.push("/board")
 }
 
 const updateBoard = function () {
@@ -66,12 +60,10 @@ const updateBoard = function () {
 
 const followUser = function (user) {
   followStore.startFollow(user);
-  isFollowed.value = checkFollow;
 }
 
-const deleteFollow = function(user){
+const deleteFollow = function (user) {
   followStore.deleteFollow(user);
-  isFollowed.value = checkFollow;
 }
 
 </script>

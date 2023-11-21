@@ -26,29 +26,30 @@ export const useBoardStore = defineStore('board', () => {
       })
   }
 
+  function deleteBoard(boardNum){
+    axiosInstanceWithToken.delete(`http://localhost:8080/board/${boardNum}`)
+    .then((res) => {
+      getBoardList();
+    })
+  }
+
   //게시글 한개
   const getBoard = function (id) {
     axiosInstance.get(`${REST_BOARD_API}/${id}`)
       .then((response) => {
-        console.log(board.value)
-        let created = new Date(response.data.createdAt);
-        let updated = new Date(response.data.updatedAt);
         board.value = response.data;
-        board.value.createdAtFormat = created.toISOString().split('T')[0];
-        board.value.updatedAtFormat = updated.toISOString().split('T')[0];
+        board.value = setBoardDate(board.value);
     })
   }
 
-  //게시글 등록
-  // const createBoard = function (board) {
-  //   axios.post(REST_BOARD_API, board)
-  //     .then(() => {
-  //       router.push({ name: 'boardList'})
-  //     })
-  //     .catch((err) => {
-  //     console.log(err)
-  //   })
-  // }
+  function setBoardDate(board) {
+        let created = new Date(board.createdAt);
+        let updated = new Date(board.updatedAt);
+        board.createdAtFormat = created.toISOString().split('T')[0];
+        board.updatedAtFormat = updated.toISOString().split('T')[0];
+        return board;
+  }
+
   const createBoard = function (board) {
     axiosInstanceWithToken.post(REST_BOARD_API, board)
       .then((response) => {
@@ -65,31 +66,11 @@ export const useBoardStore = defineStore('board', () => {
   const updateBoard = function () {
     axiosInstanceWithToken.put(REST_BOARD_API, board.value)
       .then(() => {
-      router.push({name: 'boardList'})
+        getBoard(board.value.num);
     })
   }
 
-  // const searchBoardList = function (searchCondition) {
-  //   const API = `http://localhost:8080/board/search`;
-  //   axios.get(API, {
-  //     params: searchCondition
-  //   })
-  //     .then((response) => {
-  //       const list = [];
-        
-  //       for(let i = 0; i < response.data.length ; i ++){
-  //         const board = response.data[i];
-  //         let date = new Date(response.data[i].createdAt);
-  //         board.createdAt = date.toISOString().split('T')[0];
-  //         list.push(board);
-  //      };
-
-  //      boardList.value = list;
-  //   })
-  // }
-
-
-  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard }
+  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard, deleteBoard }
 },
 {
   persist: {
