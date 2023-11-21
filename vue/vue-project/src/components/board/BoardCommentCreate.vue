@@ -11,9 +11,16 @@
       <ul v-for="(comment, index) in commentList" :key="comment.num" class="comment-item">
         <li>
           <div class="comment-content" v-if="!comment.editing">
-            {{ comment.content }}
-            <button @click="startEditing(index)" class="edit-button">수정</button>
-            <button @click="deleteComment(comment.num)" class="delete-button">삭제</button>
+            <span>{{ comment.user.nickname }}</span>
+            <span>{{ comment.content }}</span>
+            <div>
+              <span>{{ comment.updatedAtFormat }}</span>
+              <span>{{ comment.createdAtFormat !== comment.updatedAtFormat ? "(수정됨)" : "" }}</span>
+            </div>
+            <div id="comment-button-container">
+              <button @click="startEditing(index)" class="edit-button">수정</button>
+              <button @click="deleteComment(comment.num)" class="delete-button">삭제</button>
+            </div>
           </div>
           <div class="editing-section" v-else>
             <textarea v-model="comment.updateContent"></textarea>
@@ -27,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, onBeforeMount } from "vue";
 import { useBoardStore } from "@/stores/board";
 import { useUserStore } from "@/stores/user";
 import { useCommentStore } from "@/stores/comment";
@@ -39,12 +46,9 @@ const commentStore = useCommentStore();
 const content = ref('');
 const commentList = computed(() => commentStore.comments);
 
-watch(() => boardStore.board,
-  (board, oldBoard) => {
-      console.log(board)
-      commentStore.getComments(board);
-  }
-);
+onBeforeMount(() => {
+  commentStore.getComments(boardStore.board);
+});
 
 const submitComment1 = () => {
   const comment = {
@@ -95,15 +99,8 @@ const deleteComment = async (commentId) => {
 
 .comment-item {
   list-style: none;
-  margin-bottom: 15px;
+  margin: 0;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.comment-content {
-  display: flex;
-  align-items: center;
 }
 
 .edit-button,
@@ -114,7 +111,6 @@ const deleteComment = async (commentId) => {
   cursor: pointer;
   background-color: #fff;
   padding: 5px 10px;
-  border-radius: 3px;
   transition: background-color 0.3s ease;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -155,6 +151,54 @@ textarea {
 }
 
 .comment-button:hover {
+  background-color: #2980b9;
+}
+
+.comment-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.comment-content span {
+  margin-right: 10px;
+}
+
+.comment-content span.username {
+  font-weight: bold;
+}
+
+.comment-content span.timestamp {
+  color: #777;
+}
+
+.comment-content span.modified {
+  color: #e74c3c;
+  font-style: italic;
+}
+
+.comment-content span.content {
+  flex-grow: 1;
+}
+
+.comment-content .edit-button,
+.comment-content .delete-button {
+  cursor: pointer;
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+.comment-content .edit-button:hover,
+.comment-content .delete-button:hover {
   background-color: #2980b9;
 }
 </style>

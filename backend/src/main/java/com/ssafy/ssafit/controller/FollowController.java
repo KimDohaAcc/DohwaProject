@@ -1,46 +1,67 @@
 package com.ssafy.ssafit.controller;
 
 import com.ssafy.ssafit.domain.Follow;
+import com.ssafy.ssafit.domain.Like;
 import com.ssafy.ssafit.domain.User;
 import com.ssafy.ssafit.service.followService.FollowService;
+import com.ssafy.ssafit.service.userService.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/auth")
 public class FollowController {
 
     private final FollowService followService;
+    private final UserService userService;
 
     @PostMapping("/follow")
-    public ResponseEntity<Follow> startFollow(@RequestBody Follow follow) {
-        return Optional.ofNullable(followService.createFollow(follow))
+    public ResponseEntity<?> startFollow(@RequestBody User user, HttpServletRequest request) {
+        return userService.extractUserFromToken(request.getHeader("Authorization"))
+                .map(follower -> {
+//                    user.getId().equals(follower.getId()) ||
+                    if (followService.getFollowByFollowerAndFollowee(follower, user).isPresent()) {
+                        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+                    }
+                    return new ResponseEntity<Follow>(followService.createFollow(new Follow(null, follower, user)), HttpStatus.CREATED);
+                }).orElseGet(() ->
+                        new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
+    @GetMapping("/follow")
+    public ResponseEntity<List<Follow>> getFollowByFollower(HttpServletRequest request) {
+        return userService.extractUserFromToken(request.getHeader("Authorization"))
+                .map(follower ->
+                        new ResponseEntity<>(followService.getFollowByFollower(follower), HttpStatus.OK)
+                )
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
+    @PostMapping("/followee")
+    public ResponseEntity<List<Follow>> getFollowByFollowee(@RequestBody User user) {
+        return Optional.ofNullable(followService.getFollowByFollowee(user))
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @PostMapping("/follower")
-    public ResponseEntity<List<Follow>> getFollowByFollower(@RequestBody User user) {
-            return Optional.ofNullable(followService.getFollowByFollower(user))
-                    .map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.badRequest().build());
-    }
-
-
-    @PostMapping("/followee")
-    public ResponseEntity<List<Follow>> getFollowByFollowee(@RequestBody User user) {
-            return Optional.ofNullable(followService.getFollowByFollowee(user))
-                    .map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.badRequest().build());
-    }
-
-    @DeleteMapping("/follow")
-    public ResponseEntity<Void> deleteFollow(@RequestBody Follow follow) {
-        followService.removeFollow(follow);
-        return ResponseEntity.noContent().build();
+    @PostMapping("/follow/delete")
+    public ResponseEntity<Void> deleteFollow(@RequestBody User user, HttpServletRequest request) {
+        System.out.println("user = " + user);
+        return userService.extractUserFromToken(request.getHeader("Authorization"))
+                .map(follower -> {
+                    followService.getFollowByFollowerAndFollowee(follower, user)
+                            .ifPresent(followService::removeFollow);
+                    return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+                })
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 }

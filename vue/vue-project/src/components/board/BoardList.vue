@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5>이용 후기 목록</h5>
+        <h5>이용 후기</h5>
         <hr>
         <table>
             <tr>
@@ -16,7 +16,7 @@
                     <RouterLink :to="`/board/${board.num}`">{{ board.title }}</RouterLink>
                 </td>
                 <td>{{ board.user.nickname }}</td>
-                <td>{{ board.createdAt }}</td>
+                <td>{{ board.createdAtFormat }}</td>
             </tr>
         </table>
         <button>

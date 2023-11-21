@@ -15,8 +15,10 @@ export const useBoardStore = defineStore('board', () => {
         const list = [];
         for(let i = 0; i < response.data.length ; i ++){
           const board = response.data[i];
-          let date = new Date(response.data[i].createdAt);
-          board.createdAt = date.toISOString().split('T')[0];
+          let created = new Date(response.data[i].createdAt);
+          let updated = new Date(response.data[i].updatedAt);
+          board.createdAtFormat = created.toISOString().split('T')[0];
+          board.updatedAtFormat = updated.toISOString().split('T')[0];
           list.push(board);
        };
 
@@ -29,7 +31,11 @@ export const useBoardStore = defineStore('board', () => {
     axiosInstance.get(`${REST_BOARD_API}/${id}`)
       .then((response) => {
         console.log(board.value)
-         board.value = response.data
+        let created = new Date(response.data.createdAt);
+        let updated = new Date(response.data.updatedAt);
+        board.value = response.data;
+        board.value.createdAtFormat = created.toISOString().split('T')[0];
+        board.value.updatedAtFormat = updated.toISOString().split('T')[0];
     })
   }
 

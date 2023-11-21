@@ -24,7 +24,6 @@ public class LikeController {
 
     @PostMapping("/auth/like")
     public ResponseEntity<Like> clickLike(@RequestBody Video video, HttpServletRequest request) {
-        System.out.println("video = " + video);
         userService.extractUserFromToken(request.getHeader("Authorization"))
                 .ifPresent(user -> {
                     likeService.getLikeByUserAndVideo(user, video)
