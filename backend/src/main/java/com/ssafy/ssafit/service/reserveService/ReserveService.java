@@ -8,9 +8,11 @@ import java.util.List;
 public interface ReserveService {
     Reserve createReserve(Reserve reserve);
 
-    boolean deleteReserve(Reserve reserve);
+    boolean deleteReserve(Long id);
 
     void modifyReserve(Reserve reserve);
 
     List<Reserve> getListByUser(User user);
+
+
 }
