@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +34,10 @@ public class FollowServiceimpl implements FollowService {
     @Override
     public void removeFollow(Follow follow) {
         followRepository.delete(follow);
+    }
+
+    @Override
+    public Optional<Follow> getFollowByFollowerAndFollowee(User follower, User followee){
+        return followRepository.findFollowByFollowerAndFollowee(follower, followee);
     }
 }
