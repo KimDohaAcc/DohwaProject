@@ -11,4 +11,6 @@ public interface UserService {
     Optional<User> findUserByAccount(String account);
 
     Optional<User> extractUserFromToken(String sessionToken);
+
+    boolean deleteUserById(Long id);
 }

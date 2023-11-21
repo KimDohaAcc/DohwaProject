@@ -73,4 +73,20 @@ public class JwtUtil {
         secureRandom.nextBytes(salt);
         return Base64.getEncoder().encodeToString(salt);
     }
+    public void invalidateToken(String token) {
+
+        System.out.println("Invalidating token: " + token);
+
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(SALT.getBytes(StandardCharsets.UTF_8))
+                    .parseClaimsJws(token)
+                    .getBody();
+            claims.setExpiration(new Date());
+
+        } catch (JwtException e) {
+            System.out.println("Error invalidating token: " + e.getMessage());
+            // 토큰이 유효하지 않은 경우의 예외 처리
+        }
+    }
 }

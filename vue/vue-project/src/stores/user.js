@@ -1,15 +1,44 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 export const useUserStore = defineStore('user', () => {
       const loginUser = ref(null);
+      const router = useRouter();
       let user = {};
       let mealList = ref(null);
       let followerList = ref(null);
       let followeeList = ref(null);
 
       const REST_API_URL = `http://localhost:8080`;
+      const originalLogin = async () => {
+        axiosInstance({
+          method: "POST",
+          url: "http://localhost:8080/originalLogin",
+          params: {
+            account: username.value,
+            password: password.value,
+          }
+        })
+        .then((response)=>{
+          console.log('로그인이 되었습니다.', response.data);
+          
+          sessionStorage.setItem("loginUser", JSON.stringify(response.data.user));
+          sessionStorage.setItem("jwtToken", response.data['access-token']);
+          loginUser.value = user;
+          
+          
+      
+        })
+        .catch( (error) =>{
+          console.error('로그인 실패:', error);
+          alert("해당 계정이 존재하지 않습니다.");
+        }
+        );
+        alert('로그인이 되었습니다.');
+        router.push('/');
+      }
 
       loginUser.value = JSON.parse(sessionStorage.getItem('loginUser'));
 
@@ -109,7 +138,7 @@ export const useUserStore = defineStore('user', () => {
 
 
 
-      return { submitNewUser, loginUser, checkLoginAndRedirect, getKakaoAccount, logoutUser, mealList, getUserFollow, followerList, followeeList }
+      return { originalLogin, submitNewUser, loginUser, checkLoginAndRedirect, getKakaoAccount, logoutUser, mealList, getUserFollow, followerList, followeeList }
     },
     {
       persist: {
