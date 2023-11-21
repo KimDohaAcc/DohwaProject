@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
-import axios from 'axios'; 
 
 export const useUserStore = defineStore('user', () => {
       const loginUser = ref(null);

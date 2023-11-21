@@ -16,7 +16,6 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 public class KaKaoController {
 
     private final KaKaoService ks;

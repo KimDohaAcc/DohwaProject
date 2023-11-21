@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 public class FollowController {
 
     private final FollowService followService;

@@ -20,12 +20,13 @@ public class ReserveServiceImpl implements ReserveService {
     }
 
     @Override
-    public boolean deleteReserve(Reserve reserve) {
-        if (reserveRepository.existsById(reserve.getNum())) {
-            reserveRepository.delete(reserve);
+    public boolean deleteReserve(Long id) {
+        if (reserveRepository.existsById(id)) {
+            reserveRepository.deleteById(id);
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     @Override
@@ -37,4 +38,6 @@ public class ReserveServiceImpl implements ReserveService {
     public List<Reserve> getListByUser(User user) {
         return reserveRepository.findAllByUser(user);
     }
+
+
 }
