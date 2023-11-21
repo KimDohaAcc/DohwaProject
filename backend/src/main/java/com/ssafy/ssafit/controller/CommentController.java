@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestScope;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,6 +21,13 @@ public class CommentController {
         return commentService.getComment(num)
                 .map(comment -> new ResponseEntity<>(comment, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/comment/board/{boardNum}")
+    public ResponseEntity<?> getCommentByBoard(@PathVariable Long boardNum) {
+        return commentService.getCommentsByBoard(boardNum)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/comment")

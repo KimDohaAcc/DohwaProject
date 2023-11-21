@@ -19,7 +19,9 @@
                 <td>{{ board.createdAt }}</td>
             </tr>
         </table>
-
+        <button>
+        <RouterLink :to="{ name: 'boardCreate' }" class="create-board-link">보드 작성</RouterLink>
+      </button>
         <!-- <BoardSearchInput /> -->
     </div>
 </template>
@@ -36,4 +38,23 @@ onMounted(() => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+button {
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.create-board-link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+</style>

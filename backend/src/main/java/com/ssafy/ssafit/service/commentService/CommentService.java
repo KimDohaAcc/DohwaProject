@@ -9,7 +9,7 @@ public interface CommentService {
 
 
     //댓글 목록 조회
-    List<Comment> getCommentsByBoardNum(Long boardNum);
+    Optional<List<Comment>> getCommentsByBoard(Long boardNum);
 
     //댓글 작성
     Comment writeComment(Comment comment);

@@ -9,19 +9,13 @@ const REST_COMMENT_API = 'http://localhost:8080/comment';
 
 export const useCommentStore = defineStore('comment', () => {
   const comment = ref('');
-  const comments = ref([]);
-  const nowBoard = ref({});
+  const comments = ref(null);
 
   const userStore = useUserStore();
-  const boardStore = useBoardStore();
 
-  function startEditing(num) {
-
-  }
-
-  function getComments() {
-    console.log(nowBoard.value)
-    axiosInstanceWithToken.get(`http://localhost:8080/comment/${nowBoard.num}`)
+  function getComments(board) {
+    console.log(board)
+    axiosInstance.get(`http://localhost:8080/comment/board/${board.num}`)
       .then((res) => {
         console.log(res.data)
         comments.value = res.data;
@@ -32,29 +26,20 @@ export const useCommentStore = defineStore('comment', () => {
   };
 
   function deleteComment(id) {
-    // 댓글 목록에서 해당 ID를 가진 댓글을 필터링하여 삭제합니다.
     comments.value = comments.value.filter((comment) => comment.num !== id);
-
   }
 
   function editComment(editedComment) {
-    //카카오계정 로그인하고싶어->카카오로그인,비밀번호 서버에 보내->nickname, account, id
     console.log(editedComment);
-    // 해당 댓글의 내용을 수정합니다.
-    // 서버에 댓글 수정 API 호출
     axiosInstanceWithToken.put(`http://localhost:8080/comment`, editedComment)
       .then((response) => {
-        alert("댓글이 성공적으로 수정되었습니다.");
-        // 리스트 안에 있는 댓글을 업데이트
         const index = comments.value.findIndex((comment) => comment.num === editedComment.num);
         if (index !== -1) {
-          // Replace the old comment with the updated one
-          comments.value.splice(index, 1, response.data);
+          comments.value.splice(index, 1, { ...editedComment });
         }
       })
       .catch((error) => {
         console.error("댓글 수정 실패:", error);
-        alert("댓글 수정에 실패했습니다.");
       });
   }
 

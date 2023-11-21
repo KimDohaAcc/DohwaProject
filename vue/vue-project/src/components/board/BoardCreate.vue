@@ -1,27 +1,26 @@
 <template>
     <div>
-        <h4>게시글 작성</h4>
-        <fieldset>
-            <legend>등록</legend>
-            <div>
-                <label for="title">제목 : </label>
-                <input type="text" id="title" v-model="board.title">
-            </div>
-            <div>
-                <label for="user">작성자 : </label>
-                <span>{{ nickname }}</span>
-            </div>
-            <div>
-                <label for="content">내용 : </label>
-                <textarea id="content" cols="30" rows="10" v-model="board.content"></textarea>
-            </div>
-            <div>
-                <button @click="createBoard">등록</button>
-            </div>
-            
-        </fieldset>
+      <h4>게시글 작성</h4>
+      <fieldset>
+        <legend>등록</legend>
+        <div class="form-group">
+          <label for="title">제목 : </label>
+          <input type="text" id="title" v-model="board.title" class="input-field">
+        </div>
+        <div class="form-group">
+          <label for="user">작성자 : </label>
+          <span class="user-nickname">{{ nickname }}</span>
+        </div>
+        <div class="form-group">
+          <label for="content">내용 : </label>
+          <textarea id="content" cols="30" rows="10" v-model="board.content" class="input-field"></textarea>
+        </div>
+        <div class="form-group">
+          <button @click="createBoard" class="submit-button">등록</button>
+        </div>
+      </fieldset>
     </div>
-</template>
+  </template>
 
 <script setup>
 import { ref } from "vue";
@@ -43,4 +42,35 @@ const createBoard = function () {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.form-group {
+  margin-bottom: 20px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.user-nickname {
+  font-weight: bold;
+}
+
+.submit-button {
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #2980b9;
+}
+</style>
