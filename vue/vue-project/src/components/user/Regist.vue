@@ -58,7 +58,7 @@
 	</div>
       <button
         type="button"
-        :disabled="errorNickname || errorPassword || errorAccount || !nickname || !password || !account|| accountExists "
+        :disabled="errorNickname || errorPassword || errorAccount || !nickname || !password || !account|| accountExists || isJoinDisabled "
         @click="join"
       >가입하기</button>
     </div>
@@ -82,6 +82,7 @@
       const errorAccount = ref(false);
 	  const accountExists = ref(false);
       const accountAvailable = ref(false);
+      const isJoinDisabled = ref(true);
   
       const join = () => {
         checkNickname();
@@ -133,10 +134,12 @@
               // 중복된 계정이 있을 경우
               accountExists.value = true;
               accountAvailable.value = false;
+              isJoinDisabled.value = true;
             } else {
               // 중복된 계정이 없을 경우
               accountExists.value = false;
               accountAvailable.value = true;
+              isJoinDisabled.value = false;
             }
         } catch (error) {
           console.error('Error checking account:', error);
@@ -157,6 +160,7 @@
         checkNickname,
         checkPassword,
 		checkPasswordConfirmation,
+    isJoinDisabled,
 		
         checkAccount,
 		accountExists,

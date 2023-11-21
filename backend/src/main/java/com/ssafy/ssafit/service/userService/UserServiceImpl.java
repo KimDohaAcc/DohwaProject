@@ -4,6 +4,7 @@ import com.ssafy.ssafit.domain.User;
 import com.ssafy.ssafit.repository.UserRepository;
 import com.ssafy.ssafit.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -43,12 +44,22 @@ public class UserServiceImpl implements UserService {
     }
 
 
+//    @Override
+//    public boolean deleteUserById(Long id) {
+//        if (userRepository.existsById(id)) {
+//            userRepository.deleteById(id);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+
     @Override
     public boolean deleteUserById(Long id) {
-        if (userRepository.existsById(id)) {
+        try {
             userRepository.deleteById(id);
             return true;
-        } else {
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
     }

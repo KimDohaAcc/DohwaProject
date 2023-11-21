@@ -46,6 +46,7 @@ const password = ref('');
 
 const handleLogin = () => {
   store.originalLogin(username.value, password.value);
+  router.push('/login');
 };
 </script>
 

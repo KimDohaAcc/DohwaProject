@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 import { useRouter } from 'vue-router';
-const router = useRouter();
+
 export const useUserStore = defineStore('user', () => {
       const loginUser = ref(null);
       const router = useRouter();
@@ -36,8 +36,10 @@ export const useUserStore = defineStore('user', () => {
           alert("해당 계정이 존재하지 않습니다.");
         }
         );
+        
         alert('로그인이 되었습니다.');
         router.push('/');
+        
       }
 
       loginUser.value = JSON.parse(sessionStorage.getItem('loginUser'));
@@ -130,6 +132,7 @@ export const useUserStore = defineStore('user', () => {
           const response = await axiosInstance.post('http://localhost:8080/user', newUser);
           console.log('서버 응답:', response.data);
           alert("회원가입이 완료되었습니다.");
+          router.push('/');
         } catch (error) {
           console.error('오류 발생:', error);
           

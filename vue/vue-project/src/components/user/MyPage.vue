@@ -27,10 +27,11 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 const userStore = useUserStore();
-
+const router = useRouter();
 const reservations = ref([]);
 console.log(reservations);
 const formatDate = (dateString) => {
@@ -40,6 +41,7 @@ const formatDate = (dateString) => {
 };
 
 onMounted(() => {
+  
 // 사용자의 예약 정보 가져오기
   let user = sessionStorage.getItem("loginUser"); // sessionStorage는 키, 밸류가 모두 문자열
   user = JSON.parse(user);
@@ -76,14 +78,11 @@ const deleteAccount = () => {
     const userId = userStore.loginUser.id;
     const token = sessionStorage.getItem('jwtToken');
     if (!token) {
-      alert('토큰이 없습니다.'); // 토큰이 없으면 처리 중단
+      alert('토큰이 없습니다.'); 
       return;
     }
-    if (token) {
-      alert('토큰이 있습니다.');
-      console.log(token) // 토큰이 없으면 처리 중단
-      return;
-    }
+    logoutUser();
+    
     axiosInstanceWithToken.delete(`http://localhost:8080/auth/unregister/${userId}`, {
       headers: {
         'Authorization': `Bearer ${token}`
@@ -91,12 +90,22 @@ const deleteAccount = () => {
     })
       .then(() => {
         alert('계정이 삭제되었습니다.');
+        // 로그아웃 실행
+        
+        // 메인 화면으로 이동
+        router.push('/');
       })
       .catch(error => {
         console.error('계정 삭제 중 에러 발생:', error);
         alert('계정 삭제 중 오류가 발생했습니다.');
       });
   }
+}
+
+const logoutUser = function () {
+  sessionStorage.removeItem("jwtToken");
+  sessionStorage.removeItem("loginUser");
+  userStore.loginUser = null;
 }
 </script>
 

@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -75,9 +76,13 @@ public class UserController {
                     })
                   .orElseGet(()-> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    @DeleteMapping("/unregister/{id}")
+
+    @DeleteMapping("auth/unregister/{id}")
     public ResponseEntity<Void> unregisterUser(@PathVariable Long id, HttpServletRequest request) {
         String sessionToken = request.getHeader("Authorization");
+        if(sessionToken==null){
+            System.out.println("넌 바보야");
+        }
         System.out.println("sessionToken = " + sessionToken);
         try {
             Optional<User> user = userService.findUserById(jwtUtil.extractUserIdFromToken(sessionToken));
@@ -85,12 +90,13 @@ public class UserController {
             System.out.println("user = " + user);
             if (user.isPresent()) {
                 // 사용자가 존재하는 경우에만 삭제를 시도
-                userService.deleteUserById(id);
 
+                userService.deleteUserById(user.get().getId());
                 // 토큰 체크 및 무효화
                 if (sessionToken != null && sessionToken.startsWith("Bearer ")) {
                     sessionToken = sessionToken.substring(7); // "Bearer " 부분 제거
                     jwtUtil.invalidateToken(sessionToken);
+
                 } else {
                     // 토큰이 없거나 형식이 맞지 않는 경우 UNAUTHORIZED 반환
                     return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
