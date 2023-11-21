@@ -19,7 +19,7 @@
           
         </div>
       </div>
-      
+      <button @click="deleteAccount">계정 탈퇴</button>
     </div>
   </div>
 </template>
@@ -71,7 +71,33 @@ const deleteReservation = (index) => {
         console.error('예약 삭제 중 에러 발생:', error);
       })
 }
-
+const deleteAccount = () => {
+  if (confirm('정말 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
+    const userId = userStore.loginUser.id;
+    const token = sessionStorage.getItem('jwtToken');
+    if (!token) {
+      alert('토큰이 없습니다.'); // 토큰이 없으면 처리 중단
+      return;
+    }
+    if (token) {
+      alert('토큰이 있습니다.');
+      console.log(token) // 토큰이 없으면 처리 중단
+      return;
+    }
+    axiosInstanceWithToken.delete(`http://localhost:8080/auth/unregister/${userId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(() => {
+        alert('계정이 삭제되었습니다.');
+      })
+      .catch(error => {
+        console.error('계정 삭제 중 에러 발생:', error);
+        alert('계정 삭제 중 오류가 발생했습니다.');
+      });
+  }
+}
 </script>
 
 <style scoped>

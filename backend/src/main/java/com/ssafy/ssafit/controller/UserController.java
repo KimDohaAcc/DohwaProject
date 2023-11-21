@@ -77,17 +77,34 @@ public class UserController {
     }
     @DeleteMapping("/unregister/{id}")
     public ResponseEntity<Void> unregisterUser(@PathVariable Long id, HttpServletRequest request) {
-        // 회원 탈퇴 로직 구현
-        if (userService.deleteUserById(id)) {
-            // 회원 탈퇴 시 해당 사용자의 JWT 토큰 만료
-            String token = request.getHeader("Authorization"); // 헤더에서 토큰 추출 (Bearer 토큰)
-            if (token != null && token.startsWith("Bearer ")) {
-                token = token.substring(7); // "Bearer " 부분 제거
-                jwtUtil.invalidateToken(token); // 토큰 무효화 처리
+        String sessionToken = request.getHeader("Authorization");
+        System.out.println("sessionToken = " + sessionToken);
+        try {
+            Optional<User> user = userService.findUserById(jwtUtil.extractUserIdFromToken(sessionToken));
+
+            System.out.println("user = " + user);
+            if (user.isPresent()) {
+                // 사용자가 존재하는 경우에만 삭제를 시도
+                userService.deleteUserById(id);
+
+                // 토큰 체크 및 무효화
+                if (sessionToken != null && sessionToken.startsWith("Bearer ")) {
+                    sessionToken = sessionToken.substring(7); // "Bearer " 부분 제거
+                    jwtUtil.invalidateToken(sessionToken);
+                } else {
+                    // 토큰이 없거나 형식이 맞지 않는 경우 UNAUTHORIZED 반환
+                    return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+                }
+
+                // 사용자 삭제 및 토큰 무효화 성공 시 OK 반환
+                return ResponseEntity.ok().build();
+            } else {
+                // 사용자가 존재하지 않는 경우 NOT_FOUND 반환
+                return ResponseEntity.notFound().build();
             }
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            // 예외 발생 시 UNAUTHORIZED 반환
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 
