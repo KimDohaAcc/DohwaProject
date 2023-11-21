@@ -42,8 +42,14 @@ public class UserServiceImpl implements UserService {
                 .flatMap(this::findUserById);
     }
 
+
     @Override
     public boolean deleteUserById(Long id) {
-        return false;
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
