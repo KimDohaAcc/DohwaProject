@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class BoardController {
     private final BoardService boardService;
 
@@ -30,7 +29,6 @@ public class BoardController {
 
     @PostMapping("/board")
     public ResponseEntity<Board> write(@RequestBody Board board) {
-        System.out.println("board = " + board);
         return Optional.ofNullable(boardService.writeBoard(board))
                 .map(createBoard -> new ResponseEntity<>(createBoard, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -45,20 +43,19 @@ public class BoardController {
         }
     }
 
-    @PutMapping("/board/")
+    @PutMapping("/board")
     public ResponseEntity<Void> update(@RequestBody Board board) {
-        System.out.println("board = " + board);
         boardService.modifyBoard(board);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @GetMapping("/board/search")
-    public ResponseEntity<List<Board>> write(@RequestParam String key, @RequestParam String word, @RequestParam String orderBy, @RequestParam String orderByDir) {
+    public ResponseEntity<List<Board>> search(@RequestParam String key, @RequestParam String word, @RequestParam String orderBy, @RequestParam String orderByDir) {
         List<Board> list = boardService.getListByCondition(key, word, orderBy, orderByDir);
         System.out.println("list = " + list);
         for (Board board : list) {
             System.out.println("board.toString() = " + board.toString());
         }
-       return new ResponseEntity<>(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

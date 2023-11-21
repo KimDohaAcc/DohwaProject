@@ -17,7 +17,7 @@ export const useYoutubeStore = defineStore('youtube', () => {
         key: API_KEY,
         part: "snippet",
         q: keyword,
-        type: 'video',
+         type:'video',
         maxResults: 10
       }
     })
