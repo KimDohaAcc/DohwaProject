@@ -20,8 +20,8 @@ public class CommentServiceImpl implements CommentService {
     private final BoardService boardService;
 
     @Override
-    public List<Comment> getCommentsByBoardNum(Long boardNum) {
-        return commentRepository.findAllByBoardNum(boardNum);
+    public Optional<List<Comment>> getCommentsByBoard(Long boardNum) {
+        return boardService.getBoard(boardNum).map(commentRepository::findAllByBoard);
     }
 
     @Transactional

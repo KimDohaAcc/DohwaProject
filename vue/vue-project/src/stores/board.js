@@ -1,17 +1,18 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import router from '@/router'
-import axios from 'axios'
+import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
 const REST_BOARD_API = `http://localhost:8080/board`
 
 export const useBoardStore = defineStore('board', () => {
   const boardList = ref([])
+  const board = ref(null)
+
   const getBoardList = function () {
-    axios.get(REST_BOARD_API)
+    axiosInstance.get(REST_BOARD_API)
       .then((response) => {
         const list = [];
-
         for(let i = 0; i < response.data.length ; i ++){
           const board = response.data[i];
           let date = new Date(response.data[i].createdAt);
@@ -24,9 +25,8 @@ export const useBoardStore = defineStore('board', () => {
   }
 
   //게시글 한개
-  const board = ref({})
   const getBoard = function (id) {
-    axios.get(`${REST_BOARD_API}/${id}`)
+    axiosInstance.get(`${REST_BOARD_API}/${id}`)
       .then((response) => {
         console.log(board.value)
          board.value = response.data
@@ -44,7 +44,7 @@ export const useBoardStore = defineStore('board', () => {
   //   })
   // }
   const createBoard = function (board) {
-    axios.post(REST_BOARD_API, board)
+    axiosInstanceWithToken.post(REST_BOARD_API, board)
       .then((response) => {
        
         boardList.value.push(response.data);
@@ -57,7 +57,7 @@ export const useBoardStore = defineStore('board', () => {
   
 
   const updateBoard = function () {
-    axios.put(REST_BOARD_API, board.value)
+    axiosInstanceWithToken.put(REST_BOARD_API, board.value)
       .then(() => {
       router.push({name: 'boardList'})
     })
@@ -84,4 +84,9 @@ export const useBoardStore = defineStore('board', () => {
 
 
   return { boardList, getBoardList, board, getBoard, createBoard, updateBoard }
+},
+{
+  persist: {
+    storage: sessionStorage,
+  }
 })
