@@ -17,14 +17,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private static final String SUCCESS = "success";
-    private static final String FAIL = "fail";
-
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
 
     @PostMapping("/user")
-    public ResponseEntity<User> regist(@RequestBody User user) {
+    public ResponseEntity<User> regist(@RequestBody User userdto) {
+        User user = new User(userdto.getId(), userdto.getNickname(), userdto.getAccount(), userdto.getPassword(), userdto.isIskakao());
+        System.out.println("user = " + user);
         return Optional.ofNullable(userService.insertUser(user))
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -38,11 +38,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody User user, HttpServletRequest request) {
-        System.out.println("user.toString() = " + user.toString());
+    public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
         Map<String, Object> res = new HashMap<>();
         userService.insertUser(user);
-
         String token = jwtUtil.createToken(user.getId());
         res.put("user", user);
         res.put("access-token", token);

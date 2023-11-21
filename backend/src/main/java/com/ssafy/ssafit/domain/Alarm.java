@@ -23,8 +23,6 @@ public class Alarm {
     @Column(name = "alram_date")
     private LocalDateTime date;
 
-
     @Column(name="alarm_safe")
     private Boolean safe;
-
 }

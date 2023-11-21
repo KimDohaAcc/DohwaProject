@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class VideoController {
     private final VideoService videoService;
 
@@ -26,32 +25,5 @@ public class VideoController {
     @GetMapping("/video")
     public ResponseEntity<List<Video>> getVideoAll(){
         return new ResponseEntity<>(videoService.getVideoList(), HttpStatus.OK);
-    }
-
-    @PostMapping("/video")
-    public ResponseEntity<Video> write(@RequestBody Video video){
-        System.out.println("video = " + video);
-        return Optional.ofNullable(videoService.writeVideo(video))
-                .map(createVideo -> new ResponseEntity<>(createVideo, HttpStatus.OK))
-                .orElseGet(()->new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    @DeleteMapping("/video/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        if(videoService.removeVideo(id)){
-            return new ResponseEntity<>(HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PutMapping("/video/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Video updateVideo){
-        Video newVideo = videoService.modifyVideo(id,updateVideo);
-        if(newVideo != null){
-            return new ResponseEntity<Void>(HttpStatus.OK);
-        }else{
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-        }
     }
 }
