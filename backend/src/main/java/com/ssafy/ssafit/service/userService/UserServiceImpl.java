@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> findUserByAccount(String account) {
+        return userRepository.findUserByAccount(account);
+    }
+
+    @Override
     public Optional<User> extractUserFromToken(String sessionToken) {
         return Optional.ofNullable(jwtUtil.extractUserIdFromToken(sessionToken))
                 .flatMap(this::findUserById);

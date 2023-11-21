@@ -1,7 +1,9 @@
 // useReserveStore.js
 import { ref, computed, watch } from 'vue';
-import axios from 'axios';
+
 import { useUserStore } from '@/stores/user';
+import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
+//일반, 유저권한이 필요할 때 
 
 export function useReserveStore() {
     const reserveDate = ref('');
@@ -91,7 +93,7 @@ export function useReserveStore() {
                 phone: reservePhone.value,
                 store: selectedLocation.value,
             };
-            axios.post('http://localhost:8080/reserve/create', reserveData)
+            axiosInstanceWithToken.post('http://localhost:8080/auth/reserve/create', reserveData)
                 .then(response => {
                     console.log('예약이 성공적으로 생성되었습니다.', response.data);
                     alert("예약이 성공적으로 되었습니다.");

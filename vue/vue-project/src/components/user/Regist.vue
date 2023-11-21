@@ -28,7 +28,17 @@
         />
         <p v-show="errorPassword" class="input-error">비밀번호는 영문+숫자를 포함한 4자 이상 12자 이내이여야 합니다.</p>
       </div>
-  
+	  <div>
+    	<label for="passwordConfirmation">비밀번호 확인</label>
+    	<input
+     	 type="password"
+     	 placeholder="비밀번호 확인"
+      	v-model="passwordConfirmation"
+      	:class="{ 'input-error': errorPasswordConfirmation }"
+      	@blur="checkPasswordConfirmation"
+    	/>
+    <p v-show="errorPasswordConfirmation" class="input-error">비밀번호와 일치하지 않습니다.</p>
+  </div>
       <div>
         <label for="password">이메일</label>
         <input
@@ -42,11 +52,13 @@
       </div>
   
       <div>
-        <button class="checkButton" @click="accountCheck">중복체크</button>
-      </div>
+        <button class="checkButton" @click="checkAccountAvailability">중복체크</button>
+		<p v-if="accountExists" class="input-error">중복된 계정이 있습니다.</p>
+    	<p v-if="accountAvailable" class="success-message">사용가능한 계정입니다.</p>
+	</div>
       <button
         type="button"
-        :disabled="errorNickname || errorPassword || errorAccount || !nickname || !password || !account"
+        :disabled="errorNickname || errorPassword || errorAccount || !nickname || !password || !account|| accountExists "
         @click="join"
       >가입하기</button>
     </div>
@@ -55,6 +67,7 @@
   <script>
   import { ref } from 'vue';
   import { useUserStore } from '@/stores/user.js'; // 실제 사용하는 경로로 변경해주세요
+  import axios from 'axios';
   
   export default {
     setup() {
@@ -62,27 +75,39 @@
       const nickname = ref('');
       const account = ref('');
       const password = ref('');
+	  const passwordConfirmation = ref('');
       const errorNickname = ref(false);
       const errorPassword = ref(false);
+	  const errorPasswordConfirmation = ref(false);
       const errorAccount = ref(false);
+	  const accountExists = ref(false);
+      const accountAvailable = ref(false);
   
       const join = () => {
         checkNickname();
         checkPassword();
         checkAccount();
+		checkPasswordConfirmation();
   
-        if (!errorNickname.value && !errorPassword.value && !errorAccount.value && nickname.value !== '' && password.value !== '' && account.value !== '') {
-          const newUser = {
-            nickname: nickname.value,
-            account: account.value,
-            password: password.value,
-            iskakao: false,
-          };
-  
-          userStore.submitNewUser(newUser);
+		if (!errorNickname.value && !errorPassword.value && !errorPasswordConfirmation.value && !errorAccount.value && nickname.value !== '' && password.value !== '' && passwordConfirmation.value !== '' && account.value !== '') {
+        if (password.value !== passwordConfirmation.value) {
+          alert('비밀번호가 일치하지 않습니다.');
+          return;
         }
-      };
-  
+
+        const newUser = {
+          nickname: nickname.value,
+          account: account.value,
+          password: password.value,
+          iskakao: false,
+        };
+
+        userStore.submitNewUser(newUser);
+      }
+    };
+	const checkPasswordConfirmation = () => {
+      errorPasswordConfirmation.value = password.value !== passwordConfirmation.value;
+    };
       const checkNickname = () => {
         const validateNickname = /^[A-Za-z가-힣]{1,20}$/;
         errorNickname.value = !validateNickname.test(nickname.value) || !nickname.value;
@@ -97,18 +122,46 @@
         const validateAccount = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
         errorAccount.value = !validateAccount.test(account.value) || !account.value;
       };
+
+	  const checkAccountAvailability = async () => {
+		console.log(account.value);
+      if (!errorAccount.value && account.value !== '') {
+        try {
+          const response = await axios.get(`http://localhost:8080/user/dupCheck/${account.value}`);
+            // 백엔드에서 중복된 계정이 있는지 확인 후 처리
+            if (response.status === 200) {
+              // 중복된 계정이 있을 경우
+              accountExists.value = true;
+              accountAvailable.value = false;
+            } else {
+              // 중복된 계정이 없을 경우
+              accountExists.value = false;
+              accountAvailable.value = true;
+            }
+        } catch (error) {
+          console.error('Error checking account:', error);
+        }
+      }
+    };
   
       return {
         nickname,
         account,
         password,
+		passwordConfirmation,
         errorNickname,
         errorPassword,
+		errorPasswordConfirmation,
         errorAccount,
         join,
         checkNickname,
         checkPassword,
+		checkPasswordConfirmation,
+		
         checkAccount,
+		accountExists,
+        accountAvailable,
+        checkAccountAvailability,
       };
     },
   };

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +36,7 @@ public class ReserveServiceImpl implements ReserveService {
     }
 
     @Override
-    public List<Reserve> getListByUser(User user) {
+    public List<Reserve> getListByUser(Optional<User> user) {
         return reserveRepository.findAllByUser(user);
     }
 

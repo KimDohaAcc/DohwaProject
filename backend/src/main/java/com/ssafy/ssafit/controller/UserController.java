@@ -37,6 +37,14 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/user/dupCheck/{account}")
+    public ResponseEntity<User> getUser(@PathVariable String account) {
+        System.out.println("account = " + account);
+        return userService.findUserByAccount(account)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.noContent().build());
+    }
+
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
         Map<String, Object> res = new HashMap<>();

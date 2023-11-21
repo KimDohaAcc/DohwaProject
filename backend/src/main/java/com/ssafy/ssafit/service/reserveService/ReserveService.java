@@ -4,6 +4,7 @@ import com.ssafy.ssafit.domain.Reserve;
 import com.ssafy.ssafit.domain.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ReserveService {
     Reserve createReserve(Reserve reserve);
@@ -12,7 +13,7 @@ public interface ReserveService {
 
     void modifyReserve(Reserve reserve);
 
-    List<Reserve> getListByUser(User user);
+    List<Reserve> getListByUser(Optional<User> user);
 
 
 }

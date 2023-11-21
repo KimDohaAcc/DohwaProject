@@ -116,11 +116,13 @@ const router = createRouter({
       path: '/reserve',
       name: 'reserve',
       component: ReserveView,
+      beforeEnter: checkLogin,
       children:
           {
             path: "reseveRegist",
             name: "reserveRegist",
             component: ReserveRegist,
+            beforeEnter: checkLogin,
           },
     },
     {
