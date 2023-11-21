@@ -17,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private static final String SUCCESS = "success";
+    private static final String FAIL = "fail";
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
@@ -56,6 +57,41 @@ public class UserController {
 
         return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
     }
+    @PostMapping("/originalLogin")
+    public ResponseEntity<Map<String, Object>> originalLogin(@RequestParam("account") String account,
+                                                             @RequestParam("password") String password) {
+        Map<String, Object> res = new HashMap<>();
+          return userService.findUserByAccount(account)
+                    .map(user -> {
+                        if(user.getPassword().equals(password)) {
+                            String token = jwtUtil.createToken(user.getId());
+                            res.put("user", user);
+                            res.put("access-token", token);
+                            res.put("message", SUCCESS);
+                            return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
+                        }
+                        res.put("message", FAIL);
+                        return new ResponseEntity<>(res, HttpStatus.UNAUTHORIZED);
+                    })
+                  .orElseGet(()-> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    @DeleteMapping("/unregister/{id}")
+    public ResponseEntity<Void> unregisterUser(@PathVariable Long id, HttpServletRequest request) {
+        // 회원 탈퇴 로직 구현
+        if (userService.deleteUserById(id)) {
+            // 회원 탈퇴 시 해당 사용자의 JWT 토큰 만료
+            String token = request.getHeader("Authorization"); // 헤더에서 토큰 추출 (Bearer 토큰)
+            if (token != null && token.startsWith("Bearer ")) {
+                token = token.substring(7); // "Bearer " 부분 제거
+                jwtUtil.invalidateToken(token); // 토큰 무효화 처리
+            }
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
     @GetMapping("/token-check")
     public ResponseEntity<Void> checkTokenValidity(String token) {

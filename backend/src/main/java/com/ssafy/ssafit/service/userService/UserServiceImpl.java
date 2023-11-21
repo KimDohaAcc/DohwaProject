@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService {
         return Optional.ofNullable(jwtUtil.extractUserIdFromToken(sessionToken))
                 .flatMap(this::findUserById);
     }
+
+    @Override
+    public boolean deleteUserById(Long id) {
+        return false;
+    }
 }
