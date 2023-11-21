@@ -2,6 +2,7 @@ import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useUserStore } from './user';
+import { useformatDate } from '@/util/dateFormat';
 import { useBoardStore } from './board';
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
@@ -10,15 +11,23 @@ const REST_COMMENT_API = 'http://localhost:8080/comment';
 export const useCommentStore = defineStore('comment', () => {
   const comment = ref('');
   const comments = ref(null);
-
   const userStore = useUserStore();
 
   function getComments(board) {
     console.log(board)
     axiosInstance.get(`http://localhost:8080/comment/board/${board.num}`)
       .then((res) => {
-        console.log(res.data)
-        comments.value = res.data;
+        const list = [];
+        for(let i = 0; i < res.data.length ; i ++){
+          const comment = res.data[i];
+          let created = new Date(res.data[i].createdAt);
+          let updated = new Date(res.data[i].updatedAt);
+          comment.createdAtFormat = useformatDate(created);
+          comment.updatedAtFormat = useformatDate(updated);
+          list.push(comment);
+       };
+
+        comments.value = list;
       })
       .catch((err) => {
         console.log(err);
@@ -66,6 +75,7 @@ export const useCommentStore = defineStore('comment', () => {
     return comments.value;
   });
 
+  
   // // 세션 스토리지에 댓글 저장
   // function saveCommentsToSessionStorage() {
   //   sessionStorage.setItem('comments', JSON.stringify(comments.value));
