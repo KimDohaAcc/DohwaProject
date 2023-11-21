@@ -1,29 +1,34 @@
 <template>
-    <div>
-        <h5>이용 후기</h5>
-        <hr>
-        <table>
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>등록일</th>
-                <th>수정일</th>
-            </tr>
-            <tr v-for="(board, index) in store.boardList" :key="board.num">
-                <td>{{ index + 1 }}</td>
-                <td>
-                    <RouterLink :to="`/board/${board.num}`">{{ board.title }}</RouterLink>
-                </td>
-                <td>{{ board.user.nickname }}</td>
-                <td>{{ board.createdAtFormat }}</td>
-            </tr>
-        </table>
-        <button>
+  <div class="board-list">
+    <h5>이용 후기</h5>
+    <hr>
+    <table class="board-table">
+      <thead>
+        <tr>
+          <th id="number">번호</th>
+          <th id="title">제목</th>
+          <th id="nickname">작성자</th>
+          <th>등록일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(board, index) in store.boardList" :key="board.num">
+          <td>{{ index + 1 }}</td>
+          <td>
+            <RouterLink :to="`/board/${board.num}`" class="link">{{ board.title }}</RouterLink>
+          </td>
+          <td>{{ board.user.nickname }}</td>
+          <td>{{ board.createdAtFormat }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="button-container">
+      <button>
         <RouterLink :to="{ name: 'boardCreate' }" class="create-board-link">보드 작성</RouterLink>
       </button>
-        <!-- <BoardSearchInput /> -->
     </div>
+    <!-- <BoardSearchInput /> -->
+  </div>
 </template>
 
 <script setup>
@@ -33,28 +38,74 @@ import BoardSearchInput from "./BoardSearchInput.vue";
 const store = useBoardStore()
 
 onMounted(() => {
-    store.getBoardList();
+  store.getBoardList();
 })
 
 </script>
 
 <style scoped>
+.board-list {
+  max-width: 70vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.board-table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+.board-table th,
+.board-table td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.board-table th {
+  background-color: #f0f0f0;
+}
+
+.button-container {
+  margin-top: 10px;
+  text-align: right;
+}
+
 button {
   cursor: pointer;
-  padding: 10px 15px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
 }
 
 button:hover {
-  background-color: #2980b9;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
 }
 
 .create-board-link {
   text-decoration: none;
-  color: #fff;
-  font-weight: bold;
+  color: black;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-weight: 300;
+}
+
+#title {
+  width: 50%;
+}
+
+#number {
+  width: 10%;
+}
+
+#nickname {
+  width: 20%;
 }
 </style>

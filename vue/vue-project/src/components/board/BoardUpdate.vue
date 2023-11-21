@@ -24,10 +24,13 @@
 
 <script setup>
 import { useBoardStore } from "@/stores/board";
+import { useRouter } from 'vue-router'
 const store = useBoardStore();
+const router = useRouter();
 
 const updateBoard = function () {
-    store.updateBoard()
+    store.updateBoard();
+    router.push(`/board/${store.board.num}`)
 }
 </script>
 
