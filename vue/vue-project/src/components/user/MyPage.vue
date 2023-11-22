@@ -1,5 +1,5 @@
 <template>
-  <div id="user-container">
+  <div id="user-container" v-if="userStore.loginUser">
     <div id="myPage" class="sns-page">
       <h1>사용자 정보</h1>
       <p id="info">식단 관리 및 출석 설정은 카카오 채널에서 가능합니다</p>
@@ -28,7 +28,6 @@
 import { useUserStore } from "@/stores/user";
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 const userStore = useUserStore();
 const router = useRouter();
@@ -75,23 +74,11 @@ const deleteReservation = (index) => {
 }
 const deleteAccount = () => {
   if (confirm('정말 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
-    const userId = userStore.loginUser.id;
-    const token = sessionStorage.getItem('jwtToken');
-    if (!token) {
-      alert('토큰이 없습니다.'); 
-      return;
-    }
-    logoutUser();
-    
-    axiosInstanceWithToken.delete(`http://localhost:8080/auth/unregister/${userId}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(() => {
-        alert('계정이 삭제되었습니다.');
+    axiosInstanceWithToken.delete(`http://localhost:8080/auth/unregister`)
+    .then(() => {
+      userStore.logoutUser();
+      alert('계정이 삭제되었습니다.');
         // 로그아웃 실행
-        
         // 메인 화면으로 이동
         router.push('/');
       })
@@ -100,12 +87,6 @@ const deleteAccount = () => {
         alert('계정 삭제 중 오류가 발생했습니다.');
       });
   }
-}
-
-const logoutUser = function () {
-  sessionStorage.removeItem("jwtToken");
-  sessionStorage.removeItem("loginUser");
-  userStore.loginUser = null;
 }
 </script>
 

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigInteger;
 import java.util.UUID;
 
 @Data
@@ -24,7 +25,6 @@ public class User {
     @Column(nullable = false, length = 40, name = "user_iskakao")
     private boolean iskakao;
 
-
     public User(Long id, String nickname, String account, String password, boolean iskakao) {
         if (id == null) {
             this.id = generateRandomUserId();
@@ -38,6 +38,6 @@ public class User {
     }
 
     private Long generateRandomUserId() {
-        return UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        return UUID.randomUUID().getMostSignificantBits() & Integer.MAX_VALUE;
     }
 }
