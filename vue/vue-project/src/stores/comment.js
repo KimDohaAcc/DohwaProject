@@ -29,8 +29,11 @@ export const useCommentStore = defineStore('comment', () => {
           comment = setCommentDate(comment);
           list.push(comment);
         };
-
+        
+        list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+        console.log(list)
         comments.value = list;
+
       })
       .catch((err) => {
         console.log(err);

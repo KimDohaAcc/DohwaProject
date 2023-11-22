@@ -12,11 +12,17 @@
         <ul v-for="(comment, index) in commentStore.comments" :key="comment.num" class="comment-item">
           <li>
             <div class="comment-content" v-if="!comment.editing">
-              <span>{{ comment.user ? comment.user.nickname : "(탈퇴한 사용자)" }}</span>
-              <span v-if="comment.user !== userStore.loginUser">
-                <i class="bi bi-person-add" v-if="!followStore.checkFollow" @click="followUser(comment.user)"></i>
-                <i class="bi bi-person-fill-dash" v-else @click="deleteFollow(comment.user)"></i>
+              <div>
+              <span id="user-name">{{ comment.user ? comment.user.nickname : "(탈퇴한 사용자)" }}</span>
+              <span v-if="comment.user && comment.user.id !== userStore.loginUser.id">
+                <button class="follow-button" v-if="!followStore.checkFollow" @click="followUser(comment.user)">
+                  follow<i class="bi bi-person-add"></i>
+                </button>
+                <button class="follow-button" v-else @click="deleteFollow(comment.user)">
+                following<i class="bi bi-person-fill-dash"></i>
+                </button>
               </span>
+            </div>
               <span>{{ comment.content }}</span>
               <div>
                 <span>{{ comment.updatedAtFormat }}</span>
@@ -126,3 +132,4 @@ const deleteFollow = function (user) {
 
 </script>
 <style scoped src="@/assets/boardCommentCreate.css" ></style>
+<style scoped src="@/assets/follow.css" ></style>

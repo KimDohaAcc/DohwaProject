@@ -23,6 +23,7 @@ export const useBoardStore = defineStore('board', () => {
           list.push(board);
        };
 
+       list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
        boardList.value = list;
       })
   }
