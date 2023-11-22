@@ -20,6 +20,7 @@ import MyFollow from '@/components/user/MyFollow.vue'
 import Regist from '@/components/user/Regist.vue'
 import ReserveRegist from '@/components/reserve/ReserveRegist.vue'
 import StoreIntroduce from '@/components/store/StoreIntroduce.vue'
+import StoreMap from '@/components/store/StoreMap.vue'
 
 const checkLogin = (to, from, next) => {
   const isLoggedIn = computed(() => !!JSON.parse(sessionStorage.getItem('loginUser')));
@@ -130,11 +131,18 @@ const router = createRouter({
       name: 'store',
       component: StoreView,
       children:
+      [
           {
             path: "storeIntroduce",
             name: "storeIntroduce",
             component: StoreIntroduce,
           },
+          {
+            path: "storeMap",
+            name: "storeMap",
+            component: StoreMap,
+          },
+        ]
     }
   ]
 })

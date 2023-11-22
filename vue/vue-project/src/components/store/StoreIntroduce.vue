@@ -7,24 +7,27 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="@\assets\판다2.jpg" class="d-block w-100" alt="...">
+        <img src="@\assets\메인1.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>유연한 헬스 서비스</h5>
-          <p>Some representative placeholder content for the first slide.</p>
+          <h2>머신에 집중 특화된 GYM!</h2>
+          <h3>헬스판다의 머신 트레이닝은 무게나 회수 등 컨디션의 변화와 효과를 실감할 수 있습니다.</h3>
+          
         </div>
       </div>
       <div class="carousel-item">
-        <img src="@\assets\판다3.jpg" class="d-block w-100" alt="...">
+        <img src="@\assets\메인2.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>맞춤형 피트니스</h5>
-          <p>Some representative placeholder content for the second slide.</p>
+          <h2>최고의 자랑은 직원</h2>
+          <h3>1:1 맞춤 트레이닝은 물론</h3>
+            <h3>언제나 최적의 환경에서 운동을 할 수 있도록</h3>
+          <h3>매일 클럽 환경 정비에 노력하고 있습니다.</h3>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="@\assets\푸바오.png" class="d-block w-100" alt="...">
+        <img src="@\assets\메인3.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>다양한 프로그램과 이벤트</h5>
-          <p>Some representative placeholder content for the third slide.</p>
+          <h2>헬스 유저들을 위한 맞춤 카카오톡 채널 운영</h2>
+          <h3>헬스판다는 카카오톡 채널을 통해 여러분의 식단과 운동 관리에 도움을 드립니다.</h3>
         </div>
       </div>
     </div>
@@ -37,6 +40,8 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  <router-view></router-view>
+  <StoreMap />
   <footer class>
     <div class="container py-5">
       <div class="row g-5">
@@ -74,6 +79,14 @@
 
 <script>
 
+import StoreMap from './StoreMap.vue';
+
+export default {
+  components: {
+    StoreMap,
+  },
+};
+
 </script>
 
 <style>
@@ -89,15 +102,48 @@ footer .btn.btn-link {
   list-style: none;
 }
 footer {
-
-  bottom: 0;
-  left: 0;
-  width: 100%;
   background-color: #264653;
   color: white;
   z-index: 9999;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
 }
 .row g-5{
-  background-attachment: #264653;
+  background-attachment: #264653;}
+  .pics {      /* 전체 케러셀 */
+            width: 100%;
+            height: 100%;
+            /* float: left;
+            position: relative;
+            left: 50%; */
+            object-fit: cover;
+        }
+
+.carousel-inner {
+            width: 100%;
+            height: 100%; /* 이미지 높이 변경 */
+        }
+
+.carousel-item {
+            width: 100%;
+            height: 100%;
+        }
+
+.d-block {
+            display: block;
+            width: auto;
+            height: 100%;
+        }
+  .carousel-caption d-none d-md-block{
+    margin-bottom: 200px;
+  }
+
+.img-size {
+  width: 50px;
+  height: fit-content;
 }
+
+
 </style>
