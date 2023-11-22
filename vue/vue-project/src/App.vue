@@ -2,12 +2,12 @@
   <div id="front-container">
     <SideNav class="SideNav" />
     <div class="content-wrapper">
-      <HeaderNav class="HeaderNav"/>
+      <HeaderNav class="HeaderNav" />
       <main>
-      <RouterView class="RouterView" @login-user="loginUser" />
-    </main>
+        <RouterView class="RouterView" @login-user="loginUser" />
+      </main>
+      <FooterView />
     </div>
-    <FooterView/>
   </div>
 </template>
 
@@ -73,11 +73,10 @@ const loginUser = (loginUser) => {
   display: flex;
   flex-flow: column;
   margin: 0 10%;
-  width: 80%;
+  width: 80vw;
 }
 
-main > div {
-  min-height: 20vh;
+main>div {
+  min-height: 80vh;
 }
-
 </style>

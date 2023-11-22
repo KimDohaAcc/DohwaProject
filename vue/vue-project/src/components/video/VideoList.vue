@@ -39,7 +39,6 @@
 import { useVideoStore } from "@/stores/video";
 import { useUserStore } from "@/stores/user";
 import { computed, onBeforeMount, ref } from "vue";
-import Swal from 'sweetalert2';
 
 const store = useVideoStore();
 const userStore = useUserStore();
@@ -76,26 +75,8 @@ const copyVideoUrl = function (video) {
 
 const clickLike = async function (video) {
   if(!userStore.loginUser){
-    Swal.fire({
-  title: 'Auto close alert!',
-  html: 'I will close in <b></b> milliseconds.',
-  timer: 2000,
-  timerProgressBar: true,
-  didOpen: () => {
-    Swal.showLoading()
-    const b = Swal.getHtmlContainer().querySelector('b')
-    timerInterval = setInterval(() => {
-      b.textContent = Swal.getTimerLeft()
-    }, 100)
-  },
-  willClose: () => {
-    clearInterval(timerInterval)
-  }
-}).then((result) => {
-  if (result.dismiss === Swal.DismissReason.timer) {
-    console.log('I was closed by the timer')
-  }
-})
+    
+    alert('로그인이 필요합니다')
     return;
   }
 
