@@ -46,8 +46,10 @@ export const useVideoStore = defineStore('video', () => {
   const likeCheck = function () {
     axiosInstanceWithToken
       .get(REST_BOARD_API_Like + "/get")
-      .then((res) => {
-        likeList.value = res.data;
+      .then((res) => {  
+        if(res.data.length > 0){
+          likeList.value = res.data;
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -63,6 +65,6 @@ export const useVideoStore = defineStore('video', () => {
         console.log(err);
       });
   }
-
+  
   return { getVideoList, videoList, clickLike, likeCheck, likeList, selectedSort, getLikeCount, videoLikeCountList }
 })
