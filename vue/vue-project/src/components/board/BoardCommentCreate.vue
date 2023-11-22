@@ -6,29 +6,38 @@
       <button @click="submitComment" class="comment-button">댓글 작성</button>
     </div>
 
-    <div v-if="commentStore.comments" class="comment-list">
+    <div class="comment-list">
       <h3>댓글 목록</h3>
-      <ul v-for="(comment, index) in commentStore.comments" :key="comment.num" class="comment-item">
-        <li>
-          <div class="comment-content" v-if="!comment.editing">
-            <span>{{ comment.user.nickname }}</span>
-            <span>{{ comment.content }}</span>
-            <div>
-              <span>{{ comment.updatedAtFormat }}</span>
-              <span>{{ comment.createdAt !== comment.updatedAt ? "(수정됨)" : "" }}</span>
+      <div v-if="commentStore.comments">
+        <ul v-for="(comment, index) in commentStore.comments" :key="comment.num" class="comment-item">
+          <li>
+            <div class="comment-content" v-if="!comment.editing">
+              <span>{{ comment.user ? comment.user.nickname : "(탈퇴한 사용자)" }}</span>
+              <span v-if="comment.user !== userStore.loginUser">
+                <i class="bi bi-person-add" v-if="!followStore.checkFollow" @click="followUser(comment.user)"></i>
+                <i class="bi bi-person-fill-dash" v-else @click="deleteFollow(comment.user)"></i>
+              </span>
+              <span>{{ comment.content }}</span>
+              <div>
+                <span>{{ comment.updatedAtFormat }}</span>
+                <span>{{ comment.createdAt !== comment.updatedAt ? "(수정됨)" : "" }}</span>
+              </div>
+              <div id="comment-button-container" v-if="comment.user && userStore.loginUser.id === comment.user.id">
+                <button @click="startEditing(index)" class="edit-button">수정</button>
+                <button @click="deleteComment(comment.num)" class="delete-button">삭제</button>
+              </div>
             </div>
-            <div id="comment-button-container" v-if="userStore.loginUser.id === comment.user.id">
-              <button @click="startEditing(index)" class="edit-button">수정</button>
-              <button @click="deleteComment(comment.num)" class="delete-button">삭제</button>
+            <div class="editing-section" v-else>
+              <textarea v-model="comment.updateContent"></textarea>
+              <button @click="saveEditedComment(comment)" class="save-button">저장</button>
+              <button @click="cancelEditing(index)" class="cancel-button">취소</button>
             </div>
-          </div>
-          <div class="editing-section" v-else>
-            <textarea v-model="comment.updateContent"></textarea>
-            <button @click="saveEditedComment(comment)" class="save-button">저장</button>
-            <button @click="cancelEditing(index)" class="cancel-button">취소</button>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
+      <div v-else>
+        <p>존재하는 댓글이 없습니다</p>
+      </div>
     </div>
   </div>
 </template>
@@ -38,10 +47,12 @@ import { ref, onBeforeMount } from "vue";
 import { useBoardStore } from "@/stores/board";
 import { useUserStore } from "@/stores/user";
 import { useCommentStore } from "@/stores/comment";
+import { useFollowStore } from "@/stores/follow";
 
 const userStore = useUserStore();
 const boardStore = useBoardStore();
 const commentStore = useCommentStore();
+const followStore = useFollowStore();
 const content = ref('');
 
 onBeforeMount(() => {
@@ -49,7 +60,13 @@ onBeforeMount(() => {
 });
 
 const submitComment = () => {
-  if(content.value == ''){
+  if (!userStore.loginUser) {
+    alert('로그인이 필요합니다')
+    content.value = '';
+    return;
+  }
+
+  if (content.value == '') {
     alert('내용을 입력하세요');
     return;
   }
@@ -75,14 +92,14 @@ const startEditing = (index) => {
 };
 
 const saveEditedComment = function (comment) {
-  if(comment.updateContent == ''){
+  if (comment.updateContent == '') {
     alert('내용을 입력하세요');
     return;
   }
 
   comment.content = comment.updateContent;
   commentStore.editComment(comment);
- 
+
 };
 
 const cancelEditing = (index) => {
@@ -90,8 +107,22 @@ const cancelEditing = (index) => {
 };
 
 const deleteComment = (commentId) => {
- commentStore.deleteComment(commentId);
+  commentStore.deleteComment(commentId);
 };
+
+const followUser = function (user) {
+  if(!userStore.loginUser){
+    
+    alert('로그인이 필요합니다')
+    return;
+  }
+
+  followStore.startFollow(user);
+}
+
+const deleteFollow = function (user) {
+  followStore.deleteFollow(user);
+}
+
 </script>
-<style scoped src="@/assets/boardCommentCreate.css" >
-</style>
+<style scoped src="@/assets/boardCommentCreate.css" ></style>

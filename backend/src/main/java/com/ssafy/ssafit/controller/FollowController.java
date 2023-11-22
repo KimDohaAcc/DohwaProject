@@ -28,9 +28,13 @@ public class FollowController {
     public ResponseEntity<?> startFollow(@RequestBody User user, HttpServletRequest request) {
         return userService.extractUserFromToken(request.getHeader("Authorization"))
                 .map(follower -> {
-//                    user.getId().equals(follower.getId()) ||
+
+                    if(user.getId().equals(follower.getId())){
+                        return new ResponseEntity<String>("자기 자신은 팔로우 할 수 없습니다!", HttpStatus.NOT_ACCEPTABLE);
+                    }
+//
                     if (followService.getFollowByFollowerAndFollowee(follower, user).isPresent()) {
-                        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+                        return new ResponseEntity<String>("이미 팔로우 중입니다!", HttpStatus.NOT_ACCEPTABLE);
                     }
                     return new ResponseEntity<Follow>(followService.createFollow(new Follow(null, follower, user)), HttpStatus.CREATED);
                 }).orElseGet(() ->

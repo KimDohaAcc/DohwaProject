@@ -20,7 +20,7 @@ export const useFollowStore = defineStore('follow', () => {
         console.log(checkFollow.value)
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err)
       })
   }
 

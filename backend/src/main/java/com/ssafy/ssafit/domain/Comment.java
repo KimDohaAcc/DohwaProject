@@ -26,7 +26,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "comment_user")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private User user;
 
     @ManyToOne

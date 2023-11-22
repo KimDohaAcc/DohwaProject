@@ -17,7 +17,7 @@
           <td>
             <RouterLink :to="`/board/${board.num}`" class="link">{{ board.title }}</RouterLink>
           </td>
-          <td>{{ board.user.nickname }}</td>
+          <td>{{ board.user ? board.user.nickname : "(탈퇴한 사용자)" }}</td>
           <td>{{ board.createdAtFormat }}</td>
         </tr>
       </tbody>

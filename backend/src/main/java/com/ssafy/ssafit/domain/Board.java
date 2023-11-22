@@ -29,7 +29,7 @@ public class Board {
 
     @ManyToOne
     @JoinColumn(name = "user_board_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private User user;
 
     @CreationTimestamp

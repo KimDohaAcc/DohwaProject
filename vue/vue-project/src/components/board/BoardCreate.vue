@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h4>게시글 작성</h4>
+      <h4>이용 후기 작성</h4>
       <fieldset>
         <legend>등록</legend>
         <div class="form-group">
@@ -37,6 +37,16 @@ const board = ref({
 })
 
 const createBoard = function () {
+  if(board.value.title == ''){
+    alert('제목을 입력하세요');
+    return;
+  }
+
+  if(board.value.content == ''){
+    alert('내용을 입력하세요');
+    return;
+  }
+
     console.log(board.value)
     store.createBoard(board.value)
 }
