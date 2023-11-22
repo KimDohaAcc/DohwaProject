@@ -1,5 +1,5 @@
 <template>
-  <footer class>
+  <footer>
       <div class="container py-5">
         <div class="row g-5">
           <div class="col-lg-3 col-md-6">
@@ -49,15 +49,14 @@
   #nav-collapse {
     list-style: none;
   }
-  footer {
   
+  footer {
     bottom: 0;
-    margin: 0 10%;
-    width: 80%;
     background-color: #264653;
     color: white;
     z-index: 9999;
     flex-flow: column;
+    width: 100%;
   }
   
   

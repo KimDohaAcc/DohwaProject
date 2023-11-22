@@ -13,7 +13,6 @@
     "bootstrap-vue-3": "^0.5.1",
     "jwt-decode": "^4.0.0",
     "pinia": "^2.1.7",
-    "sweetalert2": "^11.10.1",
     "vite": "^4.5.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"

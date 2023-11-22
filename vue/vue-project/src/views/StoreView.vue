@@ -5,7 +5,6 @@
     <div class="container">
     <h1 class="title">지  점</h1>
     <StoreMap></StoreMap>
-    <FooterView/>
     </div>
   </div>
 </template>
@@ -13,7 +12,6 @@
 <script setup>
 import StoreIntroduce from '@/components/store/StoreIntroduce.vue';
 import StoreMap from '@/components/store/StoreMap.vue';
-import FooterView from '@/views/FooterView.vue';
 
 </script>
 
