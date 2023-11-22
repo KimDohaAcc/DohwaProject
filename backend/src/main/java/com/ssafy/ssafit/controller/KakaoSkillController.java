@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -24,20 +25,18 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/skill")
 public class KakaoSkillController {
     private final ChatgptService chatgptService;
     private final MealService mealService;
     private final AlarmService alarmService;
     private final AlarmSettingService alarmSettingService;
 
-    @PostMapping("/skill")
+    @PostMapping("/meal")
     public Map<String, String> checkFoodkcal(@RequestBody Map<String, Object> event) {
         Map<String, String> params = getActionParams(event);
         String food = params.get("food");
@@ -47,13 +46,16 @@ public class KakaoSkillController {
         String reply = chatgptService.sendMessage(String.format("%s %s의 칼로리를 '[kcal: ]' 형식으로 알려줘", food, gram));
         String kcal = extractKcal(reply);
 
-        if (params.containsKey("delete")) {
-            mealService.removeMeal(user);
-        }
-
-        Meal newMeal = new Meal(null, user, food, kcal, LocalDateTime.now());
+        Meal newMeal = new Meal(null, user, food, kcal, LocalDateTime.now(ZoneId.of("Asia/Seoul")));
         mealService.createMeal(newMeal);
         return createResponseMap(kcal);
+    }
+
+    @PostMapping("/meal/delete")
+    public ResponseEntity<Void> deleteMeal(Map<String, Object> event){
+        String user = getUserId(event);
+        mealService.removeMeal(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     private String getUserId(Map<String, Object> event) {
@@ -83,48 +85,82 @@ public class KakaoSkillController {
         return map;
     }
 
-    @PostMapping("/skill/search")
-    public Map<String, String> searchMeal(@RequestBody Map<String, Object> event) {
+    @PostMapping("/meal/search")
+    public Map<String, Object> searchMeal(@RequestBody Map<String, Object> event) {
         Map<String, String> params = getActionParams(event);
         String period = params.get("period");
         String user = getUserId(event);
+        System.out.println("user = " + user);
 
         Optional<List<Meal>> list = Optional.ofNullable(mealService.getMealAllByUser(user));
         LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
-        StringBuilder result = new StringBuilder();
         System.out.println("period = " + period);
 
-        list.ifPresent(mealList -> {
-            LocalDateTime before = switch (period) {
-                case "이번 주" -> now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-                case "이번 달" -> now.with(TemporalAdjusters.firstDayOfMonth());
-                case "최근 일 년" -> now.minusYears(1).with(TemporalAdjusters.firstDayOfYear());
-                default -> now.minusYears(3).with(TemporalAdjusters.firstDayOfYear());
-            };
+        return list.map(mealList -> {
+                    LocalDateTime before = switch (period) {
+                        case "이번 주" -> now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+                        case "이번 달" -> now.with(TemporalAdjusters.firstDayOfMonth());
+                        case "올해" -> now.with(TemporalAdjusters.firstDayOfYear());
+                        default -> now.minusYears(3).with(TemporalAdjusters.firstDayOfYear());
+                    };
 
-            for (Meal meal : mealList) {
-                if (meal.getTime().isAfter(before)) {
-                    result
-                            .append(meal.getTime().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")))
-                            .append(" ")
-                            .append(meal.getTime().getHour() >= 17 ? "저녁" : meal.getTime().getHour() >= 12 ? "점심" : "아침")
-                            .append("\n")
-                            .append(meal.getFood())
-                            .append("(")
-                            .append(meal.getKcal().trim())
-                            .append("kcal)\n");
-                }
-            }
-        });
-
-        Map<String, String> map = new HashMap<>();
-        map.put("result", result.toString());
-        System.out.println("map.get(\"result\") = " + map.get("result"));
-        return map;
+                    return sendList(period + " 식단 조회", period + " 동안 기록한 식단을 알려드릴게요!", returnItemList(mealList, before));
+                })
+                .orElseGet(() -> getStringObjectMap("기록한 식단이 존재하지 않습니다. 헬스판다봇과 함께 식단을 기록해보세요!"));
     }
 
-    @PostMapping("/dateTime")
+    public List<Map<String, Object>> returnItemList(List<Meal> list, LocalDateTime before) {
+        List<Map<String, Object>> itemList = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            Meal meal = list.get(i);
+            if (meal.getTime().isAfter(before)) {
+                String key = "(" + (i + 1) + ")";
+                String value = "[" + meal.getTime().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
+                        + " " +  (meal.getTime().getHour() >= 17 ? "저녁" : meal.getTime().getHour() >= 12 ? "점심" : "아침") + "] " +  meal.getFood() + " " + meal.getKcal().trim() + "kcal";
+                itemList.add(createItem(key, value));
+            }
+        }
+
+        return itemList;
+    }
+
+    public Map<String, Object> sendList(String title, String description, List<Map<String, Object>> list) {
+        Map<String, Object> resultMap = new HashMap<>();
+        Map<String, Object> itemCardMap = new HashMap<>();
+        Map<String, Object> imageTitleMap = new HashMap<>();
+        imageTitleMap.put("title", title);
+        imageTitleMap.put("description", description);
+
+        Map<String, Object> profileMap = new HashMap<>();
+        profileMap.put("title", "healthpanda");
+        profileMap.put("imageUrl", "https://i.ibb.co/0D7BKFc/logo.jpg");
+
+        itemCardMap.put("imageTitle", imageTitleMap);
+        itemCardMap.put("title", "");
+        itemCardMap.put("description", "");
+        itemCardMap.put("profile", profileMap);
+        itemCardMap.put("itemList", list);
+        itemCardMap.put("itemListAlignment", "left");
+
+        Map<String, Object> templateMap = new HashMap<>();
+        templateMap.put("outputs", Collections.singletonList(Collections.singletonMap("itemCard", itemCardMap)));
+
+        resultMap.put("template", templateMap);
+        resultMap.put("version", "2.0");
+
+        return resultMap;
+    }
+
+    private static Map<String, Object> createItem(String title, String description) {
+        Map<String, Object> itemMap = new HashMap<>();
+        itemMap.put("title", title);
+        itemMap.put("description", description);
+        return itemMap;
+    }
+
+    @PostMapping("/alarm/dateTime")
     public Map<String, String> handleChatbotDateRequest(@RequestBody Map<String, Object> event) throws JsonProcessingException {
         Map<String, Object> action = (Map<String, Object>) event.get("action");
         Map<String, Object> params = (Map<String, Object>) action.get("params");
@@ -149,14 +185,18 @@ public class KakaoSkillController {
         return result;
     }
 
-    @PostMapping("/nowTime")
+    @PostMapping("/alarm/nowTime")
     public Map<String, Object> nowTime(@RequestBody Map<String, Object> event) {
         System.out.println("event = " + event);
         String user = getUserId(event);
 
-        AlarmSetting alarmSetting = alarmSettingService.findAlarmSettingByUser(user);
-        String alarmSettingTime = alarmSetting.getDate();
+        Optional<AlarmSetting> opt = Optional.ofNullable(alarmSettingService.findAlarmSettingByUser(user));
+        if(opt.isEmpty()){
+            return getStringObjectMap("출석 시간 설정을 하지 않아 기록할 수 없어요. 시간을 먼저 설정해주세요");
+        }
 
+        AlarmSetting alarmSetting = opt.get();
+        String alarmSettingTime = alarmSetting.getDate();
         LocalTime currentTime = LocalTime.now(ZoneId.of("Asia/Seoul"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalTime inputTime = LocalTime.parse(alarmSettingTime, formatter);
@@ -201,44 +241,52 @@ public class KakaoSkillController {
         }
     }
 
-    @PostMapping("/listTime")
-    public Map<String, Object> getDateList(@RequestBody Map<String, Object> event) {
-        List<Alarm> alarms = alarmService.findAlarmsByUser(getUserId(event));
-        StringBuilder sb = new StringBuilder();
-        for (Alarm alarm : alarms) {
+    public List<Map<String, Object>> returnTimeList(List<Alarm> list) {
+        List<Map<String, Object>> itemList = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            Alarm alarm = list.get(i);
             LocalDateTime date = alarm.getDate();
-            String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
-            sb.append(formattedDate).append("\n");
+            String formattedDate = date.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분"));
+            itemList.add(createItem("(" + (i + 1) + ")", formattedDate));
         }
 
-        String list = sb.toString().replace("\n", "\\n");
-        return getStringObjectMap(list);
+        return itemList;
     }
 
-    @PostMapping("/deleteTime")
-    public ResponseEntity<Void> delete(@RequestBody Map<String, Object> event) {
+    @PostMapping("/alarm/listTime")
+    public Map<String, Object> getDateList(@RequestBody Map<String, Object> event) {
+        List<Alarm> alarms = alarmService.findAlarmsByUser(getUserId(event));
+        if (alarms.size() > 0) {
+            return sendList("출석 조회", "꾸준히 운동하는 모습이 멋져요!", returnTimeList(alarms));
+        } else {
+            return getStringObjectMap("출석 기록이 존재하지 않아요. 출석 시간을 설정하고 헬스판다봇과 함께 운동해봐요!");
+        }
+    }
+
+    @PostMapping("/alarm/deleteTime")
+    public Map<String, Object> delete(@RequestBody Map<String, Object> event) {
         String user = getUserId(event);
-        AlarmSetting alarmSetting = alarmSettingService.findAlarmSettingByUser(user);
-        alarmService.removeAlarm(user);
-        alarmSettingService.removeAlarmSetting(alarmSetting);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return Optional.ofNullable(alarmSettingService.findAlarmSettingByUser(user))
+                .map(alarmSetting -> {
+                    alarmService.removeAlarm(user);
+                    alarmSettingService.removeAlarmSetting(alarmSetting);
+                    return getStringObjectMap("시간 설정과 출석 기록이 삭제되었습니다." +
+                            "헬스판다는 항상 여러분을 기다리고 있습니다.");
+                })
+                .orElseGet(() -> getStringObjectMap("운동 시간 설정이 이미 삭제되었거나, 존재하지 않습니다."));
     }
-//    @PostMapping("/updateSettingTime")
-//    public Map<String, String> handleChatbotUpdateDateRequest(@RequestBody Map<String, Object> event) {
-//        String healthtime = getActionParams(event).get("healthtime");
-//        String user = getUserId(event);
-//
-//        alarmSettingService.removeAlarmSetting(alarmSettingService.findAlarmSettingByUser(user));
-//
-//        Map<String, String> result = new HashMap<>();
-//        AlarmSetting alarmSetting = new AlarmSetting();
-//        alarmSetting.setDate(healthtime);
-//        alarmSetting.setUser(getUserId(event));
-//        alarmSettingService.updateAlarmSetting(alarmSetting);
-//
-//        result.put("settingTime", healthtime);
-//
-//        return result;
-//    }
+
+    @PostMapping("/question")
+    public Map<String, String> question(@RequestBody Map<String, Object> event){
+        Map<String, String> param = getActionParams(event);
+        String question = param.get("question");
+        String reply = chatgptService.sendMessage("너는 헬스트레이너야. Use only 1 paragraph. 한국어로 질문에 답변해줘. 질문 : " + question);
+        reply = reply.replace("\n", "");
+        System.out.println("reply = " + reply);
+
+        Map<String, String> res = new HashMap<>();
+        res.put("answer", reply);
+        return res;
+    }
 }
