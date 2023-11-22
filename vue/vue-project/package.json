@@ -19,6 +19,8 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.9",
-    "@vitejs/plugin-vue": "^4.4.0"
+    "@vitejs/plugin-vue": "^4.4.0",
+    "eslint": "^8.54.0",
+    "sass": "^1.69.5"
   }
 }
