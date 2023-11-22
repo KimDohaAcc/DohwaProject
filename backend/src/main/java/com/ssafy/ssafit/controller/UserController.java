@@ -32,6 +32,13 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/auth/user")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        return Optional.ofNullable(userService.updateUser(user))
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/user/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         return userService.findUserById(id)

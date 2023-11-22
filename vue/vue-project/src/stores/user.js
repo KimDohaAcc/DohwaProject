@@ -96,6 +96,7 @@ export const useUserStore = defineStore('user', () => {
           next();
         }
       }
+
       const submitNewUser = async (newUser) => {
         try {
           
@@ -109,9 +110,15 @@ export const useUserStore = defineStore('user', () => {
         }
       };
 
+      const updateUser = function() {
+        axiosInstanceWithToken
+        .put('http://localhost:8080/auth/user', loginUser.value)
+        .then((res) => {
+          console.log("업데이트 완료")
+        })
+      }
 
-
-      return { originalLogin, submitNewUser, loginUser, checkLoginAndRedirect, getKakaoAccount, logoutUser, mealList }
+      return { originalLogin, submitNewUser, loginUser, checkLoginAndRedirect, getKakaoAccount, logoutUser, mealList, updateUser }
     },
     {
       persist: {

@@ -1,7 +1,7 @@
 <template>
     <div>
             <h1>{{ userStore.loginUser.nickname }}님이 좋아요 한 영상</h1>
-            <div v-if="!videoStore.likeList">
+            <div v-if="!videoStore.likeList || videoStore.likeList.length == 0">
                 <p>좋아요 한 영상이 없습니다</p>
             </div>
             <ul v-else>

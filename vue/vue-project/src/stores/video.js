@@ -47,9 +47,7 @@ export const useVideoStore = defineStore('video', () => {
     axiosInstanceWithToken
       .get(REST_BOARD_API_Like + "/get")
       .then((res) => {  
-        if(res.data.length > 0){
           likeList.value = res.data;
-        }
       })
       .catch((err) => {
         console.log(err);

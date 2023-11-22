@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public interface UserService {
     User insertUser(User user);
+    User updateUser(User user);
     Optional<User> findUserById(Long id);
 
     Optional<User> findUserByAccount(String account);

@@ -7,6 +7,7 @@
       <RouterView class="RouterView" @login-user="loginUser" />
     </main>
     </div>
+    <FooterView/>
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import { ref, onMounted } from 'vue'
 import axios from "axios"
 import { useRouter } from "vue-router"
 import { useUserStore } from '@/stores/user.js'
+import FooterView from '@/views/FooterView.vue';
 
 const router = useRouter();
 

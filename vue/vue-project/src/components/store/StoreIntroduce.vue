@@ -84,7 +84,7 @@ export default {
 /* Carousel item */
 .carousel-item {
   width: 100%; /* Carousel 아이템 너비 설정 */
-  max-height: 300px; /* Carousel 아이템 최대 높이 설정 */
+  max-height: 500px; /* Carousel 아이템 최대 높이 설정 */
 }
 
 /* Image within the carousel item */

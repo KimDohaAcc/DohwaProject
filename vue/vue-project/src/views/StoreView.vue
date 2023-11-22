@@ -46,8 +46,3 @@ footer {
   margin-bottom: 80px;
 }
 </style>
-
-
-
-
-
