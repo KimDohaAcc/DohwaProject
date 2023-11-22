@@ -26,7 +26,9 @@
             <b-navbar-nav right v-else>
               <b-nav-item-dropdown text="User">
                 <b-dropdown-item><RouterLink to="/myPage" tag="span" class="nav-link">마이페이지</RouterLink></b-dropdown-item>
-                <b-dropdown-item @click="kakaoLogout" class="nav-link">로그아웃</b-dropdown-item>
+                <b-dropdown-item><RouterLink to="/myLike" tag="span" class="nav-link">내 좋아요</RouterLink></b-dropdown-item>
+                <b-dropdown-item><RouterLink to="/myFollow" tag="span" class="nav-link">내 팔로우</RouterLink></b-dropdown-item>
+                <b-dropdown-item @click="logout" class="nav-link">로그아웃</b-dropdown-item>
               </b-nav-item-dropdown>
             </b-navbar-nav>
           </b-navbar-nav>
@@ -34,7 +36,6 @@
       </b-navbar>
     </div>
   </header>
-  <main></main>
 </template>
 
 <script setup>
@@ -44,7 +45,7 @@ import { computed } from 'vue'
 const userStore = useUserStore();
 const isLogin = computed(() => !!userStore.loginUser);
 
-const kakaoLogout = function () {
+const logout = function () {
   userStore.logoutUser();
 }
 

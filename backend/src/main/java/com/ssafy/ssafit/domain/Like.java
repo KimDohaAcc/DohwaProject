@@ -20,6 +20,7 @@ public class Like {
     private Long num;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false, name = "video_like")
     private Video video;
 
