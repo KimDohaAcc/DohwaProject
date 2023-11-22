@@ -16,7 +16,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-    private final UserService userService;
 
     @GetMapping("/board/{num}")
     public ResponseEntity<Board> detail(@PathVariable Long num) {

@@ -27,6 +27,7 @@ public class FollowServiceimpl implements FollowService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Follow> getFollowByFollowee(User user) {
         return followRepository.findAllByFollowee(user);
     }

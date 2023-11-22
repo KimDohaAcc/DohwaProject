@@ -22,6 +22,11 @@
   overflow: hidden;
 }
 
+.bi-clipboard {
+  font-size: 1.1rem;
+  margin-right: 15px;
+}
+
 .video-content {
   display: flex;
   justify-content: space-between;

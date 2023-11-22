@@ -3,20 +3,30 @@
     <div id="myPage" class="sns-page">
       <h1>사용자 정보</h1>
       <p id="info">식단 관리 및 출석 설정은 카카오 채널에서 가능합니다</p>
-      <div class="user-info">
-        <div class="changable-info"><span class="info-name">이메일</span><span class="info-value">{{ userStore.loginUser.account }}</span><i class="bi bi-arrow-right enter"></i></div>
-        <div class="changable-info"><span class="info-name">닉네임</span><span class="info-value">{{ userStore.loginUser.nickname }}</span><i class="bi bi-arrow-right enter"></i></div>
-        <div><span class="info-name">카카오 연동</span><span>{{ userStore.loginUser.iskakao ? "사용 중" : "사용 안 함" }}</span></div>
-        <div class="changable-info" v-if="!userStore.loginUser.iskakao"><span class="info-name">비밀번호</span><span>새 비밀번호 설정</span><i class="bi bi-arrow-right enter"></i></div>
+      <div class="user-info" v-if="userStore.loginUser.iskakao">
+        <div class="changable-info"><span class="info-name">이메일</span><span class="info-value">{{
+          userStore.loginUser.account }}</span><span>(카카오 계정)</span></div>
+        <div class="changable-info"><span class="info-name">닉네임</span><span class="info-value">{{
+          userStore.loginUser.nickname }}</span><span>(카카오 계정)</span></div>
+        <div><span class="info-name">카카오 연동</span><span>사용 중</span></div>
       </div>
-      <h1>예약 내역</h1>
-      <div class="user-info">
-        <div v-for="(reservation, index) in reservations" :key="index">
+      <div class="user-info" v-if="!userStore.loginUser.iskakao">
+        <div class="changable-info"><span class="info-name">이메일</span><span class="info-value">{{
+          userStore.loginUser.account }}</span><i class="bi bi-arrow-right enter"></i></div>
+        <div class="changable-info"><span class="info-name">닉네임</span><span class="info-value">{{
+          userStore.loginUser.nickname }}</span><i class="bi bi-arrow-right enter"></i></div>
+        <div><span class="info-name">카카오 연동</span><span>사용 안 함</span></div>
+        <div class="changable-info"><span class="info-name">비밀번호</span><span>새 비밀번호 설정</span><i
+            class="bi bi-arrow-right enter"></i></div>
+      </div>
+      <div class="user-info" v-if="reservations">
+        <h1>예약 내역</h1>
+        <div v-if="reservations.length == 0">상담 예약 내역이 없습니다</div>
+        <div v-for="(reservation, index) in reservations" :key="index" v-else>
           <div><span class="info-name">지점</span><span class="info-value">{{ reservation.store }}</span></div>
           <div><span class="info-name">예약날짜</span><span class="info-value">{{ formatDate(reservation.time) }}</span></div>
           <div><span class="info-name">전화 번호</span><span>{{ reservation.phone }}</span></div>
           <button @click="deleteReservation(index)">삭제</button>
-          
         </div>
       </div>
       <button @click="deleteAccount">계정 탈퇴</button>
@@ -28,7 +38,7 @@
 import { useUserStore } from "@/stores/user";
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
+import { axiosInstanceWithToken } from '@/util/http-common'
 const userStore = useUserStore();
 const router = useRouter();
 const reservations = ref([]);
@@ -40,8 +50,7 @@ const formatDate = (dateString) => {
 };
 
 onMounted(() => {
-  
-// 사용자의 예약 정보 가져오기
+  // 사용자의 예약 정보 가져오기
   let user = sessionStorage.getItem("loginUser"); // sessionStorage는 키, 밸류가 모두 문자열
   user = JSON.parse(user);
 
@@ -49,35 +58,35 @@ onMounted(() => {
   console.log(url);
   console.log(user);
   axiosInstanceWithToken.get(`http://localhost:8080/auth/reserve/get/${user.id}`)
-      .then(response => {
-        reservations.value = response.data; // 백엔드에서 반환된 예약 목록 저장
-        console.log("정보를 가져왔습니다");
-        console.log(reservations.value);
-      })
-      .catch(error => {
-        console.error('예약 정보를 가져오는 중 에러 발생:', error);
-        console.log(reservations);
-      });
+    .then(response => {
+      reservations.value = response.data; // 백엔드에서 반환된 예약 목록 저장
+      console.log("정보를 가져왔습니다");
+      console.log(reservations.value);
+    })
+    .catch(error => {
+      console.error('예약 정보를 가져오는 중 에러 발생:', error);
+      console.log(reservations);
+    });
 });
 
 const deleteReservation = (index) => {
   const reservationToDelete = reservations.value[index];
   console.log(reservationToDelete.num); // 예약의 ID 확인
   axiosInstanceWithToken.delete(`http://localhost:8080/auth/reserve/delete/${reservationToDelete.num}`)
-      .then(response =>{
-        reservations.value.splice(index, 1);
-        console.log('예약이 삭제되었습니다.');
-      })
-      .catch(error =>{
-        console.error('예약 삭제 중 에러 발생:', error);
-      })
+    .then(response => {
+      reservations.value.splice(index, 1);
+      console.log('예약이 삭제되었습니다.');
+    })
+    .catch(error => {
+      console.error('예약 삭제 중 에러 발생:', error);
+    })
 }
 const deleteAccount = () => {
   if (confirm('정말 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
     axiosInstanceWithToken.delete(`http://localhost:8080/auth/unregister`)
-    .then(() => {
-      userStore.logoutUser();
-      alert('계정이 삭제되었습니다.');
+      .then(() => {
+        userStore.logoutUser();
+        alert('계정이 삭제되었습니다.');
         // 로그아웃 실행
         // 메인 화면으로 이동
         router.push('/');
@@ -123,7 +132,7 @@ h1 {
   color: dimgray;
 }
 
-.info-name{
+.info-name {
   font-weight: 300;
   color: grey;
   width: 120px;

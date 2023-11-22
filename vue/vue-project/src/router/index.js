@@ -18,6 +18,7 @@ import BoardCommentCreate from '@/components/board/BoardCommentCreate.vue'
 import Login from '@/components/user/Login.vue'
 import MyPage from '@/components/user/MyPage.vue'
 import MyFollow from '@/components/user/MyFollow.vue'
+import MyLike from '@/components/user/MyLike.vue'
 import Regist from '@/components/user/Regist.vue'
 import ReserveRegist from '@/components/reserve/ReserveRegist.vue'
 import StoreIntroduce from '@/components/store/StoreIntroduce.vue'
@@ -70,6 +71,12 @@ const router = createRouter({
       beforeEnter: checkLogin,
     },
 
+    {
+      path: "/myLike",
+      name: "myLike",
+      component: MyLike,
+      beforeEnter: checkLogin,
+    },
     {
       path: "/regist",
       name: "regist",

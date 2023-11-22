@@ -46,17 +46,19 @@ public class FollowController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
-    @PostMapping("/followee")
-    public ResponseEntity<List<Follow>> getFollowByFollowee(@RequestBody User user) {
-        return Optional.ofNullable(followService.getFollowByFollowee(user))
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.badRequest().build());
-    }
+        @GetMapping("/followee")
+        public ResponseEntity<List<Follow>> getFollowByFollowee(HttpServletRequest request) {
+            return userService.extractUserFromToken(request.getHeader("Authorization"))
+                    .map(followee ->
+                            new ResponseEntity<>(followService.getFollowByFollowee(followee), HttpStatus.OK)
+                    )
+                    .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        }
 
-    @PostMapping("/follow/delete")
-    public ResponseEntity<Void> deleteFollow(@RequestBody User user, HttpServletRequest request) {
-        System.out.println("user = " + user);
-        return userService.extractUserFromToken(request.getHeader("Authorization"))
+        @PostMapping("/follow/delete")
+        public ResponseEntity<Void> deleteFollow(@RequestBody User user, HttpServletRequest request) {
+            System.out.println("user = " + user);
+            return userService.extractUserFromToken(request.getHeader("Authorization"))
                 .map(follower -> {
                     followService.getFollowByFollowerAndFollowee(follower, user)
                             .ifPresent(followService::removeFollow);
