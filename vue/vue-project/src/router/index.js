@@ -6,6 +6,7 @@ import BoardView from '@/views/BoardView.vue'
 import VideoView from '@/views/VideoView.vue'
 import ReserveView from '@/views/ReserveView.vue'
 import StoreView from '@/views/StoreView.vue'
+import FooterView from '@/views/FooterView.vue'
 
 
 import BoardList from '@/components/board/BoardList.vue'
@@ -68,6 +69,7 @@ const router = createRouter({
       component: MyFollow,
       beforeEnter: checkLogin,
     },
+
     {
       path: "/regist",
       name: "regist",
@@ -141,6 +143,12 @@ const router = createRouter({
             path: "storeMap",
             name: "storeMap",
             component: StoreMap,
+          },
+          {
+            path: "/footer",
+            name: "footer",
+            component: FooterView,
+            
           },
         ]
     }
