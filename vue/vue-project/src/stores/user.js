@@ -8,6 +8,8 @@ export const useUserStore = defineStore('user', () => {
       const router = useRouter();
       let user = {};
       let mealList = ref(null);
+      const neededUser = ref(null);
+
 
       const REST_API_URL = `http://localhost:8080`;
       const originalLogin = async () => {
@@ -117,7 +119,31 @@ export const useUserStore = defineStore('user', () => {
         })
       }
 
-      return { originalLogin, submitNewUser, loginUser, checkLoginAndRedirect, getKakaoAccount, logoutUser, mealList, updateUser }
+      const getUserById = function(id) {
+        if(loginUser.value.id === id){
+          neededUser.value = loginUser.value;
+          return;
+        }
+
+        axiosInstanceWithToken
+        .get(`http://localhost:8080/auth/user/${id}`)
+        .then((res) => {
+          console.log(res.data)
+          neededUser.value = res.data;
+        })
+      }
+
+      return { originalLogin,
+        submitNewUser, 
+        loginUser, 
+        checkLoginAndRedirect, 
+        getKakaoAccount, 
+        logoutUser, 
+        mealList, 
+        updateUser,
+        getUserById,
+        neededUser
+       }
     },
     {
       persist: {

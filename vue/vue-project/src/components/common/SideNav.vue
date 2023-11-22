@@ -3,13 +3,16 @@
         <nav>
             <RouterLink class="link" to="/"><i class="bi bi-house"></i></RouterLink>
             <img class="kakao" @click="kakaoLink()" src="https://cnpmall.com/img/right_quick_icon05.png">
-            <RouterLink class="link" to="/myLike"><i class="bi bi-box2-heart"></i></RouterLink>
+            <RouterLink class="link" :to="`/like/${userStore.loginUser ? userStore.loginUser.id : 0}`"><i class="bi bi-box2-heart"></i></RouterLink>
             <RouterLink class="link" to="/board/create"><i class="bi bi-pencil-square"></i></RouterLink>
         </nav>
     </div>
 </template>
   
 <script setup>
+import { useUserStore } from "@/stores/user";
+const userStore = useUserStore();
+
 function kakaoLink() {
     window.open("http://pf.kakao.com/_iZQTG");
 }

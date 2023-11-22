@@ -9,6 +9,7 @@ const REST_BOARD_API_AUTH = `http://localhost:8080/auth/board`
 export const useBoardStore = defineStore('board', () => {
   const boardList = ref([])
   const board = ref(null)
+  const writeList = ref(null)
 
   const getBoardList = function () {
     axiosInstance.get(REST_BOARD_API)
@@ -69,9 +70,34 @@ export const useBoardStore = defineStore('board', () => {
       .then(() => {
         getBoard(board.value.num);
     })
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
-  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard, deleteBoard }
+  const getWriteList = function(id){
+    axiosInstanceWithToken
+    .get(REST_BOARD_API_AUTH + `/${id}`)
+    .then((response) => {
+      const list = [];
+        for(let i = 0; i < response.data.length ; i ++){
+          const board = response.data[i];
+          let created = new Date(response.data[i].createdAt);
+          let updated = new Date(response.data[i].updatedAt);
+          board.createdAtFormat = created.toISOString().split('T')[0];
+          board.updatedAtFormat = updated.toISOString().split('T')[0];
+          list.push(board);
+       };
+
+       list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+       writeList.value = list;
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  }
+
+  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard, deleteBoard, writeList, getWriteList }
 },
 {
   persist: {

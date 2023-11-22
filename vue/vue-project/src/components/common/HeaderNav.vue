@@ -13,7 +13,7 @@
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto">
             <b-nav-item><RouterLink to="/store" tag="span" class="nav-link">지점 소개</RouterLink></b-nav-item>
-            <b-nav-item><RouterLink to="/board" tag="span" class="nav-link">이용 후기</RouterLink></b-nav-item>
+            <b-nav-item><RouterLink to="/board" tag="span" class="nav-link">게시판</RouterLink></b-nav-item>
             <b-nav-item><RouterLink to="/video" tag="span" class="nav-link">운동 추천 영상</RouterLink></b-nav-item>
             <b-nav-item><RouterLink to="/reserve" tag="span" class="nav-link">전화상담예약</RouterLink></b-nav-item>
 
@@ -25,8 +25,9 @@
             <b-navbar-nav right v-else>
               <b-nav-item-dropdown text="User">
                 <b-dropdown-item><RouterLink to="/myPage" tag="span" class="nav-link">마이페이지</RouterLink></b-dropdown-item>
-                <b-dropdown-item><RouterLink to="/myLike" tag="span" class="nav-link">내 좋아요</RouterLink></b-dropdown-item>
+                <b-dropdown-item><RouterLink :to="`/like/${userStore.loginUser.id}`" tag="span" class="nav-link">내 좋아요</RouterLink></b-dropdown-item>
                 <b-dropdown-item><RouterLink to="/myFollow" tag="span" class="nav-link">내 팔로우</RouterLink></b-dropdown-item>
+                <b-dropdown-item><RouterLink :to="`/board/write/${userStore.loginUser.id}`" tag="span" class="nav-link">내 작성글</RouterLink></b-dropdown-item>
                 <b-dropdown-item @click="logout" class="nav-link">로그아웃</b-dropdown-item>
               </b-nav-item-dropdown>
             </b-navbar-nav>

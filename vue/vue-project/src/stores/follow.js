@@ -15,7 +15,11 @@ export const useFollowStore = defineStore('follow', () => {
     axiosInstanceWithToken
       .post(API_URL, user)
       .then((res) => {
-        console.log(res.data);
+          if(res.status === 204){
+            alert(res.data);
+          }
+
+        console.log(res);
         getFollowList();
         console.log(checkFollow.value)
       })
@@ -30,7 +34,6 @@ export const useFollowStore = defineStore('follow', () => {
       .then((res) => {
         followList.value = res.data;
         checkFollow.value = followList.value.some(follow => boardStore.board.user.id === follow.followee.id);
-        console.log(checkFollow.value)
       })
       .catch((err) => {
         console.log(err);
@@ -81,7 +84,6 @@ export const useFollowStore = defineStore('follow', () => {
       })
   }
 
-
   return {
     startFollow,
     getFollowList,
@@ -90,7 +92,7 @@ export const useFollowStore = defineStore('follow', () => {
     followerList,
     followList,
     getFollowerList,
-    getFolloweeList
+    getFolloweeList,
   }
 },
 )

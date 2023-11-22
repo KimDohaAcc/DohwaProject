@@ -39,7 +39,7 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/auth/user/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         return userService.findUserById(id)
                 .map(ResponseEntity::ok)
