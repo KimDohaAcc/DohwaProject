@@ -37,6 +37,7 @@ const board = ref({
 })
 
 const createBoard = function () {
+    console.log(board.value)
     store.createBoard(board.value)
 }
 </script>

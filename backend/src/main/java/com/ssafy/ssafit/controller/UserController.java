@@ -77,8 +77,8 @@ public class UserController {
                   .orElseGet(()-> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("auth/unregister/{id}")
-    public ResponseEntity<Void> unregisterUser(@PathVariable Long id, HttpServletRequest request) {
+    @DeleteMapping("auth/unregister")
+    public ResponseEntity<Void> unregisterUser(HttpServletRequest request) {
         String sessionToken = request.getHeader("Authorization");
         if(sessionToken==null){
             System.out.println("넌 바보야");
