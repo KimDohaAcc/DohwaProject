@@ -15,7 +15,7 @@
               <div>
               <span id="user-name">{{ comment.user ? comment.user.nickname : "(탈퇴한 사용자)" }}</span>
               <span v-if="comment.user && comment.user.id !== userStore.loginUser.id">
-                <button class="follow-button" v-if="!followStore.checkFollow" @click="followUser(comment.user)">
+                <button class="follow-button" v-if="!followStore.followList.some(follow => comment.user.id === follow.followee.id)" @click="followUser(comment.user)">
                   follow<i class="bi bi-person-add"></i>
                 </button>
                 <button class="follow-button" v-else @click="deleteFollow(comment.user)">
@@ -54,15 +54,19 @@ import { useBoardStore } from "@/stores/board";
 import { useUserStore } from "@/stores/user";
 import { useCommentStore } from "@/stores/comment";
 import { useFollowStore } from "@/stores/follow";
+import { useRoute } from 'vue-router';
 
 const userStore = useUserStore();
 const boardStore = useBoardStore();
 const commentStore = useCommentStore();
 const followStore = useFollowStore();
+const route = useRoute();
 const content = ref('');
 
 onBeforeMount(() => {
-  commentStore.getComments(boardStore.board);
+  commentStore.getComments(route.params.id);
+  boardStore.getBoard(route.params.id)
+  followStore.getFollowList();
 });
 
 const submitComment = () => {
@@ -118,7 +122,6 @@ const deleteComment = (commentId) => {
 
 const followUser = function (user) {
   if(!userStore.loginUser){
-    
     alert('로그인이 필요합니다')
     return;
   }

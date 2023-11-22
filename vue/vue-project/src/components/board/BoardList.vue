@@ -1,6 +1,6 @@
 <template>
   <div class="board-list">
-    <h5>이용 후기</h5>
+    <h5>게시판</h5>
     <hr>
     <table class="board-table">
       <thead>

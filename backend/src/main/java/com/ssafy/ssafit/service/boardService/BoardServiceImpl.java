@@ -1,6 +1,7 @@
 package com.ssafy.ssafit.service.boardService;
 
 import com.ssafy.ssafit.domain.Board;
+import com.ssafy.ssafit.domain.User;
 import com.ssafy.ssafit.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,10 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<Board> getListByCondition(String key, String word, String orderBy, String orderByDir) {
         return boardRepository.getListByCondition(key, word, orderBy, orderByDir);
+    }
+
+    @Override
+    public List<Board> getListByUser(User user){
+        return boardRepository.getBoardsByUser(user);
     }
 }

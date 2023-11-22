@@ -14,8 +14,8 @@ export const useCommentStore = defineStore('comment', () => {
   const userStore = useUserStore();
   const boardStore = useBoardStore();
 
-  function getComments(board) {
-    axiosInstance.get(`http://localhost:8080/comment/board/${board.num}`)
+  function getComments(boardNum) {
+    axiosInstance.get(`http://localhost:8080/comment/board/${boardNum}`)
       .then((res) => {
         console.log(res.data)
         if(res.data.length === 0){
@@ -31,7 +31,6 @@ export const useCommentStore = defineStore('comment', () => {
         };
         
         list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-        console.log(list)
         comments.value = list;
 
       })
@@ -46,13 +45,13 @@ export const useCommentStore = defineStore('comment', () => {
     } catch (error) {
       console.error(error.message);
     }
-    getComments(boardStore.board)
+    getComments(boardStore.board.num)
   }
 
   function editComment(editedComment) {
     axiosInstanceWithToken.put(`http://localhost:8080/comment`, editedComment)
       .then((response) => {
-        getComments(boardStore.board);
+        getComments(boardStore.board.num);
       })
       .catch((error) => {
         console.error("댓글 수정 실패:", error);
@@ -75,7 +74,7 @@ export const useCommentStore = defineStore('comment', () => {
       if (commentValue) {
         axiosInstanceWithToken.post(REST_COMMENT_API, commentValue)
           .then((response) => {
-            getComments(boardStore.board);
+            getComments(boardStore.board.num);
             resolve();
           })
           .catch((error) => {

@@ -16,11 +16,20 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
+    private final UserService userService;
 
     @GetMapping("/board/{num}")
     public ResponseEntity<Board> detail(@PathVariable Long num) {
         return boardService.getBoard(num)
                 .map(board -> new ResponseEntity<>(board, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/auth/board/{id}")
+    public ResponseEntity<List<Board>> getBoardListByUserId(@PathVariable Long id) {
+        return userService.findUserById(id)
+                .map(boardService::getListByUser)
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 

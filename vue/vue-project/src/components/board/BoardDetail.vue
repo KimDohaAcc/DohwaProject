@@ -9,7 +9,7 @@
             {{ store.board.createdAt !== store.board.updatedAt ? "(수정됨)" : "" }}
           </span>
         </div>
-        <div v-if="userStore.loginUser && userStore.loginUser.id === store.board.user.id">
+        <div v-if="userStore.loginUser && store.board.user && userStore.loginUser.id === store.board.user.id">
           <button @click="updateBoard" class="action-button update-button">수정</button>
           <button @click="deleteBoard" class="action-button delete-button">삭제</button>
         </div>
@@ -17,7 +17,7 @@
     </div>
     <div>
       <span id="user-name">{{ store.board.user ? store.board.user.nickname : "(탈퇴한 사용자)" }}</span>
-      <span v-if="store.board.user.id !== userStore.loginUser.id">
+      <span v-if="store.board.user && userStore.loginUser && store.board.user.id !== userStore.loginUser.id">
         <button class="follow-button" v-if="!followStore.checkFollow" @click="followUser(store.board.user)">
           follow<i class="bi bi-person-add"></i>
         </button>

@@ -34,23 +34,18 @@ public class LikeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/auth/like/get")
-    public ResponseEntity<List<Like>> getLikeByUser(HttpServletRequest request) {
-        String sessionToken = request.getHeader("Authorization");
-        try {
-            Optional<User> user = userService.findUserById(jwtUtil.extractUserIdFromToken(sessionToken));
+    @GetMapping("/auth/like/{id}")
+    public ResponseEntity<List<Like>> getLikeByUser(@PathVariable Long id) {
+        System.out.println("id = " + id);
+        Optional<User> user = userService.findUserById(id);
+        System.out.println("user = " + user);
+        if (user.isPresent()) {
+            List<Like> likeList = likeService.getLikeByUser(user.get());
 
-            System.out.println("user = " + user);
-            if (user.isPresent()) {
-                List<Like> likeList = likeService.getLikeByUser(user.get());
-
-                return likeList.isEmpty() ?
-                        new ResponseEntity<>(HttpStatus.NO_CONTENT) :
-                        new ResponseEntity<>(likeList, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            }
-        } catch (Exception e) {
+            return likeList.isEmpty() ?
+                    new ResponseEntity<>(HttpStatus.NO_CONTENT) :
+                    new ResponseEntity<>(likeList, HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }

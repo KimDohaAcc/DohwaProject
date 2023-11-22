@@ -13,12 +13,13 @@ import BoardList from '@/components/board/BoardList.vue'
 import BoardCreate from '@/components/board/BoardCreate.vue'
 import BoardDetail from '@/components/board/BoardDetail.vue'
 import BoardUpdate from '@/components/board/BoardUpdate.vue'
+import WriteBoardList from '@/components/board/WriteBoardList.vue'
 import BoardCommentCreate from '@/components/board/BoardCommentCreate.vue'
 
 import Login from '@/components/user/Login.vue'
 import MyPage from '@/components/user/MyPage.vue'
 import MyFollow from '@/components/user/MyFollow.vue'
-import MyLike from '@/components/user/MyLike.vue'
+import Like from '@/components/user/Like.vue'
 import Regist from '@/components/user/Regist.vue'
 import ReserveRegist from '@/components/reserve/ReserveRegist.vue'
 import StoreIntroduce from '@/components/store/StoreIntroduce.vue'
@@ -70,11 +71,10 @@ const router = createRouter({
       component: MyFollow,
       beforeEnter: checkLogin,
     },
-
     {
-      path: "/myLike",
-      name: "myLike",
-      component: MyLike,
+      path: '/like/:id',
+      name: 'like',
+      component: Like,
       beforeEnter: checkLogin,
     },
     {
@@ -110,6 +110,12 @@ const router = createRouter({
           component: BoardDetail
         },
         {
+          path: "write/:id",
+          name: "writeBoardList",
+          component: WriteBoardList,
+          beforeEnter: checkLogin,
+        },
+        {
           path: "update",
           name: "boardUpdate",
           component: BoardUpdate,
@@ -128,19 +134,19 @@ const router = createRouter({
       component: ReserveView,
       beforeEnter: checkLogin,
       children:
-          {
-            path: "reseveRegist",
-            name: "reserveRegist",
-            component: ReserveRegist,
-            beforeEnter: checkLogin,
-          },
+      {
+        path: "reseveRegist",
+        name: "reserveRegist",
+        component: ReserveRegist,
+        beforeEnter: checkLogin,
+      },
     },
     {
       path: '/store',
       name: 'store',
       component: StoreView,
       children:
-      [
+        [
           {
             path: "storeIntroduce",
             name: "storeIntroduce",
@@ -155,7 +161,7 @@ const router = createRouter({
             path: "/footer",
             name: "footer",
             component: FooterView,
-            
+
           },
         ]
     }
