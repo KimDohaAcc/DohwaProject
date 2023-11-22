@@ -17,6 +17,12 @@ export const useCommentStore = defineStore('comment', () => {
   function getComments(board) {
     axiosInstance.get(`http://localhost:8080/comment/board/${board.num}`)
       .then((res) => {
+        console.log(res.data)
+        if(res.data.length === 0){
+          comments.value = null;
+          return;
+        }
+
         const list = [];
         for (let i = 0; i < res.data.length; i++) {
           let comment = res.data[i];

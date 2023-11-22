@@ -20,7 +20,6 @@ export const useUserStore = defineStore('user', () => {
           }
         })
         .then((response)=>{
-          alert('로그인이 되었습니다.');
           sessionStorage.setItem("loginUser", JSON.stringify(response.data.user));
           sessionStorage.setItem("jwtToken", response.data['access-token']);
           loginUser.value = response.data.user;

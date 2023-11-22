@@ -9,15 +9,15 @@
             {{ store.board.createdAt !== store.board.updatedAt ? "(수정됨)" : "" }}
           </span>
         </div>
-        <div v-if="userStore.loginUser.id === store.board.user.id">
+        <div v-if="userStore.loginUser && userStore.loginUser.id === store.board.user.id">
           <button @click="updateBoard" class="action-button update-button">수정</button>
           <button @click="deleteBoard" class="action-button delete-button">삭제</button>
         </div>
       </div>
     </div>
     <div class="user-info">
-      {{ store.board.user.nickname }}
-      <span>
+      {{ store.board.user ? store.board.user.nickname : "(탈퇴한 사용자)" }}
+      <span v-if="store.board.user.id !== userStore.loginUser.id">
         <i class="bi bi-person-add" v-if="!followStore.checkFollow" @click="followUser(store.board.user)"></i>
         <i class="bi bi-person-fill-dash" v-else @click="deleteFollow(store.board.user)"></i>
       </span>
@@ -58,6 +58,12 @@ const updateBoard = function () {
 }
 
 const followUser = function (user) {
+  if(!userStore.loginUser){
+    
+    alert('로그인이 필요합니다')
+    return;
+  }
+
   followStore.startFollow(user);
 }
 
