@@ -22,24 +22,17 @@ export const useUserStore = defineStore('user', () => {
           }
         })
         .then((response)=>{
-          console.log('로그인이 되었습니다.', response.data);
-          
+          alert('로그인이 되었습니다.');
           sessionStorage.setItem("loginUser", JSON.stringify(response.data.user));
           sessionStorage.setItem("jwtToken", response.data['access-token']);
-          loginUser.value = user;
-          
-          
-      
+          loginUser.value = response.data.user;
+          router.push('/');
         })
         .catch( (error) =>{
           console.error('로그인 실패:', error);
           alert("해당 계정이 존재하지 않습니다.");
         }
         );
-        
-        alert('로그인이 되었습니다.');
-        router.push('/');
-        
       }
 
       loginUser.value = JSON.parse(sessionStorage.getItem('loginUser'));

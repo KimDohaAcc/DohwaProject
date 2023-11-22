@@ -4,6 +4,7 @@ import router from '@/router'
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
 const REST_BOARD_API = `http://localhost:8080/board`
+const REST_BOARD_API_AUTH = `http://localhost:8080/auth/board`
 
 export const useBoardStore = defineStore('board', () => {
   const boardList = ref([])
@@ -51,9 +52,8 @@ export const useBoardStore = defineStore('board', () => {
   }
 
   const createBoard = function (board) {
-    axiosInstanceWithToken.post(REST_BOARD_API, board)
+    axiosInstanceWithToken.post(REST_BOARD_API_AUTH, board)
       .then((response) => {
-       
         boardList.value.push(response.data);
         router.push({ name: 'boardList' });
       })
