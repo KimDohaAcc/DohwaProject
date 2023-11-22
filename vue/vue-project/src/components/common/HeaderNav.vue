@@ -1,12 +1,11 @@
 <template>
   <header>
     <div class="header-wrapper">
-      <h1 class="brand-sign">헬  스  판  다</h1></div>
+      <RouterLink to="/" tag="span" class="nav-link"><img src="@/assets/web-logo.png" class="d-inline-block align-top" alt="logo" width="50"></RouterLink>
+     </div>
     <div>
       <b-navbar toggleable="lg" type="light" variant="faded" class="navbar-custom">
         <b-navbar-brand id="logo">
-          <img src="@/assets/logo.jpg" class="d-inline-block align-top" alt="logo" width="50">
-          <RouterLink to="/" tag="span" class="nav-link">healthPanda</RouterLink>
         </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -87,7 +86,6 @@ header {
   margin-top: 0vh;
 }
 .header-wrapper {
-  background-color: #2a9d8f; /* 초록색 배경 */
   padding: 60px 0;
   text-align: center; /* 텍스트 가운데 정렬 */
   margin-bottom: 0px; /* 간판 아래 여백 추가 */
@@ -100,6 +98,10 @@ header {
   font-weight: bold; /* 헬스판다 텍스트 굵기 */
   margin-top: 0; /* 위 여백 제거 */
   word-spacing: 40px; /* 각 단어 사이 간격 설정 */
+}
+
+img {
+  width: 30vw;
 }
 
 </style>

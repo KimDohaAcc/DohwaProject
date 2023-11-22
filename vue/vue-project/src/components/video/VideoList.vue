@@ -17,7 +17,8 @@
         <div class="comment-container"></div>
         <div class="like-container">
           <span @click="copyVideoUrl(video)">
-            <i :class="{ 'bi-clipboard-check': isCopied }" class="bi bi-clipboard"></i>
+            <i class="bi bi-clipboard" v-if="!video.isCopied"></i>
+            <span v-else><span id="copy-message">copied to clipboard</span><i class="bi bi-clipboard-check"></i></span>
           </span>
           <a @click="clickLike(video)">
             <span>{{ videoLikeCount(video.num) }}</span>
@@ -36,12 +37,12 @@
 
 <script setup>
 import { useVideoStore } from "@/stores/video";
+import { useUserStore } from "@/stores/user";
 import { computed, onBeforeMount, ref } from "vue";
-
-const isCopied = ref(false);
-const clipboardTimer = ref(null);
+import Swal from 'sweetalert2';
 
 const store = useVideoStore();
+const userStore = useUserStore();
 const videoList = computed(() => store.videoList);
 const likeList = computed(() => store.likeList);
 const videoLikeCountList = computed(() => store.videoLikeCountList);
@@ -57,18 +58,47 @@ onBeforeMount(() => {
 });
 
 const copyVideoUrl = function (video) {
-  navigator.clipboard.writeText(video.url)
-    .then(() => {
-      isCopied.value = true;
-    })
-
-  clipboardTimer.value = setTimeout(() => {
-    isCopied.value = false;
-  }, 3000);
+  try {
+    navigator.clipboard.writeText(video.url)
+      .then(() => {
+        video.isCopied = true;
+        setTimeout(() => {
+          video.isCopied = false;
+        }, 1000);
+      })
+      .catch((error) => {
+        console.error('Unable to copy video URL to clipboard', error);
+      });
+  } catch (error) {
+    console.error('Clipboard API not supported', error);
+  }
 };
 
-
 const clickLike = async function (video) {
+  if(!userStore.loginUser){
+    Swal.fire({
+  title: 'Auto close alert!',
+  html: 'I will close in <b></b> milliseconds.',
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
+    return;
+  }
+
   await store.clickLike(video);
   store.likeCheck();
 };

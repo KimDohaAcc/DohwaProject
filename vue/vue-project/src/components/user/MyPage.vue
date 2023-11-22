@@ -11,13 +11,31 @@
         <div><span class="info-name">카카오 연동</span><span>사용 중</span></div>
       </div>
       <div class="user-info" v-if="!userStore.loginUser.iskakao">
-        <div class="changable-info"><span class="info-name">이메일</span><span class="info-value">{{
+        <div class="changable-info" @click="changeEmail()"><span class="info-name">이메일</span><span class="info-value">{{
           userStore.loginUser.account }}</span><i class="bi bi-arrow-right enter"></i></div>
-        <div class="changable-info"><span class="info-name">닉네임</span><span class="info-value">{{
-          userStore.loginUser.nickname }}</span><i class="bi bi-arrow-right enter"></i></div>
+        <div v-if="editEmail">
+          <span class="info-name">수정 이메일</span>
+          <input type="text" id="account" v-model="updatedUser.account">
+          <button @click="checkValidEmail()">저장</button>
+        </div>
+        <div class="changable-info" @click="changeNickname()"><span class="info-name">닉네임</span><span
+            class="info-value">{{
+              userStore.loginUser.nickname }}</span><i class="bi bi-arrow-right enter"></i></div>
+        <div v-if="editNickname">
+          <span class="info-name">수정 닉네임</span>
+          <input type="text" id="nickname" v-model="updatedUser.nickname">
+          <button @click="checkValidNickname()">저장</button>
+        </div>
         <div><span class="info-name">카카오 연동</span><span>사용 안 함</span></div>
-        <div class="changable-info"><span class="info-name">비밀번호</span><span>새 비밀번호 설정</span><i
+        <div class="changable-info" @click="changePassword()"><span class="info-name">비밀번호</span><span>새 비밀번호 설정</span><i
             class="bi bi-arrow-right enter"></i></div>
+        <div v-if="editPassword">
+          <span class="info-name">비밀번호 수정</span>
+          <input type="password" id="password" v-model="updatedUser.password">
+          <span class="info-name">비밀번호 확인</span>
+          <input type="password" v-model="checkPassword">
+          <button @click="checkPasswordEqual()">저장</button>
+        </div>
       </div>
       <div class="user-info" v-if="reservations">
         <h1>예약 내역</h1>
@@ -38,10 +56,16 @@
 import { useUserStore } from "@/stores/user";
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { axiosInstanceWithToken } from '@/util/http-common'
+import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 const userStore = useUserStore();
 const router = useRouter();
 const reservations = ref([]);
+const editEmail = ref(false);
+const editNickname = ref(false);
+const editPassword = ref(false);
+const updatedUser = ref(null);
+const checkPassword = ref('');
+
 console.log(reservations);
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -68,6 +92,92 @@ onMounted(() => {
       console.log(reservations);
     });
 });
+
+const changeEmail = function () {
+  editEmail.value = !editEmail.value;
+  updatedUser.value = { ...userStore.loginUser };
+}
+
+const changeNickname = function () {
+  editNickname.value = !editNickname.value;
+  updatedUser.value = { ...userStore.loginUser };
+}
+
+
+const changePassword = function () {
+  editPassword.value = !editPassword.value;
+  updatedUser.value = { ...userStore.loginUser };
+}
+
+function checkValidNickname() {
+  const validateNickname = /^[A-Za-z가-힣]{1,20}$/;
+  if (!validateNickname.test(updatedUser.value.nickname) || !updatedUser.value.nickname) {
+    alert('닉네임이 올바르지 않습니다.');
+    updatedUser.value.nickname = '';
+    return;
+  }
+
+  updateUser();
+}
+
+function checkValidEmail() {
+  if(userStore.loginUser.account === updatedUser.value.account){
+    editEmail.value = false;
+    return;
+  }
+
+  const validateAccount = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+  if (!validateAccount.test(updatedUser.value.account) || !updatedUser.value.account) {
+    alert('이메일 형식이 올바르지 않습니다. 다시 한 번 확인 해주세요.');
+    updatedUser.value.account = '';
+    return;
+  }
+
+  axiosInstance
+    .get(`http://localhost:8080/user/dupCheck/${updatedUser.value.account}`)
+    .then((res) => {
+      console.log(res)
+      console.log(userStore.loginUser.account)
+      console.log(updatedUser.value.account)
+      if (res.status === 200) {
+        alert('중복된 계정이 존재합니다');
+        updatedUser.value.account = '';
+        return;
+      }
+
+      else {
+        updateUser();
+      }
+    })
+
+}
+
+function checkPasswordEqual() {
+  const validatePassword = /^[A-Za-z0-9]{4,12}$/;
+  if (!validatePassword.test(updatedUser.value.password) || !updatedUser.value.password) {
+    alert('비밀번호는 영문+숫자를 포함한 4자 이상 12자 이내이여야 합니다');
+    checkPassword.value = '';
+    updatedUser.value.password = '';
+    return;
+  }
+
+  if (updatedUser.value.password !== checkPassword.value) {
+    alert('비밀번호 확인이 일치하지 않습니다');
+    checkPassword.value = '';
+    updatedUser.value.password = '';
+    return;
+  }
+
+  updateUser();
+}
+
+const updateUser = function () {
+  userStore.loginUser = updatedUser.value;
+  userStore.updateUser();
+  editEmail.value = false;
+  editNickname.value = false;
+  editPassword.value = false;
+}
 
 const deleteReservation = (index) => {
   const reservationToDelete = reservations.value[index];

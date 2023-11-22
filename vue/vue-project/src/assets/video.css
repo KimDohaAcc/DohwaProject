@@ -22,7 +22,8 @@
   overflow: hidden;
 }
 
-.bi-clipboard {
+.bi-clipboard,
+.bi-clipboard-check {
   font-size: 1.1rem;
   margin-right: 15px;
 }
@@ -83,4 +84,14 @@ iframe {
   align-self: flex-end;
   margin-right: 25px;
   margin-top: 5px;
+}
+
+#copy-message {
+  background-color: #333;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 10pt;
+  padding: 0 5px;
+  margin-right: 5px;
 }
