@@ -11,22 +11,24 @@
     <ul class="video-list">
       <li v-for="video in filteredVideoList" :key="video.num" class="video-item">
         <div class="video-content">
-          <p class="video-title">
-            {{ video.title }}
-          </p>
+          <p class="video-title">{{ video.title }}</p>
         </div>
         <iframe :src="video.url" frameborder="0" allowfullscreen></iframe>
+        <div class="comment-container"></div>
         <div class="like-container">
-        <a @click="clickLike(video)">
-          <span>{{ videoLikeCount(video.num) }}</span>
-              <span v-if="hasLike(video)">
-                <i class="bi bi-heart-fill"></i>
-              </span>
-              <span v-else>
-                <i class="bi bi-heart"></i>
-              </span>
-            </a>
-          </div>
+          <span @click="copyVideoUrl(video)">
+            <i :class="{ 'bi-clipboard-check': isCopied }" class="bi bi-clipboard"></i>
+          </span>
+          <a @click="clickLike(video)">
+            <span>{{ videoLikeCount(video.num) }}</span>
+            <span v-if="hasLike(video)">
+              <i class="bi bi-heart-fill"></i>
+            </span>
+            <span v-else>
+              <i class="bi bi-heart"></i>
+            </span>
+          </a>
+        </div>
       </li>
     </ul>
   </div>
@@ -34,7 +36,10 @@
 
 <script setup>
 import { useVideoStore } from "@/stores/video";
-import { computed, onBeforeMount } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
+
+const isCopied = ref(false);
+const clipboardTimer = ref(null);
 
 const store = useVideoStore();
 const videoList = computed(() => store.videoList);
@@ -50,6 +55,18 @@ onBeforeMount(() => {
   store.getVideoList();
   store.likeCheck();
 });
+
+const copyVideoUrl = function (video) {
+  navigator.clipboard.writeText(video.url)
+    .then(() => {
+      isCopied.value = true;
+    })
+
+  clipboardTimer.value = setTimeout(() => {
+    isCopied.value = false;
+  }, 3000);
+};
+
 
 const clickLike = async function (video) {
   await store.clickLike(video);
@@ -75,5 +92,4 @@ const filterVideos = function (sort) {
   store.selectedSort = sort;
 };
 </script>
-<style src="@/assets/video.css" scoped>
-</style>
+<style src="@/assets/video.css" scoped></style>

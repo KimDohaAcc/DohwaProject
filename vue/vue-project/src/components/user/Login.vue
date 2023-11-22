@@ -29,7 +29,7 @@ const router = useRouter();
 
 const kakaoLogin = function () {
   window.Kakao.Auth.login({
-    scope: "profile_nickname, account_email",
+    scope: "profile_nickname, profile_image, account_email",
     success: () => {
       store.getKakaoAccount();
     },

@@ -15,7 +15,7 @@
             <span>{{ comment.content }}</span>
             <div>
               <span>{{ comment.updatedAtFormat }}</span>
-              <span>{{ comment.createdAtFormat !== comment.updatedAtFormat ? "(수정됨)" : "" }}</span>
+              <span>{{ comment.createdAt !== comment.updatedAt ? "(수정됨)" : "" }}</span>
             </div>
             <div id="comment-button-container" v-if="userStore.loginUser.id === comment.user.id">
               <button @click="startEditing(index)" class="edit-button">수정</button>

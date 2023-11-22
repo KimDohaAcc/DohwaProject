@@ -1,12 +1,18 @@
 <template>
-    <div>
-      <HeaderNav />
-      <RouterView @login-user="loginUser" />
+  <div id="front-container">
+    <SideNav class="SideNav" />
+    <div class="content-wrapper">
+      <HeaderNav class="HeaderNav"/>
+      <main>
+      <RouterView class="RouterView" @login-user="loginUser" />
+    </main>
     </div>
+  </div>
 </template>
 
 <script setup>
 import HeaderNav from '@/components/common/HeaderNav.vue'
+import SideNav from '@/components/common/SideNav.vue'
 import { RouterView } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import axios from "axios"
@@ -53,13 +59,23 @@ const loginUser = (loginUser) => {
 </script>
 
 
-<style scoped>
+<style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600&display=swap');
 
 * {
-  margin : 5%;
   font-family: 'IBM Plex Sans KR', sans-serif;
   font-weight: 200;
-  
 }
+
+#front-container {
+  display: flex;
+  flex-flow: column;
+  margin: 0 10%;
+  width: 80%;
+}
+
+main > div {
+  min-height: 20vh;
+}
+
 </style>

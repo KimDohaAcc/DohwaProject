@@ -2,6 +2,8 @@ package com.ssafy.ssafit.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +18,7 @@ public class Reserve {
     private Long num;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false, name = "user_reserve")
     private User user;
 

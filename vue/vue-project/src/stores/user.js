@@ -8,8 +8,6 @@ export const useUserStore = defineStore('user', () => {
       const router = useRouter();
       let user = {};
       let mealList = ref(null);
-      let followerList = ref(null);
-      let followeeList = ref(null);
 
       const REST_API_URL = `http://localhost:8080`;
       const originalLogin = async () => {
@@ -41,6 +39,7 @@ export const useUserStore = defineStore('user', () => {
         window.Kakao.API.request({
           url: "/v2/user/me",
           success: (res) => {
+            console.log(res);
             const id = res.id;
             const kakao_account = res.kakao_account;
             const nickname = kakao_account.profile.nickname;
@@ -89,28 +88,6 @@ export const useUserStore = defineStore('user', () => {
         loginUser.value = null;
       }
 
-      const getUserFollow = function (type) {
-        let API_URL = REST_API_URL;
-        if (type == "follower") {
-          API_URL += "/follower";
-        } else { API_URL += "/followee" }
-
-        const user = loginUser.value;
-
-        axiosInstanceWithToken
-            .post(API_URL, user)
-            .then((res) => {
-              if (type == "follower") {
-                followerList.value = res.data;
-              } else {
-                followeeList.value = res.data;
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-      };
-
       const checkLoginAndRedirect = function (next, loginPath = '/login') {
         const isLoggedIn = computed(() => !!loginUser);
         if (!isLoggedIn.value) {
@@ -134,7 +111,7 @@ export const useUserStore = defineStore('user', () => {
 
 
 
-      return { originalLogin, submitNewUser, loginUser, checkLoginAndRedirect, getKakaoAccount, logoutUser, mealList, getUserFollow, followerList, followeeList }
+      return { originalLogin, submitNewUser, loginUser, checkLoginAndRedirect, getKakaoAccount, logoutUser, mealList }
     },
     {
       persist: {

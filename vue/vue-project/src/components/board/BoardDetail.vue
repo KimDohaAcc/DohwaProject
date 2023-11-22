@@ -15,7 +15,6 @@
         </div>
       </div>
     </div>
-
     <div class="user-info">
       {{ store.board.user.nickname }}
       <span>
