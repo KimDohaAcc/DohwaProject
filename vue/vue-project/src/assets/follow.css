@@ -1,0 +1,22 @@
+
+.follow-button {
+    cursor: pointer;
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: max-content;
+    height: max-content;
+    margin-left: 5px;
+  }
+
+  #user-name {
+    font-size: 13pt;
+    font-weight: 300;
+  }
+
+  i {
+    margin-left: 5px;
+  }

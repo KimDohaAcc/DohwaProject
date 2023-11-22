@@ -15,14 +15,17 @@
         </div>
       </div>
     </div>
-    <div class="user-info">
-      {{ store.board.user ? store.board.user.nickname : "(탈퇴한 사용자)" }}
+    <div>
+      <span id="user-name">{{ store.board.user ? store.board.user.nickname : "(탈퇴한 사용자)" }}</span>
       <span v-if="store.board.user.id !== userStore.loginUser.id">
-        <i class="bi bi-person-add" v-if="!followStore.checkFollow" @click="followUser(store.board.user)"></i>
-        <i class="bi bi-person-fill-dash" v-else @click="deleteFollow(store.board.user)"></i>
+        <button class="follow-button" v-if="!followStore.checkFollow" @click="followUser(store.board.user)">
+          follow<i class="bi bi-person-add"></i>
+        </button>
+        <button class="follow-button" v-else @click="deleteFollow(store.board.user)">
+          following<i class="bi bi-person-fill-dash"></i>
+        </button>
       </span>
     </div>
-
     <div class="post-content">
       <div class="content">{{ store.board.content }}</div>
     </div>
@@ -58,8 +61,8 @@ const updateBoard = function () {
 }
 
 const followUser = function (user) {
-  if(!userStore.loginUser){
-    
+  if (!userStore.loginUser) {
+
     alert('로그인이 필요합니다')
     return;
   }
@@ -74,3 +77,4 @@ const deleteFollow = function (user) {
 </script>
 
 <style scoped src="@/assets/boardDetail.css"></style>
+<style scoped src="@/assets/follow.css" ></style>

@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr v-for="(board, index) in store.boardList" :key="board.num">
-          <td>{{ index + 1 }}</td>
+          <td>{{ store.boardList.length - index }}</td>
           <td>
             <RouterLink :to="`/board/${board.num}`" class="link">{{ board.title }}</RouterLink>
           </td>
