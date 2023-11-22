@@ -1,7 +1,9 @@
 package com.ssafy.ssafit.controller;
 
 import com.ssafy.ssafit.domain.Board;
+import com.ssafy.ssafit.domain.User;
 import com.ssafy.ssafit.service.boardService.BoardService;
+import com.ssafy.ssafit.service.userService.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
+    private final UserService userService;
 
     @GetMapping("/board/{num}")
     public ResponseEntity<Board> detail(@PathVariable Long num) {
@@ -27,11 +30,11 @@ public class BoardController {
         return new ResponseEntity<>(boardService.getList(), HttpStatus.OK);
     }
 
-    @PostMapping("/board")
-    public ResponseEntity<Board> write(@RequestBody Board board) {
+    @PostMapping("/auth/board")
+    public ResponseEntity<?> write(@RequestBody Board board) {
         return Optional.ofNullable(boardService.writeBoard(board))
                 .map(createBoard -> new ResponseEntity<>(createBoard, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE));
     }
 
     @DeleteMapping("/board/{num}")
