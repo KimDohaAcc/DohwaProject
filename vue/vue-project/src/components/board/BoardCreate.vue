@@ -1,6 +1,7 @@
+
 <template>
     <div>
-      <h4>이용 후기 작성</h4>
+      <h4>헬스판다 이용후기</h4>
       <fieldset>
         <legend>등록</legend>
         <div class="form-group">
@@ -51,7 +52,6 @@ const createBoard = function () {
     store.createBoard(board.value)
 }
 </script>
-
 <style scoped>
 .form-group {
   margin-bottom: 20px;
@@ -72,7 +72,7 @@ const createBoard = function () {
 
 .submit-button {
   cursor: pointer;
-  background-color: #3498db;
+  background-color: #1A2A5F;
   color: #fff;
   border: none;
   padding: 8px 15px;
@@ -81,6 +81,6 @@ const createBoard = function () {
 }
 
 .submit-button:hover {
-  background-color: #2980b9;
+  background-color: #1A2A5F;
 }
 </style>

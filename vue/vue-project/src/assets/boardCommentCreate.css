@@ -1,117 +1,122 @@
-
 .comment-list {
-    margin-top: 20px;
-  }
-  
-  .comment-item {
-    list-style: none;
-    margin: 0;
-    padding: 10px;
-  }
-  
-  .edit-button,
-  .delete-button,
-  .save-button,
-  .cancel-button {
-    cursor: pointer;
-    background-color: #fff;
-    padding: 5px 10px;
-    transition: background-color 0.3s ease;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 60px;
-  }
-  
-  .edit-button:hover,
-  .delete-button:hover,
-  .save-button:hover,
-  .cancel-button:hover {
-    background-color: #2980b9;
-  }
-  
-  .editing-section {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    max-width: 100%;
-  }
-  
-  .editing-section textarea {
-    max-width: 85%;
-    margin-right: 20px;
-  }
-  .comment-form {
-    margin-bottom: 20px;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    resize: vertical;
-  }
-  
-  .comment-button {
-    cursor: pointer;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 3px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .comment-button:hover {
-    background-color: #2980b9;
-  }
-  
-  .comment-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-  }
-  
-  .comment-content span {
-    margin-right: 10px;
-    max-width: 50%;
-  }
-  
-  .comment-content span.username {
-    font-weight: bold;
-  }
-  
-  .comment-content span.timestamp {
-    color: #777;
-  }
-  
-  .comment-content span.modified {
-    color: #e74c3c;
-    font-style: italic;
-  }
-  
-  .comment-content span.content {
-    flex-grow: 1;
-  }
-  
-  .comment-content .edit-button,
-  .comment-content .delete-button {
-    cursor: pointer;
-    background-color: #fff;
-    padding: 5px 10px;
-    border-radius: 3px;
-    transition: background-color 0.3s ease;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .comment-content .edit-button:hover,
-  .comment-content .delete-button:hover {
-    background-color: #2980b9;
-  }
+  margin-top: 20px;
+}
 
+/* 댓글 아이템 */
+.comment-item {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+
+/* 버튼 스타일 */
+.action-button
+.edit-button,
+.delete-button,
+.save-button,
+.cancel-button {
+  cursor: pointer;
+  background-color: #fff;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 60px;
+}
+
+.edit-button:hover,
+.delete-button:hover,
+.save-button:hover,
+.cancel-button:hover {
+  background-color: #1A2A5F;
+}
+
+/* 수정 영역 스타일 */
+.editing-section {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.editing-section textarea {
+  max-width: 85%;
+  margin-right: 20px;
+}
+
+/* 댓글 작성 폼 */
+.comment-form {
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.comment-button {
+  cursor: pointer;
+  background-color: #1A2A5F;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.comment-button:hover {
+  background-color: #1A2A5F;
+}
+
+/* 댓글 내용 */
+.comment-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.comment-content span {
+  margin-right: 10px;
+  max-width: 50%;
+}
+
+.comment-content span.username {
+  font-weight: bold;
+}
+
+.comment-content span.timestamp {
+  color: #777;
+}
+
+.comment-content span.modified {
+  color: #e74c3c;
+  font-style: italic;
+}
+
+.comment-content span.content {
+  flex-grow: 1;
+}
+
+.comment-content .edit-button,
+.comment-content .delete-button {
+  cursor: pointer;
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.comment-content .edit-button:hover,
+.comment-content .delete-button:hover {
+  background-color: #1A2A5F;
+}

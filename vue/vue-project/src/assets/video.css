@@ -1,4 +1,12 @@
+
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600&display=swap');
+body {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 300;
+}
+* {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
 .video-list {
   list-style: none;
   padding: 0;
@@ -20,6 +28,29 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  padding: 8px 16px;
+  margin: 0 8px;
+  border: 1px solid #1A2A5F;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #1A2A5F;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-buttons button.active {
+  background-color: #1A2A5F;
+  color: white;
 }
 
 .bi-clipboard,
@@ -53,10 +84,11 @@
 
 .filter-buttons button:hover {
   background-color: #f0f0f0;
+  color: #333;
 }
 
 .filter-buttons button.active {
-  background-color: #3490dc;
+  background-color: #1A2A5F;
   color: #fff;
 }
 
@@ -78,6 +110,7 @@ iframe {
   font-family: 'IBM Plex Sans KR', sans-serif;
   margin: 5px 25px;
   padding-bottom: 7px;
+  font-weight: 500;
 }
 
 .like-container {
@@ -94,4 +127,92 @@ iframe {
   font-size: 10pt;
   padding: 0 5px;
   margin-right: 5px;
+}
+
+.liked-videos {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-left: 15px;
+}
+.username {
+  margin-left: 15px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  
+}
+
+.video-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.video-item {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-content {
+  margin-bottom: 10px;
+}
+
+.video-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 비율을 유지하기 위한 값 */
+}
+
+.video-frame iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.like-container {
+  display: flex;
+  align-items: center;
+}
+
+.like-button {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.like-button:hover {
+  color: #ff5555;
+}
+
+.like-count {
+  margin-right: 5px;
+}
+
+.liked,
+.not-liked {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.liked {
+  color: #ff5555;
+}
+
+.not-liked {
+  color: #ccc;
 }

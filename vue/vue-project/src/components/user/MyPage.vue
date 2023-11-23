@@ -47,8 +47,11 @@
           <button @click="deleteReservation(index)">삭제</button>
         </div>
       </div>
-      <button @click="deleteAccount">계정 탈퇴</button>
+      <div class="box1">
+        <button @click="deleteAccount" class="deleteAccount">계정 탈퇴</button>
+      </div>
     </div>
+    
   </div>
 </template>
 
@@ -212,11 +215,16 @@ const deleteAccount = () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600&display=swap');
 
+
 #user-container {
   display: flex;
   flex-flow: wrap column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 200px;
+  margin-top: 100px;
+  height: 100vh;
+  /* background-color: aqua; */
 }
 
 .sns-page {
@@ -273,5 +281,29 @@ h1 {
 
 .hover-bg:hover {
   background-color: #f0f0f0;
+}
+
+.deleteAccount {
+  /* position: fixed; */
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  border: 1px solid #1A2A5F;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #1A2A5F;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.deleteAccount:hover {
+  background-color: #1A2A5F;
+  color: white;
+}
+.box1{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 </style>

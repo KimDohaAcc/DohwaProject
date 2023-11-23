@@ -1,42 +1,49 @@
 <template>
-  <div>
-    <h1>{{ userStore.loginUser.nickname }}님의 친구</h1>
-    <div>
-      <h2>Follower</h2>
-      <div v-if="!followStore.followerList">
-        <p>팔로워가 없습니다.</p>
-      </div>
-      <ul v-else class="follower-list">
-        <li v-for="follow in followStore.followerList" :key="follow.num" class="follower-item">
-          <div class="dropdown">
-            <p @click="toggleDropdown(follow.num)">{{ follow.follower.nickname }}</p>
-            <div v-if="follow.dropdownOpen" class="dropdown-content">
-              <RouterLink :to="`/like/${follow.follower.id}`">좋아하는 비디오</RouterLink>
-              <RouterLink :to="`/board/write/${follow.follower.id}`">작성한 글</RouterLink>
+    <div class="friend-list">
+      <h1>{{ userStore.loginUser.nickname }}님의 친구</h1>
+      <div class="friend-section">
+        <h2>Follower</h2>
+        <div v-if="!followStore.followerList">
+          <p>팔로워가 없습니다.</p>
+        </div>
+        <ul v-else class="follower-list">
+          <li v-for="follow in followStore.followerList" :key="follow.num" class="follower-item">
+            <div class="dropdown">
+              <div  @click="toggleDropdown(follow.num)" class="follower-content">
+                <img src="@\assets\사람.png" alt="Follower Profile" class="follower-profile">
+                <p>{{ follow.follower.nickname }}</p>
+              </div>
+              <div v-if="follow.dropdownOpen" class="dropdown-content">
+                <RouterLink :to="`/like/${follow.follower.id}`">좋아하는 비디오</RouterLink>
+                <RouterLink :to="`/board/write/${follow.follower.id}`">작성한 글</RouterLink>
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h2>Followee</h2>
-      <div v-if="!followStore.followList">
-        <span>팔로잉 중인 사용자가 없습니다.</span>
+          </li>
+        </ul>
       </div>
-      <ul v-else class="following-list">
-        <li v-for="follow in followStore.followList" :key="follow.num" class="following-item">
-          <div class="dropdown">
-            <p @click="toggleDropdown(follow.num)">{{ follow.followee.nickname }}</p>
-            <div v-if="follow.dropdownOpen" class="dropdown-content">
-              <RouterLink :to="`/like/${follow.followee.id}`">좋아하는 비디오</RouterLink>
-              <RouterLink :to="`/board/write/${follow.followee.id}`">작성한 글</RouterLink>
+      <div class="friend-section">
+        <h2>Followee</h2>
+        <div v-if="!followStore.followList">
+          <span>팔로잉 중인 사용자가 없습니다.</span>
+        </div>
+        <ul v-else class="following-list">
+          <li v-for="follow in followStore.followList" :key="follow.num" class="following-item">
+            <div class="dropdown">
+              <div class="following-content" @click="toggleDropdown(follow.num)">
+                <img src="@\assets\사람.png" alt="Followee Profile" class="following-profile">
+                <p>{{ follow.followee.nickname }}</p>
+              </div>
+              <div v-if="follow.dropdownOpen" class="dropdown-content">
+                <RouterLink :to="`/like/${follow.followee.id}`">좋아하는 비디오</RouterLink>
+                <RouterLink :to="`/board/write/${follow.followee.id}`">작성한 글</RouterLink>
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</template>
+  </template>
+
 <script setup>
 import { useFollowStore } from "@/stores/follow";
 import { useUserStore } from "@/stores/user";
@@ -68,15 +75,20 @@ const toggleDropdown = (followNum) => {
 </script>
 
 <style scoped>
+.friend-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 h1 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 h2 {
-  font-size: 1.2em;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  font-size: 18px;
+  margin-top: 30px;
+  margin-bottom: 15px;
 }
 
 ul {
@@ -84,26 +96,44 @@ ul {
   padding: 0;
 }
 
+.friend-section {
+  margin-bottom: 40px;
+}
+
 .follower-list,
 .following-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 15px;
 }
 
 .follower-item,
 .following-item {
-  border: 1px solid #ddd;
-  padding: 10px 30px;
-  width: max-content;
   text-align: center;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .follower-item p,
 .following-item p {
-  margin: 0;
-  font-size: 1em;
+  margin: 8px 0 0;
+  font-size: 14px;
+}
+
+.follower-profile,
+.following-profile {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+.template{
+
+  font-family: 'IBM Plex Sans KR', sans-serif;
+
 }
 
 .dropdown {

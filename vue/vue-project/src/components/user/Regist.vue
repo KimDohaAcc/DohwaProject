@@ -175,4 +175,91 @@
   .input-error {
     color: red;
   }
-  </style>
+
+  .joinMain {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  margin-top: 250px;
+  margin-bottom: 250px;
+}
+
+.header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.joinText {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.input-error {
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.success-message {
+  color: green;
+  font-size: 16px;
+}
+
+.checkButton {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #1a2a5f;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+  margin-bottom: 10px;
+}
+
+.checkButton:hover {
+  background-color: #142040;
+}
+
+button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #1a2a5f;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+button:hover {
+  background-color: #142040;
+}
+</style>

@@ -1,3 +1,4 @@
+
 <template>
   <footer>
       <div class="container py-5">
@@ -51,13 +52,13 @@
   }
   
   footer {
-    bottom: 0;
-    background-color: #264653;
-    color: white;
-    z-index: 9999;
-    flex-flow: column;
-    width: 100%;
-  }
+  bottom: 0;
+  background-color: #1A2A5F; /* 원하는 배경색으로 설정 */
+  color: white;
+  z-index: 9999;
+  flex-flow: column;
+  width: 100%;
+}
   
   
   </style>
