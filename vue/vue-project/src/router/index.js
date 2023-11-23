@@ -8,7 +8,6 @@ import ReserveView from '@/views/ReserveView.vue'
 import StoreView from '@/views/StoreView.vue'
 import FooterView from '@/views/FooterView.vue'
 
-
 import BoardList from '@/components/board/BoardList.vue'
 import BoardCreate from '@/components/board/BoardCreate.vue'
 import BoardDetail from '@/components/board/BoardDetail.vue'
@@ -73,7 +72,7 @@ const router = createRouter({
     },
     {
       path: '/like/:id',
-      name: 'like',
+      name: 'like', 
       component: Like,
       beforeEnter: checkLogin,
     },
@@ -162,9 +161,9 @@ const router = createRouter({
             name: "footer",
             component: FooterView,
 
-          },
-        ]
-    }
+      },
+    ]
+}
   ]
 })
 

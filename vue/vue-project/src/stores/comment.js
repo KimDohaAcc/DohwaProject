@@ -6,7 +6,8 @@ import { useformatDate } from '@/util/dateFormat';
 import { useBoardStore } from './board';
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
-const REST_COMMENT_API = 'http://localhost:8080/comment';
+const lApi = "http://localhost:8080";
+const dApi = "https://healthpanda.site";
 
 export const useCommentStore = defineStore('comment', () => {
   const comment = ref('');
@@ -15,7 +16,7 @@ export const useCommentStore = defineStore('comment', () => {
   const boardStore = useBoardStore();
 
   function getComments(boardNum) {
-    axiosInstance.get(`http://localhost:8080/comment/board/${boardNum}`)
+    axiosInstance.get(`${lApi}/comment/board/${boardNum}`)
       .then((res) => {
         console.log(res.data)
         if(res.data.length === 0){
@@ -41,7 +42,7 @@ export const useCommentStore = defineStore('comment', () => {
 
   function deleteComment(commentId) {
     try {
-      axiosInstanceWithToken.delete(`http://localhost:8080/comment/${commentId}`);
+      axiosInstance.delete(`${lApi}/comment/${commentId}`);
     } catch (error) {
       console.error(error.message);
     }
@@ -49,7 +50,7 @@ export const useCommentStore = defineStore('comment', () => {
   }
 
   function editComment(editedComment) {
-    axiosInstanceWithToken.put(`http://localhost:8080/comment`, editedComment)
+    axiosInstance.put(`${lApi}/comment`, editedComment)
       .then((response) => {
         getComments(boardStore.board.num);
       })
@@ -72,7 +73,7 @@ export const useCommentStore = defineStore('comment', () => {
 
     return new Promise((resolve, reject) => {
       if (commentValue) {
-        axiosInstanceWithToken.post(REST_COMMENT_API, commentValue)
+        axiosInstanceWithToken.post(`${lApi}/auth/comment`, commentValue)
           .then((response) => {
             getComments(boardStore.board.num);
             resolve();

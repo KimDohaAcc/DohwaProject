@@ -18,7 +18,7 @@
   </template>
   
   <script>
-  import { ref } from 'vue';
+  import { ref, onMounted  } from 'vue';
   
   export default {
     setup() {
@@ -121,7 +121,7 @@
     background: white;
     width: 100%;
     margin: 0; /* wrapper의 마진을 없애는 부분 */
-    margin-bottom: 20%;
+    margin-bottom: 10%;
   }
   .grid-container {
     display: grid;

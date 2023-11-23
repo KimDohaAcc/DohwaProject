@@ -23,8 +23,11 @@ import axios from "axios"
 import { useRouter } from "vue-router"
 import { useUserStore } from '@/stores/user.js'
 import FooterView from '@/views/FooterView.vue';
+import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
 const router = useRouter();
+const lApi = "http://localhost:8080";
+const dApi = "https://healthpanda.site";
 
 onMounted(() => {
 
@@ -37,11 +40,11 @@ onMounted(() => {
 
 const loginUser = (loginUser) => {
   // user 정보 요청 api 주소
-  const API_URL = `http://localhost:8080/user`;
+
 
   // axios 요청
-  axios
-    .get(API_URL)
+  axiosInstance
+    .get(`${lApi}/user`)
     .then((res) => {
       let matchedUser = res.data.find(
         (u) => u.id === loginUser.id && u.password === loginUser.password
