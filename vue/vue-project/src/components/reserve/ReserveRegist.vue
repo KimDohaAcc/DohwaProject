@@ -53,12 +53,13 @@
         <p v-for="(detail, index) in reservationDetails" :key="index">{{ detail }}</p>
       </ul>
     </div>
-    <button :disabled="isCreateDisabled" @click="createReserve" class="create-button">예약하기</button>
+    <button :disabled="isCreateDisabled" @click="reserveValidate()" class="create-button">예약하기</button>
   </div>
 </template>
 
 <script>
 import { useReserveStore } from "@/stores/reserve";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
@@ -79,8 +80,16 @@ export default {
       createReserve,
       handlePhoneNumberInput,
     } = useReserveStore();
+    const router = useRouter();
+
+    function reserveValidate() {
+      createReserve();
+      router.push('/myPage');
+      window.scrollTo(0, 99999);
+    }
 
     return {
+      reserveValidate,
       reserveDate,
       reservePhone,
       minDate,
@@ -104,11 +113,16 @@ export default {
 <style scoped>
 /* 필요한 스타일 작성 */
 .survey-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
 }
 
 .form-group {
   margin-bottom: 50px;
+  width: 30vw;
 }
 
 .label {
@@ -180,5 +194,9 @@ export default {
 
 .create-button:hover:enabled {
   background-color: #1A2A5F;
+}
+
+input {
+  width: 50vw;
 }
 </style>

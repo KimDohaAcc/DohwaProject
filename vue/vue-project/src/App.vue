@@ -67,10 +67,9 @@ const loginUser = (loginUser) => {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600&display=swap');
 
-/* * {
+* {
   font-family: 'IBM Plex Sans KR', sans-serif;
-  font-weight: 200;
-} */
+}
 
 #front-container {
   background-color: white; /* 내용 부분 배경색 */

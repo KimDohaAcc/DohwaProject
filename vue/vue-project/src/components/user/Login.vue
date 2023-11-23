@@ -49,6 +49,10 @@ const kakaoLogin = () => {
     }
   });
   router.push('/');
+  window.scroll({
+			top: 0, 
+			left: 0, 
+		});
 };
 
 const handleLogin = () => {

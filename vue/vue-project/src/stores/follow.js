@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useBoardStore } from "@/stores/board";
+import { useUserStore } from "@/stores/user";
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
 export const useFollowStore = defineStore('follow', () => {
@@ -10,6 +11,7 @@ export const useFollowStore = defineStore('follow', () => {
   const API_URL = "http://localhost:8080/auth/follow"
   const checkFollow = ref(false);
   const boardStore = useBoardStore();
+  const userStore = useUserStore();
 
   const startFollow = function (user) {
     axiosInstanceWithToken
@@ -29,6 +31,10 @@ export const useFollowStore = defineStore('follow', () => {
   }
 
   const getFollowList = function () {
+    if(!userStore.loginUser){
+      return;
+    }
+
     axiosInstanceWithToken
       .get(API_URL)
       .then((res) => {
