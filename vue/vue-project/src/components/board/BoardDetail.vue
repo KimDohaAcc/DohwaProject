@@ -30,6 +30,7 @@
       <div class="content">{{ store.board.content }}</div>
     </div>
     <BoardCommentCreate></BoardCommentCreate>
+    <button @click="goToBoardList" class="action-button">목록으로</button>
   </div>
 </template>
 
@@ -54,6 +55,10 @@ onBeforeMount(() => {
 const deleteBoard = function () {
   store.deleteBoard(route.params.id);
   router.push("/board")
+}
+
+const goToBoardList = function() {
+  router.push( "/board" )
 }
 
 const updateBoard = function () {

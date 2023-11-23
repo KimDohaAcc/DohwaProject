@@ -1,63 +1,70 @@
 <template>
-  <div>
-    <label for="reserveDate">예약 날짜:</label>
-    <input type="date" id="reserveDate" v-model="reserveDate" :min="minDate">
-
-    <label for="reservePhone">전화번호:</label>
-    <input type="text" id="reservePhone" v-model="reservePhone" @input="handlePhoneNumberInput">
-    <p v-if="showPhoneNumberWarning" style="color: red;">
-      {{ phoneNumberWarningMessage }}
-    </p>
-
-    <!-- 지점 선택 버튼 -->
-    <div>
-      <button
-          v-for="(location, index) in locations"
-          :key="index"
-          @click="selectLocation(location)"
-          :class="{ 'selected': selectedLocation === location }"
-          @mousedown.prevent
-      >
-        {{ location }}
-      </button>
+  <div class="survey-container">
+    <div class="form-group">
+      <label for="reserveDate" class="label">예약 날짜</label>
+      <input type="date" id="reserveDate" v-model="reserveDate" :min="minDate" class="input-date">
     </div>
 
-    <!-- 시간대 선택 버튼 -->
-    <div>
-      <button
-          v-for="(time, index) in times"
-          :key="index"
-          @click="selectTime(time)"
-          :class="{ 'selected': selectedTime === time }"
-          @mousedown.prevent
-      >
-        {{ time }}
-      </button>
+    <div class="form-group">
+      <label for="reservePhone" class="label">전화번호</label>
+      <input type="text" id="reservePhone" v-model="reservePhone" @input="handlePhoneNumberInput" class="input-text">
+      <p v-if="showPhoneNumberWarning" class="warning">{{ phoneNumberWarningMessage }}</p>
     </div>
 
-    <button :disabled="isCreateDisabled" @click="createReserve" class="create-button">예약 정보 확인</button>
+    <div class="form-group" style="margin-bottom: 20px;">
+      <h3>선택 지점</h3>
+      <div class="location-selection">
+        <div class="location-buttons">
+          <button
+            v-for="(location, index) in locations"
+            :key="index"
+            @click="selectLocation(location)"
+            :class="{ 'selected': selectedLocation === location }"
+            @mousedown.prevent
+            class="location-button"
+          >
+            {{ location }}
+          </button>
+        </div>
+      </div>
+    </div>
 
-    <!-- 선택한 정보 표시 -->
-    <div v-if="reservationDetails.length !== 0">
-      <h3>선택한 정보:</h3>
+    <div class="form-group" style="margin-bottom: 20px;">
+      <h3>선택 시간</h3>
+      <div class="time-selection">
+        <div class="time-buttons">
+          <button
+            v-for="(time, index) in times"
+            :key="index"
+            @click="selectTime(time)"
+            :class="{ 'selected': selectedTime === time }"
+            @mousedown.prevent
+            class="time-button"
+          >
+            {{ time }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="reservationDetails.length !== 0" class="selected-info">
+      <h4>선택한 정보</h4>
       <ul>
-        <li v-for="(detail, index) in reservationDetails" :key="index">{{ detail }}</li>
+        <p v-for="(detail, index) in reservationDetails" :key="index">{{ detail }}</p>
       </ul>
     </div>
+    <button :disabled="isCreateDisabled" @click="createReserve" class="create-button">예약하기</button>
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue';
 import { useReserveStore } from "@/stores/reserve";
-import axios from 'axios';
 
 export default {
   setup() {
     const {
       reserveDate,
       reservePhone,
-      phoneNumberRegex,
       minDate,
       showPhoneNumberWarning,
       phoneNumberWarningMessage,
@@ -69,8 +76,6 @@ export default {
       selectedTime,
       selectTime,
       reservationDetails,
-      updateReservationDetails,
-      reserveDateTime,
       createReserve,
       handlePhoneNumberInput,
     } = useReserveStore();
@@ -78,7 +83,6 @@ export default {
     return {
       reserveDate,
       reservePhone,
-      phoneNumberRegex,
       minDate,
       showPhoneNumberWarning,
       phoneNumberWarningMessage,
@@ -90,39 +94,91 @@ export default {
       selectedTime,
       selectTime,
       reservationDetails,
-      updateReservationDetails,
-      reserveDateTime,
       createReserve,
       handlePhoneNumberInput,
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
 /* 필요한 스타일 작성 */
-button {
-  margin-right: 10px;
+.survey-container {
+  padding: 20px;
 }
 
-button.selected {
-  background-color: lightblue;
+.form-group {
+  margin-bottom: 50px;
+}
+
+.label {
   font-weight: bold;
 }
 
-/* 예약 생성 버튼 스타일 */
-.create-button {
-  margin-top: 10px;
+.input-date,
+.input-text {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.warning {
+  color: red;
+  font-style: italic;
+}
+
+.location-selection,
+.time-selection {
+  margin-top: 20px;
+}
+
+.location-buttons{
+  margin-bottom: 80px;
+}
+.time-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.location-button,
+.time-button {
   padding: 8px 16px;
-  background-color: #007bff;
+  margin: 0 8px 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.location-button.selected,
+.time-button.selected {
+  background-color: #1A2A5F;
+  color: white;
+  border-color: #1A2A5F;
+}
+
+.create-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #1A2A5F;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .create-button:disabled {
-  background-color: #cccccc;
+  background-color: #e0e0e0;
   cursor: not-allowed;
+}
+
+.create-button:hover:enabled {
+  background-color: #1A2A5F;
 }
 </style>

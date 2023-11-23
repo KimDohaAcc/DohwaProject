@@ -1,7 +1,8 @@
 <template>
   <div class="board-list">
-    <h5>이용 후기</h5>
-    <hr>
+    <h5 class="board-title">이용 후기</h5>
+    <h6 class="board-cotent">헬스판다를 이용한 회원님들의 솔직한 후기를 보실 수 있습니다.</h6>
+    <hr class="divider">
     <table class="board-table">
       <thead>
         <tr>
@@ -24,7 +25,7 @@
     </table>
     <div class="button-container">
       <button>
-        <RouterLink :to="{ name: 'boardCreate' }" class="create-board-link">보드 작성</RouterLink>
+        <RouterLink :to="{ name: 'boardCreate' }" class="create-board-link">후기 남기기</RouterLink>
       </button>
     </div>
     <!-- <BoardSearchInput /> -->
@@ -33,8 +34,7 @@
 
 <script setup>
 import { useBoardStore } from "@/stores/board";
-import { onMounted, computed } from "vue";
-import BoardSearchInput from "./BoardSearchInput.vue";
+import { onMounted } from "vue";
 const store = useBoardStore()
 
 onMounted(() => {
@@ -47,20 +47,32 @@ onMounted(() => {
 .board-list {
   max-width: 70vw;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.board-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.divider {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #ddd;
 }
 
 .board-table {
   width: 100%;
-  margin-top: 10px;
   border-collapse: collapse;
 }
 
 .board-table th,
 .board-table td {
-  padding: 8px;
-  text-align: left;
+  padding: 12px;
+  text-align: center;
   border: 1px solid #ddd;
 }
 
@@ -69,32 +81,37 @@ onMounted(() => {
 }
 
 .button-container {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: right;
 }
 
 button {
   cursor: pointer;
-  padding: 8px 15px;
-  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border: none;
   border-radius: 4px;
-  background-color: white;
-}
-
-button:hover {
-  background-color: #f0f0f0;
+  background-color: #1A2A5F;
+  color: white;
+  font-weight: bold;
   transition: background-color 0.3s ease;
+}
+.board-cotent{
+ margin-bottom: 50px;
+ text-align: center;
+}
+button:hover {
+  background-color:#1A2A5F;
 }
 
 .create-board-link {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 .link {
   text-decoration: none;
-  color: black;
-  font-weight: 300;
+  color: #1A2A5F;
+  font-weight: bold;
 }
 
 #title {
@@ -106,6 +123,10 @@ button:hover {
 }
 
 #nickname {
+  width: 20%;
+}
+
+#date {
   width: 20%;
 }
 </style>
