@@ -68,7 +68,8 @@ const editNickname = ref(false);
 const editPassword = ref(false);
 const updatedUser = ref(null);
 const checkPassword = ref('');
-
+const lApi = "http://localhost:8080";
+const dApi = "https://healthpanda.site";
 console.log(reservations);
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -81,10 +82,10 @@ onMounted(() => {
   let user = sessionStorage.getItem("loginUser"); // sessionStorage는 키, 밸류가 모두 문자열
   user = JSON.parse(user);
 
-  const url = `http://localhost:8080/reserve/get/${user.id}`;
-  console.log(url);
+  
+
   console.log(user);
-  axiosInstanceWithToken.get(`http://localhost:8080/auth/reserve/get/${user.id}`)
+  axiosInstanceWithToken.get(`${lApi}/auth/reserve/get/${user.id}`)
     .then(response => {
       reservations.value = response.data; // 백엔드에서 반환된 예약 목록 저장
       console.log("정보를 가져왔습니다");
@@ -137,7 +138,7 @@ function checkValidEmail() {
   }
 
   axiosInstance
-    .get(`http://localhost:8080/user/dupCheck/${updatedUser.value.account}`)
+    .get(`${lApi}/user/dupCheck/${updatedUser.value.account}`)
     .then((res) => {
       console.log(res)
       console.log(userStore.loginUser.account)
@@ -185,7 +186,7 @@ const updateUser = function () {
 const deleteReservation = (index) => {
   const reservationToDelete = reservations.value[index];
   console.log(reservationToDelete.num); // 예약의 ID 확인
-  axiosInstanceWithToken.delete(`http://localhost:8080/auth/reserve/delete/${reservationToDelete.num}`)
+  axiosInstanceWithToken.delete(`${lApi}/auth/reserve/delete/${reservationToDelete.num}`)
     .then(response => {
       reservations.value.splice(index, 1);
       console.log('예약이 삭제되었습니다.');
@@ -196,7 +197,7 @@ const deleteReservation = (index) => {
 }
 const deleteAccount = () => {
   if (confirm('정말 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
-    axiosInstanceWithToken.delete(`http://localhost:8080/auth/unregister`)
+    axiosInstanceWithToken.delete(`${lApi}/auth/unregister`)
       .then(() => {
         userStore.logoutUser();
         alert('계정이 삭제되었습니다.');
