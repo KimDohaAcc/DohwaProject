@@ -10,6 +10,7 @@ export const useBoardStore = defineStore('board', () => {
   const boardList = ref([])
   const board = ref(null)
   const writeList = ref(null)
+  const searchList = ref(null)
 
   const getBoardList = function () {
     axiosInstance.get(REST_BOARD_API)
@@ -97,7 +98,7 @@ export const useBoardStore = defineStore('board', () => {
   })
   }
 
-  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard, deleteBoard, writeList, getWriteList }
+  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard, deleteBoard, writeList, getWriteList}
 },
 {
   persist: {

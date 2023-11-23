@@ -6,7 +6,7 @@
     <div class="content-wrapper">
       <HeaderNav class="HeaderNav" />
       <main>
-        <RouterView class="RouterView" @login-user="loginUser" />
+        <RouterView class="RouterView"/>
       </main>
       <FooterView />
     </div>

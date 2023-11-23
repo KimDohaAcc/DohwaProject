@@ -61,9 +61,8 @@ public class BoardController {
     }
 
     @GetMapping("/board/search")
-    public ResponseEntity<List<Board>> search(@RequestParam String key, @RequestParam String word, @RequestParam String orderBy, @RequestParam String orderByDir) {
-        List<Board> list = boardService.getListByCondition(key, word, orderBy, orderByDir);
-        System.out.println("list = " + list);
+    public ResponseEntity<List<Board>> search(@RequestParam String key, @RequestParam String word) {
+        List<Board> list = boardService.getListByCondition(key, word);
         for (Board board : list) {
             System.out.println("board.toString() = " + board.toString());
         }
