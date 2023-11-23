@@ -13,7 +13,7 @@
             <b-dropdown-item><RouterLink :to="`/like/${userStore.loginUser.id}`" tag="span" class="nav-link">내 좋아요</RouterLink></b-dropdown-item>
             <b-dropdown-item><RouterLink to="/myFollow" tag="span" class="nav-link">내 팔로우</RouterLink></b-dropdown-item>
             <b-dropdown-item><RouterLink :to="`/board/write/${userStore.loginUser.id}`" tag="span" class="nav-link">내 작성글</RouterLink></b-dropdown-item>
-            <b-dropdown-item @click="logout" class="nav-link">로그아웃</b-dropdown-item>
+            <b-dropdown-item @click="logout" class="nav-link logout">로그아웃</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </div>
@@ -21,10 +21,6 @@
     </div>
     <div class="nav-hwaseok">
       <b-navbar toggleable="lg" type="light" variant="faded" class="navbar-custom">
-        <!-- <b-navbar-brand id="logo">
-        </b-navbar-brand> -->
-
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto">
             <b-nav-item><RouterLink to="/store" tag="span" class="nav-link">지점 소개</RouterLink></b-nav-item>
@@ -63,7 +59,8 @@ const logout = function () {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  width: 50vw;
 }
 .nav-link {
   text-decoration: none;
@@ -105,7 +102,7 @@ header {
   margin-top: 0vh;
 }
 .header-wrapper {
-  padding: 60px 0;
+  padding: 30px 0;
   text-align: center; /* 텍스트 가운데 정렬 */
   margin-bottom: 0px; /* 간판 아래 여백 추가 */
   margin-top: 5px; /* 위 여백을 5px로 설정 */
@@ -124,6 +121,24 @@ header {
 
 img {
   width: 30vw;
+}
+
+.ml-auto{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 45vw;
+}
+
+#nav-collapse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a, .logout {
+  font-weight: 400;
+  font-size: 15pt;
 }
 
 </style>

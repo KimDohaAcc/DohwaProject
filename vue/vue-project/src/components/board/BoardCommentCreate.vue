@@ -14,7 +14,7 @@
             <div class="comment-content" v-if="!comment.editing">
               <div>
               <span id="user-name">{{ comment.user ? comment.user.nickname : "(탈퇴한 사용자)" }}</span>
-              <span v-if="comment.user && comment.user.id !== userStore.loginUser.id">
+              <span v-if="comment.user && userStore.loginUser && comment.user.id !== userStore.loginUser.id">
                 <button class="follow-button" v-if="!followStore.followList.some(follow => comment.user.id === follow.followee.id)" @click="followUser(comment.user)">
                   follow<i class="bi bi-person-add"></i>
                 </button>
@@ -28,7 +28,7 @@
                 <span>{{ comment.updatedAtFormat }}</span>
                 <span>{{ comment.createdAt !== comment.updatedAt ? "(수정됨)" : "" }}</span>
               </div>
-              <div id="comment-button-container" v-if="comment.user && userStore.loginUser.id === comment.user.id">
+              <div id="comment-button-container" v-if="comment.user && userStore.loginUser && userStore.loginUser.id === comment.user.id">
                 <button @click="startEditing(index)" class="edit-button">수정</button>
                 <button @click="deleteComment(comment.num)" class="delete-button">삭제</button>
               </div>

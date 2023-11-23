@@ -104,12 +104,11 @@ iframe {
 }
 
 .video-title {
-  font-size: 1.1rem;
-  font-weight: 400;
+  font-size: 12pt;
+  font-weight: 200;
   color: #333;
   font-family: 'IBM Plex Sans KR', sans-serif;
   margin: 5px 25px;
-  padding-bottom: 7px;
   font-weight: 500;
 }
 
@@ -130,6 +129,10 @@ iframe {
 }
 
 .liked-videos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -161,12 +164,6 @@ h1 {
 
 .video-content {
   margin-bottom: 10px;
-}
-
-.video-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-left: 10px;
 }
 
 .video-frame {

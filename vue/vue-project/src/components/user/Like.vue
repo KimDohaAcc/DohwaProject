@@ -1,24 +1,26 @@
 <template>
-    <div v-if="userStore.neededUser">
+    <div class="liked-videos" v-if="userStore.neededUser">
         <h1>{{ userStore.neededUser.nickname }}님이 좋아요 한 영상</h1>
         <div v-if="!videoStore.likeList || videoStore.likeList.length == 0">
             <p>좋아요 한 영상이 없습니다</p>
         </div>
-        <ul v-else>
+        <ul v-else class="video-list">
             <li v-for="like in videoStore.likeList" :key="like.num">
                 <div class="video-content">
                     <p class="video-title">
                         {{ like.video.title }}
                     </p>
                 </div>
-                <iframe :src="like.video.url" frameborder="0" allowfullscreen></iframe>
+                <div class="video-frame">
+            <iframe :src="like.video.url" frameborder="0" allowfullscreen></iframe>
+          </div>
                 <div class="like-container">
                     <a @click="clickLike(like.video)">
-                        <span>{{ videoLikeCount(like.video.num) }}</span>
-                        <span v-if="hasLike(like.video)">
+                        <span class="like-count">{{ videoLikeCount(like.video.num) }}</span>
+                        <span v-if="hasLike(like.video)" class="liked">
                             <i class="bi bi-heart-fill"></i>
                         </span>
-                        <span v-else>
+                        <span v-else class="not-liked">
                             <i class="bi bi-heart"></i>
                         </span>
                     </a>

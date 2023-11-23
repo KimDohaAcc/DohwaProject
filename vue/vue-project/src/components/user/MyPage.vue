@@ -223,8 +223,6 @@ const deleteAccount = () => {
   align-items: center;
   margin-bottom: 200px;
   margin-top: 100px;
-  height: 100vh;
-  /* background-color: aqua; */
 }
 
 .sns-page {
@@ -284,7 +282,6 @@ h1 {
 }
 
 .deleteAccount {
-  /* position: fixed; */
   bottom: 20px;
   right: 20px;
   padding: 10px 20px;

@@ -50,10 +50,11 @@ nav>a {
 }
 
 .kakao {
-    width: 45px;
+    width: 35px;
+    padding: 5px;
     height: auto;
     cursor: pointer;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 5px solid #ddd;
 }
 
 link:hover {
