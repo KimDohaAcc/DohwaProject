@@ -71,6 +71,8 @@
   
   export default {
     setup() {
+      const lApi = "http://localhost:8080";
+      const dApi = "https://healthpanda.site";
       const userStore = useUserStore();
       const nickname = ref('');
       const account = ref('');
@@ -128,7 +130,7 @@
 		console.log(account.value);
       if (!errorAccount.value && account.value !== '') {
         try {
-          const response = await axios.get(`http://localhost:8080/user/dupCheck/${account.value}`);
+          const response = await axios.get(`${lApi}/user/dupCheck/${account.value}`);
             // 백엔드에서 중복된 계정이 있는지 확인 후 처리
             if (response.status === 200) {
               // 중복된 계정이 있을 경우
