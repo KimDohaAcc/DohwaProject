@@ -70,7 +70,6 @@ export const useUserStore = defineStore('user', () => {
       }
 
       const login = function () {
-        const API_URL = REST_API_URL + `/login`
         console.log(user)
 
         axiosInstance

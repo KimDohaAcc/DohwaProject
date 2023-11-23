@@ -11,7 +11,8 @@
           </b-nav-item>
         </b-navbar-nav>
 
-        <b-navbar-nav right v-else>
+        <b-navbar-nav class="user-nav" right v-else>
+          <span v-if="userStore.loginUser">{{ userStore.loginUser.nickname }}님, 안녕하세요!</span>
           <b-nav-item-dropdown text="User" class="navbar-user">
             <b-dropdown-item>
               <RouterLink to="/myPage" tag="span" class="nav-link">마이페이지</RouterLink>
@@ -114,7 +115,8 @@ const logout = function () {
 }
 
 .navbar-user {
-  margin-right: 20px;
+  margin: 0 20px;
+  font-size: 15pt;
 }
 
 @media (max-width: 768px) {
@@ -191,4 +193,12 @@ a,
   margin: 50px 0;
 }
 
+.user-nav {
+  display: flex;
+  flex-flow: wrap row;
+}
+
+.user-nav > span {
+  padding-top: 12px;
+}
 </style>

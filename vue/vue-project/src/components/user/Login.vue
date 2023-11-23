@@ -73,7 +73,7 @@ const goToSignup = () => {
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
-  margin-top: 250px;
+  margin-top: 100px;
   margin-bottom: 250px;
 }
 

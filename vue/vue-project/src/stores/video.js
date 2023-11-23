@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { useUserStore } from '@/stores/user';
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
 const REST_BOARD_API = `http://localhost:8080/video`
@@ -10,6 +11,8 @@ export const useVideoStore = defineStore('video', () => {
   const videoList = ref(null)
   const videoLikeCountList = ref({});
   const likeList = ref(null);
+  const userStore = useUserStore();
+
   const selectedSort = ref('전체');
 
   const getVideoList = async function () {
@@ -36,7 +39,7 @@ export const useVideoStore = defineStore('video', () => {
       .then((res) => {
         console.log("ok")
         getVideoList();
-        likeCheck();
+        likeCheck(userStore.loginUser.id);
       })
       .catch((err) => {
         console.log(err);
@@ -45,6 +48,10 @@ export const useVideoStore = defineStore('video', () => {
 
 
   const likeCheck = function (id) {
+    if(!userStore.loginUser){
+      return;
+    }
+    
     axiosInstanceWithToken
       .get(`${lApi}/auth/like/${id}`)
       .then((res) => {  
