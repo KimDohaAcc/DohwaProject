@@ -21,6 +21,7 @@
           </li>
         </ul>
       </div>
+      
       <div class="friend-section">
         <h2>Followee</h2>
         <div v-if="!followStore.followList">

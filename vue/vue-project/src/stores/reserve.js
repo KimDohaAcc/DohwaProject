@@ -12,6 +12,8 @@ export function useReserveStore() {
     const selectedLocation = ref('');
     const selectedTime = ref('');
     const userStore = useUserStore();
+    const lApi = "http://localhost:8080";
+    const dApi = "https://healthpanda.site";
 
 
     const currentDate = new Date();
@@ -93,7 +95,7 @@ export function useReserveStore() {
                 phone: reservePhone.value,
                 store: selectedLocation.value,
             };
-            axiosInstanceWithToken.post('http://localhost:8080/auth/reserve/create', reserveData)
+            axiosInstanceWithToken.post(`${lApi}/auth/reserve/create`, reserveData)
                 .then(response => {
                     console.log('예약이 성공적으로 생성되었습니다.', response.data);
                     alert("예약이 성공적으로 되었습니다.");

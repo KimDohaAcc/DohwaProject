@@ -9,13 +9,15 @@ export const useUserStore = defineStore('user', () => {
       let user = {};
       let mealList = ref(null);
       const neededUser = ref(null);
+      const lApi = "http://localhost:8080";
+      const dApi = "https://healthpanda.site";
+  
 
 
-      const REST_API_URL = `http://localhost:8080`;
       const originalLogin = async () => {
         axiosInstance({
           method: "POST",
-          url: "http://localhost:8080/originalLogin",
+          url: `${lApi}/originalLogin`,
           params: {
             account: username.value,
             password: password.value,
@@ -72,7 +74,7 @@ export const useUserStore = defineStore('user', () => {
         console.log(user)
 
         axiosInstance
-            .post(API_URL, user)
+            .post(`${lApi}/login`, user)
             .then((res) => {
               sessionStorage.setItem('jwtToken', res.data['access-token']);
             })
@@ -101,7 +103,7 @@ export const useUserStore = defineStore('user', () => {
       const submitNewUser = async (newUser) => {
         try {
           
-          const response = await axiosInstance.post('http://localhost:8080/user', newUser);
+          const response = await axiosInstance.post(`${lApi}/user`, newUser);
           console.log('서버 응답:', response.data);
           alert("회원가입이 완료되었습니다.");
           router.push('/');
@@ -113,7 +115,7 @@ export const useUserStore = defineStore('user', () => {
 
       const updateUser = function() {
         axiosInstanceWithToken
-        .put('http://localhost:8080/auth/user', loginUser.value)
+        .put(`${lApi}/auth/user`, loginUser.value)
         .then((res) => {
           console.log("업데이트 완료")
         })
@@ -126,7 +128,7 @@ export const useUserStore = defineStore('user', () => {
         }
 
         axiosInstanceWithToken
-        .get(`http://localhost:8080/auth/user/${id}`)
+        .get(`${lApi}/auth/user/${id}`)
         .then((res) => {
           console.log(res.data)
           neededUser.value = res.data;
