@@ -27,18 +27,7 @@
             </li>
         </ul>
     </div>
-    <li v-for="follow in followStore.followerList" :key="follow.num" class="follower-item">
-  <div class="dropdown">
-    <div @click="toggleDropdown(follow.num)" class="follower-content">
-      <img src="@\assets\사람.png" alt="Follower Profile" class="follower-profile">
-      <p>{{ follow.follower.nickname }}</p>
-    </div>
-    <div v-if="follow.dropdownOpen" class="dropdown-content">
-      <RouterLink :to="`/like/${follow.follower.id}`">좋아하는 비디오</RouterLink>
-      <RouterLink :to="`/board/write/${follow.follower.id}`">작성한 글</RouterLink>
-    </div>
-  </div>
-</li>
+
 </template>
 
 <script setup>
