@@ -4,7 +4,8 @@ import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
 const REST_BOARD_API = `http://localhost:8080/video`
 const REST_BOARD_API_Like = `http://localhost:8080/auth/like`
-
+const lApi = "http://localhost:8080";
+const dApi = "https://healthpanda.site";
 export const useVideoStore = defineStore('video', () => {
   const videoList = ref(null)
   const videoLikeCountList = ref({});
@@ -12,7 +13,7 @@ export const useVideoStore = defineStore('video', () => {
   const selectedSort = ref('전체');
 
   const getVideoList = async function () {
-    await axiosInstance.get(REST_BOARD_API)
+    await axiosInstance.get(`${lApi}/video`)
       .then(async function (res) {
         videoList.value = res.data;
         await Promise.all(videoList.value.map(video => getLikeCount(video.num)));
@@ -31,7 +32,7 @@ export const useVideoStore = defineStore('video', () => {
 
   const clickLike = function (video) {
     axiosInstanceWithToken
-      .post(REST_BOARD_API_Like, video)
+      .post(`${lApi}/auth/like`, video)
       .then((res) => {
         console.log("ok")
         getVideoList();
@@ -45,7 +46,7 @@ export const useVideoStore = defineStore('video', () => {
 
   const likeCheck = function (id) {
     axiosInstanceWithToken
-      .get(REST_BOARD_API_Like + `/${id}`)
+      .get(`${lApi}/auth/like/${id}`)
       .then((res) => {  
           likeList.value = res.data;
       })
@@ -55,7 +56,7 @@ export const useVideoStore = defineStore('video', () => {
   }
 
   const getLikeCount = async function (videoNum) {
-    await axiosInstance.get(`http://localhost:8080/like/${videoNum}`)
+    await axiosInstance.get(`${lApi}/like/${videoNum}`)
       .then((res) => {
         videoLikeCountList.value[videoNum] = res.data
       })
