@@ -8,7 +8,10 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
 import BootstrapVue3 from 'bootstrap-vue-3';
+import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
+const lApi = "http://localhost:8080";
+const dApi = "https://healthpanda.site";
 const app = createApp(App);
 
 app.config.globalProperties.$axios = axios;
@@ -22,7 +25,7 @@ const checkTokenValidity = () => {
   console.log(token);
 
   if (token) {
-      axios.get('http://localhost:8080/token-check', {
+    axiosInstance.get(`${lApi}/token-check`, {
         params: {
           token: token
         }

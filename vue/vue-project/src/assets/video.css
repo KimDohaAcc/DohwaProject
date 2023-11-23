@@ -14,6 +14,8 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   overflow: hidden;
+  justify-content: center;
+  gap: 20px;
 }
 
 .video-item {
@@ -129,14 +131,15 @@ iframe {
 }
 
 .liked-videos {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 800px;
+  max-width: 800px; */
   margin: 0 auto;
   padding: 20px;
   margin-left: 15px;
+  text-align: center; /* 요소 내 텍스트 가운데 정렬 */
 }
 .username {
   margin-left: 15px;
@@ -150,15 +153,19 @@ h1 {
 }
 
 .video-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
 .video-item {
+  width: 530px; /* 동영상 폭 */
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -169,7 +176,7 @@ h1 {
 .video-frame {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 비율을 유지하기 위한 값 */
+  padding-bottom: 56.25%; /* 16:9 비율 */
 }
 
 .video-frame iframe {
