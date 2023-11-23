@@ -44,6 +44,11 @@
       alert('검색어를 입력해주세요');
       return;
     }
+
+    if(store.type !== 'board' && store.type !== 'video'){
+        alert('검색 유형을 설정해주세요')
+        return;
+    }
   
     if (store.type === 'board') {
       store.searchBoardList(searchInfo.value);

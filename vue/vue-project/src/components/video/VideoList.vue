@@ -52,7 +52,10 @@ const videoLikeCount = computed(() => {
 
 onBeforeMount(() => {
   store.getVideoList();
-  store.likeCheck(userStore.loginUser.id);
+
+  if(userStore.loginUser){
+    store.likeCheck(userStore.loginUser.id);
+  }
 });
 
 const copyVideoUrl = function (video) {
