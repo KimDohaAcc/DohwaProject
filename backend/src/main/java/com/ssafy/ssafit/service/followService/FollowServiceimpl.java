@@ -15,6 +15,7 @@ import java.util.Optional;
 @Transactional
 public class FollowServiceimpl implements FollowService {
     private final FollowRepository followRepository;
+
     @Override
     public Follow createFollow(Follow follow) {
         return followRepository.save(follow);
@@ -38,7 +39,7 @@ public class FollowServiceimpl implements FollowService {
     }
 
     @Override
-    public Optional<Follow> getFollowByFollowerAndFollowee(User follower, User followee){
+    public Optional<Follow> getFollowByFollowerAndFollowee(User follower, User followee) {
         return followRepository.findFollowByFollowerAndFollowee(follower, followee);
     }
 }

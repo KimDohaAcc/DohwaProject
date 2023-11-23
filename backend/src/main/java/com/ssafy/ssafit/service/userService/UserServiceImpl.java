@@ -6,21 +6,19 @@ import com.ssafy.ssafit.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-
+@Transactional
 public class UserServiceImpl implements UserService {
-    // 카카오로그인시 db에 유저로 저장 메소드
-    // userRepository
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
 
     @Override
     public User insertUser(User user) {
-
         return userRepository.save(user);
     }
 
@@ -30,32 +28,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<User> findUserByAccount(String account) {
         return userRepository.findUserByAccount(account);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<User> extractUserFromToken(String sessionToken) {
         return Optional.ofNullable(jwtUtil.extractUserIdFromToken(sessionToken))
                 .flatMap(this::findUserById);
     }
-
-
-//    @Override
-//    public boolean deleteUserById(Long id) {
-//        if (userRepository.existsById(id)) {
-//            userRepository.deleteById(id);
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-
     @Override
     public boolean deleteUserById(Long id) {
         try {

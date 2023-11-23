@@ -7,7 +7,6 @@
       <button :class="{ active: store.selectedSort === '상체' }" @click="filterVideos('상체')">상체</button>
       <button :class="{ active: store.selectedSort === '복부' }" @click="filterVideos('복부')">복부</button>
     </div>
-
     <ul class="video-list">
       <li v-for="video in filteredVideoList" :key="video.num" class="video-item">
         <div class="video-content">
@@ -22,7 +21,7 @@
           </span>
           <a @click="clickLike(video)">
             <span>{{ videoLikeCount(video.num) }}</span>
-            <span v-if="hasLike(video)">
+            <span v-if="userStore.loginUser && hasLike(video)">
               <i class="bi bi-heart-fill"></i>
             </span>
             <span v-else>
@@ -53,7 +52,7 @@ const videoLikeCount = computed(() => {
 
 onBeforeMount(() => {
   store.getVideoList();
-  store.likeCheck();
+  store.likeCheck(userStore.loginUser.id);
 });
 
 const copyVideoUrl = function (video) {

@@ -63,9 +63,6 @@ public class BoardController {
     @GetMapping("/board/search")
     public ResponseEntity<List<Board>> search(@RequestParam String key, @RequestParam String word) {
         List<Board> list = boardService.getListByCondition(key, word);
-        for (Board board : list) {
-            System.out.println("board.toString() = " + board.toString());
-        }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

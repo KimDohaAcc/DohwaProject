@@ -11,12 +11,9 @@ import com.ssafy.ssafit.service.alarmSettingService.AlarmSettingService;
 import com.ssafy.ssafit.service.mealService.MealService;
 import io.github.flashvayne.chatgpt.dto.ChatRequest;
 import io.github.flashvayne.chatgpt.dto.ChatResponse;
-import io.github.flashvayne.chatgpt.dto.chat.MultiChatRequest;
 import io.github.flashvayne.chatgpt.property.ChatgptProperties;
 import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +47,6 @@ public class KakaoSkillController {
 
         String reply = chatgptService.sendMessage(String.format("%s %s의 칼로리를 '[kcal: ]' 형식으로 알려줘", food, gram));
         String kcal = extractKcal(reply);
-        System.out.println("reply = " + reply);
         Meal newMeal = new Meal(null, user, food, kcal, LocalDateTime.now(ZoneId.of("Asia/Seoul")));
         mealService.createMeal(newMeal);
         return createResponseMap(kcal);
@@ -67,9 +63,7 @@ public class KakaoSkillController {
 
     private String getUserId(Map<String, Object> event) {
         Map<String, Object> userRequest = (Map<String, Object>) event.get("userRequest");
-        System.out.println("userRequest = " + userRequest);
         Map<String, Object> user = (Map<String, Object>) userRequest.get("user");
-        System.out.println("user = " + user);
         return (String) user.get("id");
     }
 
@@ -97,12 +91,9 @@ public class KakaoSkillController {
         Map<String, String> params = getActionParams(event);
         String period = params.get("period");
         String user = getUserId(event);
-        System.out.println("user = " + user);
 
         Optional<List<Meal>> list = Optional.ofNullable(mealService.getMealAllByUser(user));
         LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-
-        System.out.println("period = " + period);
 
         return list.map(mealList -> {
                     LocalDateTime before = switch (period) {
@@ -194,7 +185,6 @@ public class KakaoSkillController {
 
     @PostMapping("/alarm/nowTime")
     public Map<String, Object> nowTime(@RequestBody Map<String, Object> event) {
-        System.out.println("event = " + event);
         String user = getUserId(event);
 
         Optional<AlarmSetting> opt = Optional.ofNullable(alarmSettingService.findAlarmSettingByUser(user));
@@ -291,8 +281,6 @@ public class KakaoSkillController {
         ChatRequest chatRequest = new ChatRequest(chatgptProperties.getModel(), date + "의 다이어트 식단을 번호를 매겨 리스트로 작성해줘", 3000, 0.8, 0.8);
         ChatResponse reply = chatgptService.sendChatRequest(chatRequest);
         String result = reply.getChoices().get(0).getText();
-        System.out.println(result);
-        System.out.println("reply = " + reply);
 
         int startIdx = result.indexOf('1');
         result = result.substring(startIdx);

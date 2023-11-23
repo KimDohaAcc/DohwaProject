@@ -10,7 +10,10 @@ public interface FollowService {
     Follow createFollow(Follow follow);
 
     List<Follow> getFollowByFollower(User user);
+
     List<Follow> getFollowByFollowee(User user);
+
     Optional<Follow> getFollowByFollowerAndFollowee(User follower, User followee);
+
     void removeFollow(Follow follow);
 }

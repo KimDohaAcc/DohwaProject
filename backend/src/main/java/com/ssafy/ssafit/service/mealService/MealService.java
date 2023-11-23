@@ -3,7 +3,6 @@ package com.ssafy.ssafit.service.mealService;
 import com.ssafy.ssafit.domain.Meal;
 
 import java.util.List;
-
 public interface MealService {
     Meal createMeal(Meal meal);
 

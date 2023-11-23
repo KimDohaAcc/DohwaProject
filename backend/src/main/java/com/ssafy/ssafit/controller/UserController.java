@@ -26,7 +26,6 @@ public class UserController {
     @PostMapping("/user")
     public ResponseEntity<User> regist(@RequestBody User userdto) {
         User user = new User(userdto.getId(), userdto.getNickname(), userdto.getAccount(), userdto.getPassword(), userdto.isIskakao());
-        System.out.println("user = " + user);
         return Optional.ofNullable(userService.insertUser(user))
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -48,7 +47,6 @@ public class UserController {
 
     @GetMapping("/user/dupCheck/{account}")
     public ResponseEntity<User> getUser(@PathVariable String account) {
-        System.out.println("account = " + account);
         return userService.findUserByAccount(account)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.noContent().build());
@@ -87,36 +85,21 @@ public class UserController {
     @DeleteMapping("auth/unregister")
     public ResponseEntity<Void> unregisterUser(HttpServletRequest request) {
         String sessionToken = request.getHeader("Authorization");
-        if(sessionToken==null){
-            System.out.println("넌 바보야");
-        }
-        System.out.println("sessionToken = " + sessionToken);
         try {
             Optional<User> user = userService.findUserById(jwtUtil.extractUserIdFromToken(sessionToken));
-
-            System.out.println("user = " + user);
             if (user.isPresent()) {
-                // 사용자가 존재하는 경우에만 삭제를 시도
-
                 userService.deleteUserById(user.get().getId());
-                // 토큰 체크 및 무효화
                 if (sessionToken != null && sessionToken.startsWith("Bearer ")) {
                     sessionToken = sessionToken.substring(7); // "Bearer " 부분 제거
                     jwtUtil.invalidateToken(sessionToken);
-
                 } else {
-                    // 토큰이 없거나 형식이 맞지 않는 경우 UNAUTHORIZED 반환
                     return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
                 }
-
-                // 사용자 삭제 및 토큰 무효화 성공 시 OK 반환
                 return ResponseEntity.ok().build();
             } else {
-                // 사용자가 존재하지 않는 경우 NOT_FOUND 반환
                 return ResponseEntity.notFound().build();
             }
         } catch (Exception e) {
-            // 예외 발생 시 UNAUTHORIZED 반환
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }

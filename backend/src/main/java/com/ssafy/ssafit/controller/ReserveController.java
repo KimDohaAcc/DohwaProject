@@ -25,12 +25,10 @@ public class ReserveController {
 
     @PostMapping("/reserve/create")
     public ResponseEntity<Object> createReserve(@RequestBody Reserve reserve, HttpServletRequest request) {
-//        reserveService.createReserve(reserve);
         String sessionToken = request.getHeader("Authorization");
         try {
             Optional<User> user = userService.findUserById(jwtUtil.extractUserIdFromToken(sessionToken));
 
-            System.out.println("user = " + user);
             if (user.isPresent()) {
                 reserveService.createReserve(reserve);
             } else {
@@ -42,50 +40,29 @@ public class ReserveController {
         return null;
     }
 
-//    @PutMapping("/reserve/update")
-//    public void updateReserve(@RequestBody Reserve reserve) {
-//        reserveService.modifyReserve(reserve);
-//    }
-
     @DeleteMapping("/reserve/delete/{id}")
     public void deleteReserve(@PathVariable Long id, HttpServletRequest request) {
 
-//        reserveService.deleteReserve(id);
         String sessionToken = request.getHeader("Authorization");
         try {
             Optional<User> user = userService.findUserById(jwtUtil.extractUserIdFromToken(sessionToken));
 
-            System.out.println("user = " + user);
             if (user.isPresent()) {
                 reserveService.deleteReserve(id);
             } else {
                 new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-                return;
             }
         } catch (Exception e) {
             new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            return;
         }
     }
 
     @GetMapping("/reserve/get/{id}")
     public Object getReserveByUser(@PathVariable Long id, HttpServletRequest request) {
-        // 앞으로 request 받아와서 token에서 user id를 빼서 user 를 찾아올 것!
-//        System.out.println("?");
-//        User user = userService.findUserById(id).get();
-//        System.out.println(user.toString());
-//        System.out.println("리스트 가져오나?");
-//        List<Reserve> tempList = new ArrayList<Reserve>();
-//        if(user!=null){
-//            tempList = reserveService.getListByUser(user);
-//        }
-//        System.out.println(tempList);
-//        return new ResponseEntity<>(tempList,HttpStatus.OK);
         String sessionToken = request.getHeader("Authorization");
         try {
             Optional<User> user = userService.findUserById(jwtUtil.extractUserIdFromToken(sessionToken));
 
-            System.out.println("user = " + user);
             List<Reserve> tempList = new ArrayList<Reserve>();
             if (user.isPresent()) {
                 tempList = reserveService.getListByUser(user);

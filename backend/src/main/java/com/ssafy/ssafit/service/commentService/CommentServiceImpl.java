@@ -12,48 +12,44 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
-
     private final CommentRepository commentRepository;
     private final UserService userService;
     private final BoardService boardService;
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<Comment>> getCommentsByBoard(Long boardNum) {
         return boardService.getBoard(boardNum).map(commentRepository::findAllByBoard);
     }
 
-    @Transactional
     @Override
     public Comment writeComment(Comment comment) {
         comment.setUser(userService.findUserById(comment.getUser().getId()).get());
         comment.setBoard(boardService.getBoard(comment.getBoard().getNum()).get());
-        System.out.println(comment);
         return commentRepository.save(comment);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Comment> getComment(Long userId) {
-
         return commentRepository.findById(userId);
     }
 
-    @Transactional
     @Override
     public void modifyComment(Comment comment) {
         commentRepository.save(comment);
 
     }
 
-    @Transactional
     @Override
-    public boolean removeComment(Long commentId)
-    {
-        if(commentRepository.existsById(commentId)){
+    public boolean removeComment(Long commentId) {
+        if (commentRepository.existsById(commentId)) {
             commentRepository.deleteById(commentId);
             return true;
-        }else{
+        } else {
             return false;
         }
 

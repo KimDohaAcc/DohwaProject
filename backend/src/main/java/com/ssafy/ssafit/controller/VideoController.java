@@ -28,13 +28,7 @@ public class VideoController {
 
     @GetMapping("/video/search")
     public ResponseEntity<List<Video>> search(@RequestParam String key, @RequestParam String word) {
-        System.out.println("key = " + key);
-        System.out.println("word = " + word);
         List<Video> list = videoService.getListByCondition(key, word);
-        for (Video video : list) {
-            System.out.println("video.toString() = " + video.toString());
-        }
-
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }

@@ -5,7 +5,6 @@ import com.ssafy.ssafit.domain.User;
 import com.ssafy.ssafit.domain.Video;
 import com.ssafy.ssafit.service.likeService.LikeService;
 import com.ssafy.ssafit.service.userService.UserService;
-import com.ssafy.ssafit.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LikeController {
     private final LikeService likeService;
-    private final JwtUtil jwtUtil;
     private final UserService userService;
 
     @PostMapping("/auth/like")
@@ -36,9 +34,7 @@ public class LikeController {
 
     @GetMapping("/auth/like/{id}")
     public ResponseEntity<List<Like>> getLikeByUser(@PathVariable Long id) {
-        System.out.println("id = " + id);
         Optional<User> user = userService.findUserById(id);
-        System.out.println("user = " + user);
         if (user.isPresent()) {
             List<Like> likeList = likeService.getLikeByUser(user.get());
 

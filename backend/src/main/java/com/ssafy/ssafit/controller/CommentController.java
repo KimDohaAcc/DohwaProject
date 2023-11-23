@@ -32,7 +32,6 @@ public class CommentController {
 
     @PostMapping("/auth/comment")
     public ResponseEntity<Comment> write(@RequestBody Comment comment) {
-        System.out.println("comment = " + comment.toString());
         return Optional.ofNullable(commentService.writeComment(comment))
                 .map(createComment -> new ResponseEntity<>(createComment, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));

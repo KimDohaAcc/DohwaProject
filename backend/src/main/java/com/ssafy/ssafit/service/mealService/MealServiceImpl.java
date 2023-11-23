@@ -17,7 +17,6 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal createMeal(Meal meal) {
-        System.out.println("meal = " + meal.toString());
         return mealRepository.save(meal);
     }
 
@@ -37,7 +36,6 @@ public class MealServiceImpl implements MealService {
     @Override
     public void removeMeal(String user) {
         List<Meal> meals = mealRepository.findByUserOrderByNumDesc(user);
-        System.out.println("meals = " + meals);
         if (!meals.isEmpty()) {
             mealRepository.delete(meals.get(0));
         }

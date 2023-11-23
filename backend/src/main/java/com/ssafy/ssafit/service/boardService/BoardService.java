@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface BoardService {
     List<Board> getList();
+
     List<Board> getListByUser(User user);
 
     Board writeBoard(Board board);

@@ -16,7 +16,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setHeaderParam("alg", "HS256")
                 .setHeaderParam("typ", "JWT")
-                .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1시간 후 만료
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
                 .claim("id", value)
                 .signWith(SignatureAlgorithm.HS256, SALT.getBytes(StandardCharsets.UTF_8))
                 .compact();
@@ -29,16 +29,8 @@ public class JwtUtil {
             Jws<Claims> claimsJws = Jwts.parser()
                     .setSigningKey(SALT.getBytes(StandardCharsets.UTF_8))
                     .parseClaimsJws(token);
-
-            if (claimsJws.getBody().getExpiration().before(new Date())) {
-                System.out.println("토큰이 만료되었습니다.");
-                return false;
-            }
-
-            return true;
-
+            return !claimsJws.getBody().getExpiration().before(new Date());
         } catch (JwtException e) {
-            System.out.println("토큰 검증 에러: " + e.getMessage());
             return false;
         }
     }
@@ -53,7 +45,6 @@ public class JwtUtil {
 
     public Long extractUserIdFromToken(String token) {
         token = replaceToken(token);
-
         try {
             Claims claims = Jwts.parser()
                     .setSigningKey(SALT.getBytes())
@@ -73,10 +64,8 @@ public class JwtUtil {
         secureRandom.nextBytes(salt);
         return Base64.getEncoder().encodeToString(salt);
     }
+
     public void invalidateToken(String token) {
-
-        System.out.println("Invalidating token: " + token);
-
         try {
             Claims claims = Jwts.parser()
                     .setSigningKey(SALT.getBytes(StandardCharsets.UTF_8))
@@ -86,7 +75,6 @@ public class JwtUtil {
 
         } catch (JwtException e) {
             System.out.println("Error invalidating token: " + e.getMessage());
-            // 토큰이 유효하지 않은 경우의 예외 처리
         }
     }
 }

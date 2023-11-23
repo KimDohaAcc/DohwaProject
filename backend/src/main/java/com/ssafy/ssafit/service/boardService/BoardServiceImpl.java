@@ -11,16 +11,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Board> getList() {
         return boardRepository.findAll();
     }
 
-    @Transactional
     @Override
     public Board writeBoard(Board board) {
         System.out.println("board = " + board);
@@ -28,19 +29,18 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Board> getBoard(Long num) {
         return boardRepository.findById(num);
     }
 
-    @Transactional
+
     @Override
     public void modifyBoard(Board board) {
-        System.out.println("board = " + board);
         boardRepository.save(board);
     }
 
 
-    @Transactional
     @Override
     public boolean removeBoard(Long num) {
         if (boardRepository.existsById(num)) {
@@ -52,12 +52,14 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Board> getListByCondition(String key, String word) {
         return boardRepository.getListByCondition(key, word);
     }
 
     @Override
-    public List<Board> getListByUser(User user){
+    @Transactional(readOnly = true)
+    public List<Board> getListByUser(User user) {
         return boardRepository.getBoardsByUser(user);
     }
 }

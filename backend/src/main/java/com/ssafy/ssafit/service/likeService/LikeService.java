@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface LikeService {
     Like createLike(Like like);
+
     Optional<Like> getLikeByUserAndVideo(User user, Video video);
 
     List<Like> getLikeByUser(User user);

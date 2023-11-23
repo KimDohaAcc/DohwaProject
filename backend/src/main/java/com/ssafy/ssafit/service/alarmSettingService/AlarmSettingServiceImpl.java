@@ -9,8 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AlarmSettingServiceImpl implements AlarmSettingService{
+public class AlarmSettingServiceImpl implements AlarmSettingService {
     private final AlarmSettingRepository alarmSettingRepository;
+
     @Override
     public AlarmSetting insertAlarmSetting(AlarmSetting alarmSetting) {
         return alarmSettingRepository.save(alarmSetting);
@@ -28,7 +29,6 @@ public class AlarmSettingServiceImpl implements AlarmSettingService{
 
     @Override
     public void removeAlarmSetting(AlarmSetting alarmSetting) {
-        System.out.println("alarmSetting = " + alarmSetting.toString());
         alarmSettingRepository.delete(alarmSetting);
     }
 
