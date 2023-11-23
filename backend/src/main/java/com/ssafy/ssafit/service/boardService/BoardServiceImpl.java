@@ -52,8 +52,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<Board> getListByCondition(String key, String word, String orderBy, String orderByDir) {
-        return boardRepository.getListByCondition(key, word, orderBy, orderByDir);
+    public List<Board> getListByCondition(String key, String word) {
+        return boardRepository.getListByCondition(key, word);
     }
 
     @Override

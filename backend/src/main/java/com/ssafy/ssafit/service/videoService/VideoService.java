@@ -16,4 +16,5 @@ public interface VideoService {
 
     boolean removeVideo(Long id);
 
+    List<Video> getListByCondition(String key, String word);
 }

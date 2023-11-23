@@ -9,6 +9,10 @@ import com.ssafy.ssafit.domain.Meal;
 import com.ssafy.ssafit.service.alarmService.AlarmService;
 import com.ssafy.ssafit.service.alarmSettingService.AlarmSettingService;
 import com.ssafy.ssafit.service.mealService.MealService;
+import io.github.flashvayne.chatgpt.dto.ChatRequest;
+import io.github.flashvayne.chatgpt.dto.ChatResponse;
+import io.github.flashvayne.chatgpt.dto.chat.MultiChatRequest;
+import io.github.flashvayne.chatgpt.property.ChatgptProperties;
 import io.github.flashvayne.chatgpt.service.ChatgptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,6 +36,7 @@ import java.util.*;
 @RequestMapping("/skill")
 public class KakaoSkillController {
     private final ChatgptService chatgptService;
+    private final ChatgptProperties chatgptProperties;
     private final MealService mealService;
     private final AlarmService alarmService;
     private final AlarmSettingService alarmSettingService;
@@ -45,17 +50,19 @@ public class KakaoSkillController {
 
         String reply = chatgptService.sendMessage(String.format("%s %s의 칼로리를 '[kcal: ]' 형식으로 알려줘", food, gram));
         String kcal = extractKcal(reply);
-
+        System.out.println("reply = " + reply);
         Meal newMeal = new Meal(null, user, food, kcal, LocalDateTime.now(ZoneId.of("Asia/Seoul")));
         mealService.createMeal(newMeal);
         return createResponseMap(kcal);
     }
 
     @PostMapping("/meal/delete")
-    public ResponseEntity<Void> deleteMeal(Map<String, Object> event){
+    public Map<String, String> deleteMeal(@RequestBody Map<String, Object> event) {
         String user = getUserId(event);
         mealService.removeMeal(user);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Map<String, String> map = new HashMap<>();
+        map.put("delete", "ok");
+        return map;
     }
 
     private String getUserId(Map<String, Object> event) {
@@ -118,7 +125,7 @@ public class KakaoSkillController {
             if (meal.getTime().isAfter(before)) {
                 String key = "(" + (i + 1) + ")";
                 String value = "[" + meal.getTime().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
-                        + " " +  (meal.getTime().getHour() >= 17 ? "저녁" : meal.getTime().getHour() >= 12 ? "점심" : "아침") + "] " +  meal.getFood() + " " + meal.getKcal().trim() + "kcal";
+                        + " " + (meal.getTime().getHour() >= 17 ? "저녁" : meal.getTime().getHour() >= 12 ? "점심" : "아침") + "] " + meal.getFood() + " " + meal.getKcal().trim() + "kcal";
                 itemList.add(createItem(key, value));
             }
         }
@@ -191,7 +198,7 @@ public class KakaoSkillController {
         String user = getUserId(event);
 
         Optional<AlarmSetting> opt = Optional.ofNullable(alarmSettingService.findAlarmSettingByUser(user));
-        if(opt.isEmpty()){
+        if (opt.isEmpty()) {
             return getStringObjectMap("출석 시간 설정을 하지 않아 기록할 수 없어요. 시간을 먼저 설정해주세요");
         }
 
@@ -278,15 +285,16 @@ public class KakaoSkillController {
     }
 
     @PostMapping("/question")
-    public Map<String, String> question(@RequestBody Map<String, Object> event){
+    public Map<String, String> question(@RequestBody Map<String, Object> event) {
         Map<String, String> param = getActionParams(event);
-        String question = param.get("question");
-        String reply = chatgptService.sendMessage("너는 헬스트레이너야. Use only 1 paragraph. 한국어로 질문에 답변해줘. 질문 : " + question);
-        reply = reply.replace("\n", "");
+        ChatRequest chatRequest = new ChatRequest(chatgptProperties.getModel(), "7일의 다이어트 식단을 리스트로 작성해줘", 3000, 0.8, 0.8);
+        ChatResponse reply = chatgptService.sendChatRequest(chatRequest);
+        String result = reply.getChoices().get(0).getText();
+        System.out.println(result);
+        result = result.replace("\n", "");
         System.out.println("reply = " + reply);
-
-        Map<String, String> res = new HashMap<>();
-        res.put("answer", reply);
-        return res;
+        Map<String, String> map = new HashMap<>();
+        map.put("answer", result);
+        return map;
     }
 }

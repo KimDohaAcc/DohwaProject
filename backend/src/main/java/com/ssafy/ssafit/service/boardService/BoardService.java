@@ -18,5 +18,5 @@ public interface BoardService {
 
     boolean removeBoard(Long id);
 
-    List<Board> getListByCondition(String key, String word, String orderBy, String orderByDir);
+    List<Board> getListByCondition(String key, String word);
 }

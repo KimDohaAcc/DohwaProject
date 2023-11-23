@@ -8,6 +8,7 @@ import ReserveView from '@/views/ReserveView.vue'
 import StoreView from '@/views/StoreView.vue'
 import FooterView from '@/views/FooterView.vue'
 
+import SearchResult from '@/components/common/SearchResult.vue'
 
 import BoardList from '@/components/board/BoardList.vue'
 import BoardCreate from '@/components/board/BoardCreate.vue'
@@ -66,6 +67,11 @@ const router = createRouter({
       beforeEnter: checkLogin,
     },
     {
+      path: "/searchResult",
+      name: "searchResult",
+      component: SearchResult,
+    },
+    {
       path: "/myFollow",
       name: "myFollow",
       component: MyFollow,
@@ -73,7 +79,7 @@ const router = createRouter({
     },
     {
       path: '/like/:id',
-      name: 'like',
+      name: 'like', 
       component: Like,
       beforeEnter: checkLogin,
     },

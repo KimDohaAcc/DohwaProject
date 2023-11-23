@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
-public class VideoServiceImpl implements VideoService{
+public class VideoServiceImpl implements VideoService {
     private final VideoRepository videoRepository;
+
     @Override
     public List<Video> getVideoList() {
         return videoRepository.findAll();
@@ -30,7 +32,7 @@ public class VideoServiceImpl implements VideoService{
     @Override
     public Video modifyVideo(Long id, Video video) {
         Optional<Video> existingVideo = videoRepository.findById(id);
-        if(existingVideo.isPresent()){
+        if (existingVideo.isPresent()) {
             videoRepository.save(video);
         }
         return null;
@@ -44,5 +46,9 @@ public class VideoServiceImpl implements VideoService{
         } else {
             return false;
         }
+    }
+    @Override
+    public List<Video> getListByCondition(String key, String word) {
+        return videoRepository.getListByCondition(key, word);
     }
 }
