@@ -1,32 +1,34 @@
 <template>
-    <div>
-            <h1>{{ userStore.loginUser.nickname }}님이 좋아요 한 영상</h1>
-            <div v-if="!videoStore.likeList || videoStore.likeList.length == 0">
-                <p>좋아요 한 영상이 없습니다</p>
-            </div>
-            <ul v-else>
-                <li v-for="like in videoStore.likeList" :key="like.num">
-                    <div class="video-content">
-                        <p class="video-title">
-                            {{ like.video.title }}
-                        </p>
-                    </div>
-                    <iframe :src="like.video.url" frameborder="0" allowfullscreen></iframe>
-                    <div class="like-container">
-                        <a @click="clickLike(like.video)">
-                            <span>{{ videoLikeCount(like.video.num) }}</span>
-                            <span v-if="hasLike(like.video)">
-                                <i class="bi bi-heart-fill"></i>
-                            </span>
-                            <span v-else>
-                                <i class="bi bi-heart"></i>
-                            </span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
+    <div class="liked-videos">
+      <h1 class="username">{{ userStore.loginUser.nickname }}님이 좋아요 한 영상</h1>
+  
+      <div v-if="!videoStore.likeList || videoStore.likeList.length === 0">
+        <p>좋아요 한 영상이 없습니다</p>
+      </div>
+  
+      <ul v-else class="video-list">
+        <li v-for="like in videoStore.likeList" :key="like.num" class="video-item">
+          <div class="video-content">
+            <p class="video-title">{{ like.video.title }}</p>
+          </div>
+          <div class="video-frame">
+            <iframe :src="like.video.url" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class="like-container">
+            <a @click="clickLike(like.video)" class="like-button">
+              <span class="like-count">{{ videoLikeCount(like.video.num) }}</span>
+              <span v-if="hasLike(like.video)" class="liked">
+                <i class="bi bi-heart-fill"></i>
+              </span>
+              <span v-else class="not-liked">
+                <i class="bi bi-heart"></i>
+              </span>
+            </a>
+          </div>
+        </li>
+      </ul>
     </div>
-</template>
+  </template>
 
 <script setup>
 import { useVideoStore } from "@/stores/video";

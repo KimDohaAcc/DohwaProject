@@ -1,4 +1,6 @@
+
 <template>
+   <div id="outer-container">
   <div id="front-container">
     <SideNav class="SideNav" />
     <div class="content-wrapper">
@@ -9,6 +11,7 @@
       <FooterView />
     </div>
   </div>
+</div>
 </template>
 
 <script setup>
@@ -64,17 +67,31 @@ const loginUser = (loginUser) => {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600&display=swap');
 
-* {
+/* * {
   font-family: 'IBM Plex Sans KR', sans-serif;
   font-weight: 200;
-}
+} */
 
 #front-container {
+  background-color: white; /* 내용 부분 배경색 */
   display: flex;
   flex-flow: column;
-  margin: 0 10%;
+  margin: 0 5%;
   width: 80vw;
+  
+  
+
+
 }
+#outer-container {
+  display: flex;
+  justify-content: center;
+  background-color: #1A2A5F; /* 전체 배경색 */
+  padding: 0 5%;
+  
+}
+
+
 
 main>div {
   min-height: 80vh;
