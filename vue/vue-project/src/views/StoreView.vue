@@ -1,9 +1,11 @@
+
+
 <template>
   <div>
     
     <StoreIntroduce></StoreIntroduce>
+    <h2 class="title">헬스판다 지점</h2>
     <div class="container">
-    <h1 class="title">지  점</h1>
     <StoreMap></StoreMap>
     </div>
   </div>
@@ -16,6 +18,12 @@ import StoreMap from '@/components/store/StoreMap.vue';
 </script>
 
 <style scoped>
+.container{
+  margin-left: 25%;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: center; /* 수평 가운데 정렬 */
+
+}
 
 footer .btn.btn-link {
   color: white;
@@ -33,7 +41,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #264653;
+  background-color: #1A2A5F;
   color: white;
   z-index: 9999;
 }

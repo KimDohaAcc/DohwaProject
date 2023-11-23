@@ -32,6 +32,7 @@ nav {
     right: 2%;
     transform: translateY(-50%);
     z-index: 1000;
+    background-color: white;
 }
 
 .link, .kakao {
@@ -45,7 +46,7 @@ nav {
 }
 
 nav>a {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 5px solid #ddd;
 }
 
 .kakao {
