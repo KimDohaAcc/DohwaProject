@@ -276,10 +276,9 @@ public class KakaoSkillController {
 
     @PostMapping("/question")
     public Map<String, String> question(@RequestBody Map<String, Object> event) {
-        System.out.println("event  = " + event);
         Map<String, String> params = getActionParams(event);
         String type = params.get("type");
-        ChatRequest chatRequest = new ChatRequest(chatgptProperties.getModel(), type + "식단을 1. 아침 2. 점심 3. 저녁 으로 나누어서 작성해줘", 3000, 0.8, 0.8);
+        ChatRequest chatRequest = new ChatRequest(chatgptProperties.getModel(), type + "식단을 1. 아침 2. 점심 3. 저녁 으로 나누어서 각각 한 가지의 메뉴를 작성해줘", 3000, 0.8, 0.8);
         ChatResponse reply = chatgptService.sendChatRequest(chatRequest);
         String result = reply.getChoices().get(0).getText();
 

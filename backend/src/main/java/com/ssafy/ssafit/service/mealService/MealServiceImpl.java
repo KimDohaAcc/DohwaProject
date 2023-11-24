@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -35,9 +36,7 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public void removeMeal(String user) {
-        List<Meal> meals = mealRepository.findByUserOrderByNumDesc(user);
-        if (!meals.isEmpty()) {
-            mealRepository.delete(meals.get(0));
-        }
+        Optional<Meal> latestMealOptional = mealRepository.findTopByUserOrderByTimeDesc(user);
+        latestMealOptional.ifPresent(mealRepository::delete);
     }
 }
