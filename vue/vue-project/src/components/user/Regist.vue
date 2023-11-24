@@ -106,7 +106,7 @@ export default {
     const checkAccountAvailability = async () => {
       if (!errorAccount.value && account.value !== '') {
         try {
-          const response = await axios.get(`${lApi}/user/dupCheck/${account.value}`);
+          const response = await axios.get(`${dApi}/user/dupCheck/${account.value}`);
           if (response.status === 200) {
             // 중복된 계정이 있을 경우
             accountExists.value = true;
