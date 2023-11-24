@@ -136,10 +136,10 @@
 특정하지 못하는 문제를 감지해 사용자의 발화에 유연한 대처가 가능한 Chat GPT를 이용하게 되었습니다.그러나 chat GPT는 음식 외의 것을 입력해도 칼로리를 계산하여 돌려주는 문제가 있기에 여전히 개선이 필요한 부분이 존재합니다. 사용자의 발화가 음식 범주에 들어가는지를 1차로 검증한 뒤, 음식의 칼로리를 계산하는 로직으로 변경해야 하는 등 적합한 기술 활용 방법을 더 고민해야 합니다.
 2. SPA 페이지 배포로 인한 URL 직접 접근 및 새로고침 이슈가 발생했습니다. ErrorController를 구현하여 처리하였으나, GET을 제외한 특정 요청에서는 여전히 이슈가 남아있는 상태입니다. 이 부분에 대한 깊은 이해와 해결을 위한 추가 공부가 필요합니다.
 <br>
-MIT © NoHack
+
 <!-- Stack Icon Refernces -->
-[java]: /images/java.svg
-[spring]: /images/spring.svg
-[vue]: /images/vue.svg
-[mySQL]: /images/mySQL.svg
-[gradle]: /images/gradle.svg
+
+[js]: /images/stack/javascript.svg
+[ts]: /images/stack/typescript.svg
+[react]: /images/stack/react.svg
+[node]: /images/stack/node.svg
