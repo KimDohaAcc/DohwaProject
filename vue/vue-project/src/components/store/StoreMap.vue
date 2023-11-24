@@ -72,7 +72,7 @@ export default {
           return;
         }
 
-        const imgSrc = '/src/assets/마커.png';
+        const imgSrc = '@/assets/marker.png';
         const imgSize = new kakao.maps.Size(35, 35);
         const markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize);
 
