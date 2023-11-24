@@ -42,7 +42,7 @@ export const useCommentStore = defineStore('comment', () => {
 
   function deleteComment(commentId) {
     try {
-      axiosInstance.delete(`${D_COMMENT_API_AUTH}/${commentId}`);
+      axiosInstance.delete(`${D_COMMENT_API}/${commentId}`);
     } catch (error) {
       console.error(error.message);
     }
@@ -50,7 +50,7 @@ export const useCommentStore = defineStore('comment', () => {
   }
 
   function editComment(editedComment) {
-    axiosInstance.put(`${D_COMMENT_API_AUTH}`, editedComment)
+    axiosInstance.put(`${D_COMMENT_API}`, editedComment)
       .then((response) => {
         getComments(boardStore.board.num);
       })
@@ -76,7 +76,7 @@ export const useCommentStore = defineStore('comment', () => {
         axiosInstanceWithToken.post(`${D_COMMENT_API_AUTH}`, commentValue)
           .then((response) => {
             getComments(boardStore.board.num);
-            resolve();
+            resolve();s
           })
           .catch((error) => {
             reject(error);
