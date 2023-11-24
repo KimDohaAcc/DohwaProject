@@ -7,7 +7,7 @@
 </p>
 
 ## 프로젝트 소개
-<a href="https://www.notion.so/3297b6eb5e69428f8293491006258ecc">[Notion]HealthPanda 소개</a>
+<a href="https://www.notion.so/3297b6eb5e69428f8293491006258ecc">✨[Notion]HealthPanda✨</a>
 
 <p align="justify">
 단순한 헬스 경험을 넘어, 창의적이고 손쉬운 서비스로 헬스장 이용자들에게 새로운 차원의 편의를 제공하는 프로젝트를 소개합니다.
