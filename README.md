@@ -1,4 +1,4 @@
-# 헬스장 사용자 친화서비스 프로젝트, HealthPanda
+# 헬스장 편의 프로젝트, HealthPanda
 
 <p align="center">
   <br>
