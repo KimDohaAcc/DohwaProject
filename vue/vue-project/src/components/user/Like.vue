@@ -5,14 +5,14 @@
             <p>좋아요 한 영상이 없습니다</p>
         </div>
         <ul class="video-list">
-      <li v-for="like in videoStore.likeList" :key="like.num" class="video-item">
-        <div class="video-content">
-          <p class="video-title">{{ like.video.title }}</p>
-        </div>
-        <div class="video-frame">
-          <iframe :src="like.video.url" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="comment-container"></div>
+            <li v-for="like in videoStore.likeList" :key="like.num" class="video-item">
+                <div class="video-content">
+                    <p class="video-title">{{ like.video.title }}</p>
+                </div>
+                <div class="video-frame">
+                    <iframe :src="like.video.url" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="comment-container"></div>
                 <div class="like-container">
                     <a @click="clickLike(like.video)">
                         <span class="like-count">{{ videoLikeCount(like.video.num) }}</span>
@@ -27,13 +27,12 @@
             </li>
         </ul>
     </div>
-
 </template>
 
 <script setup>
 import { useVideoStore } from "@/stores/video";
 import { useUserStore } from "@/stores/user";
-import { onMounted, computed, ref } from 'vue';
+import { onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router'
 
 const videoStore = useVideoStore();

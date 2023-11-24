@@ -58,6 +58,8 @@
   transition: background-color 0.3s ease;
 }
 
+
+
 /* Update Button */
 .update-button {
   background-color: #fff;
@@ -79,7 +81,9 @@
 
 /* Content */
 .content {
-  margin-top: 15px;
+  color: darkslategrey;
+  margin-top: 50px;
+  font-weight: 200;
 }
 
 /* Dropdown Section */
@@ -114,4 +118,9 @@
 .bi.bi-person-add,
 .bi.bi-person-fill-dash {
   font-size: 1rem;
+}
+
+#user-name {
+  margin-left: 15px;
+  color : #1A2A5F;
 }

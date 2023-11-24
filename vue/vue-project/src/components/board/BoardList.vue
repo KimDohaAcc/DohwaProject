@@ -28,7 +28,6 @@
         <RouterLink :to="{ name: 'boardCreate' }" class="create-board-link">후기 남기기</RouterLink>
       </button>
     </div>
-    <!-- <BoardSearchInput /> -->
   </div>
 </template>
 
@@ -95,12 +94,14 @@ button {
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
-.board-cotent{
- margin-bottom: 50px;
- text-align: center;
+
+.board-cotent {
+  margin-bottom: 50px;
+  text-align: center;
 }
+
 button:hover {
-  background-color:#1A2A5F;
+  background-color: #1A2A5F;
 }
 
 .create-board-link {

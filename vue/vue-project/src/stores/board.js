@@ -5,57 +5,58 @@ import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
 const REST_BOARD_API = `http://localhost:8080/board`
 const REST_BOARD_API_AUTH = `http://localhost:8080/auth/board`
+const D_BOARD_API = `https://healthpanda.site/board`
+const D_BOARD_API_AUTH = `https://healthpanda.site/auth/board`
 
 export const useBoardStore = defineStore('board', () => {
   const boardList = ref([])
   const board = ref(null)
   const writeList = ref(null)
-  const searchList = ref(null)
 
   const getBoardList = function () {
-    axiosInstance.get(REST_BOARD_API)
+    axiosInstance.get(D_BOARD_API)
       .then((response) => {
         const list = [];
-        for(let i = 0; i < response.data.length ; i ++){
+        for (let i = 0; i < response.data.length; i++) {
           const board = response.data[i];
           let created = new Date(response.data[i].createdAt);
           let updated = new Date(response.data[i].updatedAt);
           board.createdAtFormat = created.toISOString().split('T')[0];
           board.updatedAtFormat = updated.toISOString().split('T')[0];
           list.push(board);
-       };
+        };
 
-       list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-       boardList.value = list;
+        list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+        boardList.value = list;
       })
   }
 
-  function deleteBoard(boardNum){
-    axiosInstanceWithToken.delete(`http://localhost:8080/board/${boardNum}`)
-    .then((res) => {
-      getBoardList();
-    })
+  function deleteBoard(boardNum) {
+    axiosInstanceWithToken.delete(`${D_BOARD_API_AUTH}/${boardNum}`)
+      .then((res) => {
+        getBoardList();
+      })
   }
 
   //게시글 한개
   const getBoard = function (id) {
-    axiosInstance.get(`${REST_BOARD_API}/${id}`)
+    axiosInstance.get(`${D_BOARD_API}/${id}`)
       .then((response) => {
         board.value = response.data;
         board.value = setBoardDate(board.value);
-    })
+      })
   }
 
   function setBoardDate(board) {
-        let created = new Date(board.createdAt);
-        let updated = new Date(board.updatedAt);
-        board.createdAtFormat = created.toISOString().split('T')[0];
-        board.updatedAtFormat = updated.toISOString().split('T')[0];
-        return board;
+    let created = new Date(board.createdAt);
+    let updated = new Date(board.updatedAt);
+    board.createdAtFormat = created.toISOString().split('T')[0];
+    board.updatedAtFormat = updated.toISOString().split('T')[0];
+    return board;
   }
 
   const createBoard = function (board) {
-    axiosInstanceWithToken.post(REST_BOARD_API_AUTH, board)
+    axiosInstanceWithToken.post(D_BOARD_API_AUTH, board)
       .then((response) => {
         boardList.value.push(response.data);
         router.push({ name: 'boardList' });
@@ -64,44 +65,44 @@ export const useBoardStore = defineStore('board', () => {
         console.log(err);
       });
   };
-  
+
 
   const updateBoard = function () {
-    axiosInstanceWithToken.put(REST_BOARD_API, board.value)
+    axiosInstanceWithToken.put(D_BOARD_API, board.value)
       .then(() => {
         getBoard(board.value.num);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
-  const getWriteList = function(id){
+  const getWriteList = function (id) {
     axiosInstanceWithToken
-    .get(REST_BOARD_API_AUTH + `/${id}`)
-    .then((response) => {
-      const list = [];
-        for(let i = 0; i < response.data.length ; i ++){
+      .get(D_BOARD_API_AUTH + `/${id}`)
+      .then((response) => {
+        const list = [];
+        for (let i = 0; i < response.data.length; i++) {
           const board = response.data[i];
           let created = new Date(response.data[i].createdAt);
           let updated = new Date(response.data[i].updatedAt);
           board.createdAtFormat = created.toISOString().split('T')[0];
           board.updatedAtFormat = updated.toISOString().split('T')[0];
           list.push(board);
-       };
+        };
 
-       list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
-       writeList.value = list;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+        list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+        writeList.value = list;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
-  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard, deleteBoard, writeList, getWriteList}
+  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard, deleteBoard, writeList, getWriteList }
 },
-{
-  persist: {
-    storage: sessionStorage,
-  }
-})
+  {
+    persist: {
+      storage: sessionStorage,
+    }
+  })

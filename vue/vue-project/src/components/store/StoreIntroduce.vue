@@ -2,7 +2,8 @@
 <template>
   <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
@@ -10,10 +11,10 @@
       <div class="carousel-item active">
         <img src="@\assets\덤벨.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h2  class="content">머신에 집중 특화된 GYM!</h2>
+          <h2 class="content">머신에 집중 특화된 GYM!</h2>
           <h3 class="content">헬스판다의 머신 트레이닝은 무게나 회수 등</h3>
           <h3 class="content"> 컨디션의 변화와 효과를 실감할 수 있습니다.</h3>
-          
+
         </div>
       </div>
       <div class="carousel-item">
@@ -21,7 +22,7 @@
         <div class="carousel-caption d-none d-md-block">
           <h2 class="content">최고의 자랑은 직원</h2>
           <h3 class="content">1:1 맞춤 트레이닝은 물론 언제나 최적의 환경에서 운동을</h3>
-         
+
           <h3 class="content">할 수 있도록 매일 클럽 환경 정비에 노력하고 있습니다.</h3>
         </div>
       </div>
@@ -42,8 +43,6 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-
-  
 </template>
 
 <script>
@@ -52,54 +51,48 @@
 
 export default {
   components: {
-    
+
   },
 };
 
 </script>
 
 <style>
+.row g-5 {
+  background-attachment: #264653;
+}
 
+.pics {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-.row g-5{
-  background-attachment: #264653;}
-  .pics {      /* 전체 케러셀 */
-            width: 100%;
-            height: 100%;
-            /* float: left;
-            position: relative;
-            left: 50%; */
-            object-fit: cover;
-        }
-
-/* Carousel wrapper */
 .wrapper {
-  max-width: 600px; /* 최대 너비 설정 */
-  margin: 0 auto; /* 중앙 정렬을 위한 마진 설정 */
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-/* Carousel container */
 .carousel {
-  width: 100%; /* Carousel 전체 너비 설정 */
+  width: 100%;
 }
 
-/* Carousel item */
 .carousel-item {
-  width: 100%; /* Carousel 아이템 너비 설정 */
-  max-height: 800px; /* Carousel 아이템 최대 높이 설정 */
+  width: 100%;
+  max-height: 800px;
 }
+
 .content {
-  
+
   font-weight: bold;
   color: white;
 }
 
 
-/* Image within the carousel item */
 .carousel-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지를 확대 또는 축소하여 영역에 맞게 보여줌 */
+  object-fit: cover;
 }
 
 
@@ -108,6 +101,4 @@ export default {
   width: 50px;
   height: fit-content;
 }
-
-
 </style>

@@ -7,7 +7,8 @@ import { useBoardStore } from './board';
 import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
 
 const lApi = "http://localhost:8080";
-const dApi = "https://healthpanda.site";
+const D_COMMENT_API = `https://healthpanda.site/comment`
+const D_COMMENT_API_AUTH = `https://healthpanda.site/auth/comment`
 
 export const useCommentStore = defineStore('comment', () => {
   const comment = ref('');
@@ -16,10 +17,9 @@ export const useCommentStore = defineStore('comment', () => {
   const boardStore = useBoardStore();
 
   function getComments(boardNum) {
-    axiosInstance.get(`${lApi}/comment/board/${boardNum}`)
+    axiosInstance.get(`${D_COMMENT_API}/board/${boardNum}`)
       .then((res) => {
-        console.log(res.data)
-        if(res.data.length === 0){
+        if (res.data.length === 0) {
           comments.value = null;
           return;
         }
@@ -30,7 +30,7 @@ export const useCommentStore = defineStore('comment', () => {
           comment = setCommentDate(comment);
           list.push(comment);
         };
-        
+
         list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
         comments.value = list;
 
@@ -42,7 +42,7 @@ export const useCommentStore = defineStore('comment', () => {
 
   function deleteComment(commentId) {
     try {
-      axiosInstance.delete(`${lApi}/comment/${commentId}`);
+      axiosInstance.delete(`${D_COMMENT_API_AUTH}/${commentId}`);
     } catch (error) {
       console.error(error.message);
     }
@@ -50,7 +50,7 @@ export const useCommentStore = defineStore('comment', () => {
   }
 
   function editComment(editedComment) {
-    axiosInstance.put(`${lApi}/comment`, editedComment)
+    axiosInstance.put(`${D_COMMENT_API_AUTH}`, editedComment)
       .then((response) => {
         getComments(boardStore.board.num);
       })
@@ -73,7 +73,7 @@ export const useCommentStore = defineStore('comment', () => {
 
     return new Promise((resolve, reject) => {
       if (commentValue) {
-        axiosInstanceWithToken.post(`${lApi}/auth/comment`, commentValue)
+        axiosInstanceWithToken.post(`${D_COMMENT_API_AUTH}`, commentValue)
           .then((response) => {
             getComments(boardStore.board.num);
             resolve();

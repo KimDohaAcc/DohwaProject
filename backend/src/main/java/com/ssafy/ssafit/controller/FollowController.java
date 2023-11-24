@@ -45,7 +45,7 @@ public class FollowController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
-    @GetMapping("/followee")
+    @GetMapping("/follow/followee")
     public ResponseEntity<List<Follow>> getFollowByFollowee(HttpServletRequest request) {
         return userService.extractUserFromToken(request.getHeader("Authorization"))
                 .map(followee ->

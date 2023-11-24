@@ -29,15 +29,15 @@ const store = useBoardStore();
 const router = useRouter();
 
 const updateBoard = function () {
-    if(store.board.title == ''){
-    alert('제목을 입력하세요');
-    return;
-  }
+    if (store.board.title == '') {
+        alert('제목을 입력하세요');
+        return;
+    }
 
-  if(store.board.content == ''){
-    alert('내용을 입력하세요');
-    return;
-  }
+    if (store.board.content == '') {
+        alert('내용을 입력하세요');
+        return;
+    }
 
     store.updateBoard();
     router.push(`/board/${store.board.num}`)

@@ -57,8 +57,8 @@ const deleteBoard = function () {
   router.push("/board")
 }
 
-const goToBoardList = function() {
-  router.push( "/board" )
+const goToBoardList = function () {
+  router.push("/board")
 }
 
 const updateBoard = function () {

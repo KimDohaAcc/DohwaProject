@@ -200,85 +200,86 @@ button:hover {
 }
 
 .video-item {
-  display: flex;
-  flex-flow: wrap column;
-  justify-content: center;
-  align-items: center;
-  width: 30vw;
-  height: fit-content;
-  margin-bottom: 20px;
-  padding: 5px;
-  margin : 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    height: fit-content;
+    margin-bottom: 20px;
+    padding: 5px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 
 
 .bi-clipboard,
 .bi-clipboard-check {
-  font-size: 1.1rem;
-  margin-right: 15px;
+    font-size: 1.1rem;
+    margin-right: 15px;
 }
 
 .video-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .bi-heart-fill,
 .bi-heart {
-  font-size: 1.1rem;
-  margin-left: 5px;
-  color: red;
+    font-size: 1.1rem;
+    margin-left: 5px;
+    color: red;
 }
 
 
 iframe {
-  width: 530px;
-  height: 300px;
+    width: 530px;
+    height: 300px;
 }
 
 .video-title {
-  font-size: 12pt;
-  font-weight: 200;
-  color: #333;
-  font-family: 'IBM Plex Sans KR', sans-serif;
-  margin: 5px 25px;
-  font-weight: 500;
+    font-size: 12pt;
+    font-weight: 200;
+    color: #333;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    margin: 5px 25px;
+    font-weight: 500;
 }
 
 .like-container {
-  align-self: flex-end;
-  margin-right: 25px;
-  margin-top: 5px;
+    align-self: flex-end;
+    margin-right: 25px;
+    margin-top: 5px;
 }
 
 #copy-message {
-  background-color: #333;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-size: 10pt;
-  padding: 0 5px;
-  margin-right: 5px;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 10pt;
+    padding: 0 5px;
+    margin-right: 5px;
 }
 
 .liked-videos {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-left: 15px;
 }
+
 .username {
-  margin-left: 15px;
+    margin-left: 15px;
 }
 
 .not-found {
@@ -286,11 +287,11 @@ iframe {
 }
 
 .video-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  overflow: hidden;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: hidden;
 }
 </style>

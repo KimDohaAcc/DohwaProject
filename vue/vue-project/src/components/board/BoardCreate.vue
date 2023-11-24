@@ -1,27 +1,27 @@
 
 <template>
-    <div>
-      <h4>헬스판다 이용후기</h4>
-      <fieldset>
-        <legend>등록</legend>
-        <div class="form-group">
-          <label for="title">제목 : </label>
-          <input type="text" id="title" v-model="board.title" class="input-field">
-        </div>
-        <div class="form-group">
-          <label for="user">작성자 : </label>
-          <span class="user-nickname">{{ nickname }}</span>
-        </div>
-        <div class="form-group">
-          <label for="content">내용 : </label>
-          <textarea id="content" cols="30" rows="10" v-model="board.content" class="input-field"></textarea>
-        </div>
-        <div class="form-group">
-          <button @click="createBoard" class="submit-button">등록</button>
-        </div>
-      </fieldset>
-    </div>
-  </template>
+  <div>
+    <h4>헬스판다 이용후기</h4>
+    <fieldset>
+      <legend>등록</legend>
+      <div class="form-group">
+        <label for="title">제목 : </label>
+        <input type="text" id="title" v-model="board.title" class="input-field">
+      </div>
+      <div class="form-group">
+        <label for="user">작성자 : </label>
+        <span class="user-nickname">{{ nickname }}</span>
+      </div>
+      <div class="form-group">
+        <label for="content">내용 : </label>
+        <textarea id="content" cols="30" rows="10" v-model="board.content" class="input-field"></textarea>
+      </div>
+      <div class="form-group">
+        <button @click="createBoard" class="submit-button">등록</button>
+      </div>
+    </fieldset>
+  </div>
+</template>
 
 <script setup>
 import { ref } from "vue";
@@ -32,24 +32,23 @@ const userStore = useUserStore();
 const store = useBoardStore();
 const nickname = ref(userStore.loginUser.nickname);
 const board = ref({
-    title: '',
-    user: userStore.loginUser,
-    content: ''
+  title: '',
+  user: userStore.loginUser,
+  content: ''
 })
 
 const createBoard = function () {
-  if(board.value.title == ''){
+  if (board.value.title == '') {
     alert('제목을 입력하세요');
     return;
   }
 
-  if(board.value.content == ''){
+  if (board.value.content == '') {
     alert('내용을 입력하세요');
     return;
   }
 
-    console.log(board.value)
-    store.createBoard(board.value)
+  store.createBoard(board.value)
 }
 </script>
 <style scoped>

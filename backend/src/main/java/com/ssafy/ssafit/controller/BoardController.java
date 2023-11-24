@@ -45,7 +45,7 @@ public class BoardController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE));
     }
 
-    @DeleteMapping("/board/{num}")
+    @DeleteMapping("/auth/board/{num}")
     public ResponseEntity<Void> delete(@PathVariable Long num) {
         if (boardService.removeBoard(num)) {
             return new ResponseEntity<>(HttpStatus.OK);

@@ -3,7 +3,8 @@
         <nav>
             <RouterLink class="link" to="/"><i class="bi bi-house"></i></RouterLink>
             <img class="kakao" @click="kakaoLink()" src="https://cnpmall.com/img/right_quick_icon05.png">
-            <RouterLink class="link" :to="`/like/${userStore.loginUser ? userStore.loginUser.id : 0}`"><i class="bi bi-box2-heart"></i></RouterLink>
+            <RouterLink class="link" :to="`/like/${userStore.loginUser ? userStore.loginUser.id : 0}`"><i
+                    class="bi bi-box2-heart"></i></RouterLink>
             <RouterLink class="link" to="/board/create"><i class="bi bi-pencil-square"></i></RouterLink>
         </nav>
     </div>
@@ -35,7 +36,8 @@ nav {
     background-color: white;
 }
 
-.link, .kakao {
+.link,
+.kakao {
     text-decoration: none;
     color: black;
     padding: 8px;
@@ -59,5 +61,5 @@ nav>a {
 
 link:hover {
     background-color: #555;
-    /* Change background color on hover */
-}</style>
+}
+</style>

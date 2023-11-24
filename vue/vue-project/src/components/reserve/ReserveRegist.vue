@@ -15,14 +15,8 @@
       <h3>선택 지점</h3>
       <div class="location-selection">
         <div class="location-buttons">
-          <button
-            v-for="(location, index) in locations"
-            :key="index"
-            @click="selectLocation(location)"
-            :class="{ 'selected': selectedLocation === location }"
-            @mousedown.prevent
-            class="location-button"
-          >
+          <button v-for="(location, index) in locations" :key="index" @click="selectLocation(location)"
+            :class="{ 'selected': selectedLocation === location }" @mousedown.prevent class="location-button">
             {{ location }}
           </button>
         </div>
@@ -33,14 +27,8 @@
       <h3>선택 시간</h3>
       <div class="time-selection">
         <div class="time-buttons">
-          <button
-            v-for="(time, index) in times"
-            :key="index"
-            @click="selectTime(time)"
-            :class="{ 'selected': selectedTime === time }"
-            @mousedown.prevent
-            class="time-button"
-          >
+          <button v-for="(time, index) in times" :key="index" @click="selectTime(time)"
+            :class="{ 'selected': selectedTime === time }" @mousedown.prevent class="time-button">
             {{ time }}
           </button>
         </div>
@@ -111,7 +99,6 @@ export default {
 </script>
 
 <style scoped>
-/* 필요한 스타일 작성 */
 .survey-container {
   display: flex;
   flex-direction: column;
@@ -147,9 +134,10 @@ export default {
   margin-top: 20px;
 }
 
-.location-buttons{
+.location-buttons {
   margin-bottom: 80px;
 }
+
 .time-buttons {
   display: flex;
   flex-wrap: wrap;

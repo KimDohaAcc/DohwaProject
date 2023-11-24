@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { axiosInstance } from '@/util/http-common'
 
@@ -6,24 +6,25 @@ import { axiosInstance } from '@/util/http-common'
 export const useSearchStore = defineStore('search', () => {
     const searchList = ref(null);
     const type = ref('');
+    const D_API = `https://healthpanda.site`
 
     function loadSession() {
         const storedSearchList = sessionStorage.getItem('searchList');
         const storedType = sessionStorage.getItem('type');
-        console.log(storedSearchList)
         if (storedSearchList) {
             searchList.value = JSON.parse(storedSearchList);
         }
 
-        if (storedType) {
+        if (type.value === '' && storedType) {
             type.value = storedType;
         }
     }
 
     const searchBoardList = function (searchInfo) {
+        searchList.value = null;
         axiosInstance({
             method: "GET",
-            url: "http://localhost:8080/board/search",
+            url: `${D_API}/board/search`,
             params: {
                 key: searchInfo.key,
                 word: searchInfo.word,
@@ -41,8 +42,6 @@ export const useSearchStore = defineStore('search', () => {
                         list.push(board);
                     };
 
-                    console.log(list)
-
                     list.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
                     searchList.value = list;
                     sessionStorage.setItem("searchList", JSON.stringify(searchList.value))
@@ -56,10 +55,10 @@ export const useSearchStore = defineStore('search', () => {
 
 
     const searchVideoList = function (searchInfo) {
-        console.log(searchInfo);
+        searchList.value = null;
         axiosInstance({
             method: "GET",
-            url: "http://localhost:8080/video/search",
+            url: `${D_API}/video/search`,
             params: {
                 key: searchInfo.key,
                 word: searchInfo.word,
@@ -70,7 +69,6 @@ export const useSearchStore = defineStore('search', () => {
                     searchList.value = res.data;
                     sessionStorage.setItem("searchList", JSON.stringify(searchList.value))
                     sessionStorage.setItem("type", type.value);
-                    console.log(res.data)
                 } else { searchList.value = null; }
             })
             .catch((err) => {

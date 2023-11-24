@@ -138,11 +138,8 @@ header {
 .header-wrapper {
   padding: 30px 0;
   text-align: center;
-  /* 텍스트 가운데 정렬 */
   margin-bottom: 0px;
-  /* 간판 아래 여백 추가 */
   margin-top: 5px;
-  /* 위 여백을 5px로 설정 */
 }
 
 .hwaseok-header {
@@ -152,15 +149,10 @@ header {
 
 .brand-sign {
   color: white;
-  /* 헬스판다 텍스트 색상 */
   font-size: 130px;
-  /* 헬스판다 텍스트 크기 */
   font-weight: bold;
-  /* 헬스판다 텍스트 굵기 */
   margin-top: 0;
-  /* 위 여백 제거 */
   word-spacing: 40px;
-  /* 각 단어 사이 간격 설정 */
 }
 
 img {
@@ -198,7 +190,7 @@ a,
   flex-flow: wrap row;
 }
 
-.user-nav > span {
+.user-nav>span {
   padding-top: 12px;
 }
 </style>

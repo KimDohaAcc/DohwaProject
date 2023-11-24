@@ -79,7 +79,7 @@ const router = createRouter({
     },
     {
       path: '/like/:id',
-      name: 'like', 
+      name: 'like',
       component: Like,
       beforeEnter: checkLogin,
     },

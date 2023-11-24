@@ -53,7 +53,7 @@ const videoLikeCount = computed(() => {
 onBeforeMount(() => {
   store.getVideoList();
 
-  if(userStore.loginUser){
+  if (userStore.loginUser) {
     store.likeCheck(userStore.loginUser.id);
   }
 });
@@ -76,8 +76,8 @@ const copyVideoUrl = function (video) {
 };
 
 const clickLike = async function (video) {
-  if(!userStore.loginUser){
-    
+  if (!userStore.loginUser) {
+
     alert('로그인이 필요합니다')
     return;
   }

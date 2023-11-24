@@ -32,11 +32,8 @@ h3 {
   color: #666;
 }
 
-.text{
+.text {
   margin-bottom: 80px;
 }
-
-/* ReserveRegist 컴포넌트 스타일링 */
-/* .reserve 클래스를 사용하여 ReserveRegist 컴포넌트의 스타일을 추가하세요 */
 
 </style>

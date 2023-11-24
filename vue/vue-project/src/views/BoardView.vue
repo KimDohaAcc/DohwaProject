@@ -1,8 +1,8 @@
 <template>
-    <div class="reviews-page">
-      <RouterView />
-    </div>
-  </template>
+  <div class="reviews-page">
+    <RouterView />
+  </div>
+</template>
 <script setup>
 
 </script>

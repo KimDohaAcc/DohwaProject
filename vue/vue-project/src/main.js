@@ -8,7 +8,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
 import BootstrapVue3 from 'bootstrap-vue-3';
-import { axiosInstance, axiosInstanceWithToken } from '@/util/http-common'
+import { axiosInstance } from '@/util/http-common'
 
 const lApi = "http://localhost:8080";
 const dApi = "https://healthpanda.site";
@@ -22,21 +22,18 @@ app.use(BootstrapVue3);
 
 const checkTokenValidity = () => {
   const token = sessionStorage.getItem('jwtToken');
-  console.log(token);
 
   if (token) {
-    axiosInstance.get(`${lApi}/token-check`, {
-        params: {
-          token: token
-        }
-      })
-      .then(res=> {
-        console.log("토큰이 있음")
+    axiosInstance.get(`${dApi}/token-check`, {
+      params: {
+        token: token
+      }
+    })
+      .then(res => {
       })
       .catch(error => {
         sessionStorage.removeItem('jwtToken');
         sessionStorage.removeItem('loginUser');
-        console.log("토큰이 없음")
 
       });
   }

@@ -20,9 +20,9 @@
       </button>
     </div>
     <div class="register-link">
-    <p>Don't have an account?</p>
-    <button @click="goToSignup" class="signup-button">Sign Up</button>
-  </div>
+      <p>Don't have an account?</p>
+      <button @click="goToSignup" class="signup-button">Sign Up</button>
+    </div>
   </div>
 </template>
 
@@ -30,7 +30,6 @@
 import { useUserStore } from '@/stores/user.js';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import Regist from './Regist.vue';
 
 const store = useUserStore();
 const router = useRouter();
@@ -44,15 +43,15 @@ const kakaoLogin = () => {
     success: () => {
       store.getKakaoAccount();
     },
-    fail: function(err) {
+    fail: function (err) {
       console.log(err);
     }
   });
   router.push('/');
   window.scroll({
-			top: 0, 
-			left: 0, 
-		});
+    top: 0,
+    left: 0,
+  });
 };
 
 const handleLogin = () => {
@@ -61,7 +60,7 @@ const handleLogin = () => {
 };
 
 const goToSignup = () => {
-  router.push('/regist'); 
+  router.push('/regist');
 };
 </script>
 
@@ -152,10 +151,11 @@ button:hover {
   margin-top: 0;
 }
 
-.login-button{
+.login-button {
   margin-bottom: 40px;
 }
-.h6{
+
+.h6 {
   text-align: center;
 }
 </style>

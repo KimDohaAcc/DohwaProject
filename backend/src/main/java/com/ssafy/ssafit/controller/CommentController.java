@@ -37,7 +37,7 @@ public class CommentController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/comment/{num}")
+    @DeleteMapping("/auth/comment/{num}")
     public ResponseEntity<Void> delete(@PathVariable Long num) {
         if (commentService.removeComment(num)) {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -46,7 +46,7 @@ public class CommentController {
         }
     }
 
-    @PutMapping("/comment")
+    @PutMapping("/auth/comment")
     public ResponseEntity<Void> update(@RequestBody Comment comment) {
         commentService.modifyComment(comment);
         return new ResponseEntity<Void>(HttpStatus.OK);

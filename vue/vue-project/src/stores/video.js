@@ -16,7 +16,7 @@ export const useVideoStore = defineStore('video', () => {
   const selectedSort = ref('전체');
 
   const getVideoList = async function () {
-    await axiosInstance.get(`${lApi}/video`)
+    await axiosInstance.get(`${dApi}/video`)
       .then(async function (res) {
         videoList.value = res.data;
         await Promise.all(videoList.value.map(video => getLikeCount(video.num)));
@@ -35,9 +35,8 @@ export const useVideoStore = defineStore('video', () => {
 
   const clickLike = function (video) {
     axiosInstanceWithToken
-      .post(`${lApi}/auth/like`, video)
+      .post(`${dApi}/auth/like`, video)
       .then((res) => {
-        console.log("ok")
         getVideoList();
         likeCheck(userStore.loginUser.id);
       })
@@ -48,14 +47,14 @@ export const useVideoStore = defineStore('video', () => {
 
 
   const likeCheck = function (id) {
-    if(!userStore.loginUser){
+    if (!userStore.loginUser) {
       return;
     }
-    
+
     axiosInstanceWithToken
-      .get(`${lApi}/auth/like/${id}`)
-      .then((res) => {  
-          likeList.value = res.data;
+      .get(`${dApi}/auth/like/${id}`)
+      .then((res) => {
+        likeList.value = res.data;
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +62,7 @@ export const useVideoStore = defineStore('video', () => {
   }
 
   const getLikeCount = async function (videoNum) {
-    await axiosInstance.get(`${lApi}/like/${videoNum}`)
+    await axiosInstance.get(`${dApi}/like/${videoNum}`)
       .then((res) => {
         videoLikeCountList.value[videoNum] = res.data
       })
@@ -71,6 +70,6 @@ export const useVideoStore = defineStore('video', () => {
         console.log(err);
       });
   }
-  
+
   return { getVideoList, videoList, clickLike, likeCheck, likeList, selectedSort, getLikeCount, videoLikeCountList }
 })

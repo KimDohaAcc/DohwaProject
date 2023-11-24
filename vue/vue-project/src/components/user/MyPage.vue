@@ -51,7 +51,7 @@
         <button @click="deleteAccount" class="deleteAccount">계정 탈퇴</button>
       </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -70,7 +70,7 @@ const updatedUser = ref(null);
 const checkPassword = ref('');
 const lApi = "http://localhost:8080";
 const dApi = "https://healthpanda.site";
-console.log(reservations);
+
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
   const date = new Date(dateString);
@@ -78,22 +78,15 @@ const formatDate = (dateString) => {
 };
 
 onMounted(() => {
-  // 사용자의 예약 정보 가져오기
-  let user = sessionStorage.getItem("loginUser"); // sessionStorage는 키, 밸류가 모두 문자열
+  let user = sessionStorage.getItem("loginUser");
   user = JSON.parse(user);
 
-  
-
-  console.log(user);
-  axiosInstanceWithToken.get(`${lApi}/auth/reserve/get/${user.id}`)
+  axiosInstanceWithToken.get(`${dApi}/auth/reserve/get/${user.id}`)
     .then(response => {
-      reservations.value = response.data; // 백엔드에서 반환된 예약 목록 저장
-      console.log("정보를 가져왔습니다");
-      console.log(reservations.value);
+      reservations.value = response.data;
     })
     .catch(error => {
       console.error('예약 정보를 가져오는 중 에러 발생:', error);
-      console.log(reservations);
     });
 });
 
@@ -125,7 +118,7 @@ function checkValidNickname() {
 }
 
 function checkValidEmail() {
-  if(userStore.loginUser.account === updatedUser.value.account){
+  if (userStore.loginUser.account === updatedUser.value.account) {
     editEmail.value = false;
     return;
   }
@@ -138,11 +131,8 @@ function checkValidEmail() {
   }
 
   axiosInstance
-    .get(`${lApi}/user/dupCheck/${updatedUser.value.account}`)
+    .get(`${dApi}/user/dupCheck/${updatedUser.value.account}`)
     .then((res) => {
-      console.log(res)
-      console.log(userStore.loginUser.account)
-      console.log(updatedUser.value.account)
       if (res.status === 200) {
         alert('중복된 계정이 존재합니다');
         updatedUser.value.account = '';
@@ -185,11 +175,9 @@ const updateUser = function () {
 
 const deleteReservation = (index) => {
   const reservationToDelete = reservations.value[index];
-  console.log(reservationToDelete.num); // 예약의 ID 확인
-  axiosInstanceWithToken.delete(`${lApi}/auth/reserve/delete/${reservationToDelete.num}`)
+  axiosInstanceWithToken.delete(`${dApi}/auth/reserve/delete/${reservationToDelete.num}`)
     .then(response => {
       reservations.value.splice(index, 1);
-      console.log('예약이 삭제되었습니다.');
     })
     .catch(error => {
       console.error('예약 삭제 중 에러 발생:', error);
@@ -197,12 +185,10 @@ const deleteReservation = (index) => {
 }
 const deleteAccount = () => {
   if (confirm('정말 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
-    axiosInstanceWithToken.delete(`${lApi}/auth/unregister`)
+    axiosInstanceWithToken.delete(`${dApi}/auth/unregister`)
       .then(() => {
         userStore.logoutUser();
         alert('계정이 삭제되었습니다.');
-        // 로그아웃 실행
-        // 메인 화면으로 이동
         router.push('/');
       })
       .catch(error => {
@@ -299,7 +285,8 @@ h1 {
   background-color: #1A2A5F;
   color: white;
 }
-.box1{
+
+.box1 {
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
