@@ -1,4 +1,4 @@
-# 프로젝트 이름
+# HealthPanda
 
 <p align="center">
   <br>
