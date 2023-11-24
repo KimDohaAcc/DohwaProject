@@ -1,4 +1,4 @@
-# HealthPanda
+# 헬스장 사용자 친화서비스 프로젝트, HealthPanda
 
 <p align="center">
   <br>
@@ -7,7 +7,7 @@
 </p>
 
 ## 프로젝트 소개
-<a href="https://www.notion.so/3297b6eb5e69428f8293491006258ecc">✨[Notion]HealthPanda✨</a>
+✨[Notion]<a href="https://www.notion.so/3297b6eb5e69428f8293491006258ecc">HealthPanda</a>✨
 
 <p align="justify">
 단순한 헬스 경험을 넘어, 창의적이고 손쉬운 서비스로 헬스장 이용자들에게 새로운 차원의 편의를 제공하는 프로젝트를 소개합니다.
