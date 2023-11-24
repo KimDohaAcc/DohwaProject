@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Data
 @Entity
@@ -34,9 +35,9 @@ public class Board {
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
     @UpdateTimestamp
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt  = LocalDateTime.now();
+    private LocalDateTime updatedAt  = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 }

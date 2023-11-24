@@ -43,10 +43,10 @@ export const useCommentStore = defineStore('comment', () => {
   function deleteComment(commentId) {
     try {
       axiosInstance.delete(`${D_COMMENT_API}/${commentId}`);
+      getComments(boardStore.board.num);
     } catch (error) {
       console.error(error.message);
     }
-    getComments(boardStore.board.num)
   }
 
   function editComment(editedComment) {
