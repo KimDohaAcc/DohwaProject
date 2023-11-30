@@ -1,4 +1,4 @@
-# 헬스장 웹/채팅 서비스, HealthPanda
+# 헬스장 웹/챗봇 서비스, HealthPanda
 
 
 <p align="center">
