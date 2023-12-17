@@ -12,7 +12,7 @@
 
 
 ## 프로젝트 소개
-✨[Notion]<a href="https://www.notion.so/3297b6eb5e69428f8293491006258ecc">HealthPanda</a>✨
+✨Notion : <a href="https://www.notion.so/3297b6eb5e69428f8293491006258ecc">HealthPanda</a>✨
 
 
 
